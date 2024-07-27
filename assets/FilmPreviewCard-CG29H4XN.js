@@ -1,1 +1,0 @@
-import{j as i,L as l}from"./index-DmZTpW4i.js";const r="/assets/film-preview-stub-DnlY90jG.avif",t=({id:s,title:e,posterUrl:a})=>i.jsx("article",{className:"film-card",children:i.jsx(l,{className:"film-card__link",to:`/movie/${s}`,children:i.jsx("img",{className:"film-card__img",src:a||r,alt:e,loading:"lazy",width:224,height:336})})});export{t as F};
