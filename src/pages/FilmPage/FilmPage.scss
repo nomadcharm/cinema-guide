@@ -1,0 +1,95 @@
+@import "../../scss/mixins/breakpoints";
+
+.film {
+  padding-top: 40px;
+  padding-bottom: 160px;
+
+  @include tablet-768 {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+
+  &__title {
+    margin-bottom: 64px;
+
+    @include tablet-768 {
+      margin-bottom: 40px;
+    }
+  }
+}
+
+.film-details {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  width: 50%;
+  font-size: 18px;
+  line-height: 24px;
+
+  &:not(:last-child) {
+    margin-bottom: 24px;
+
+    @include mobile-576 {
+      margin-bottom: 12px;
+    }
+  }
+
+  @include tablet-768 {
+    width: 100%;
+  }
+
+  @include mobile-576 {
+    flex-direction: column;
+    align-content: flex-start;
+  }
+
+  &__category {
+    width: 50%;
+
+    & span {
+      position: relative;
+      z-index: 1;
+      padding-right: 8px;
+      background-color: var(--clr-woodsmoke);
+
+      @include mobile-576 {
+        margin-bottom: 4px;
+        font-size: 14px;
+        line-height: 20px;
+        color: var(--clr-white-50);
+      }
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0.2em;
+      display: block;
+      width: 100%;
+      border-bottom: 2px dotted var(--clr-white-50);
+
+      @include mobile-576 {
+        display: none;
+      }
+    }
+  }
+
+  &__description {
+    width: 50%;
+
+    & span {
+      position: relative;
+      z-index: 1;
+      display: block;
+      padding-left: 8px;
+      background-color: var(--clr-woodsmoke);
+
+      @include mobile-576 {
+        padding: 0;
+      }
+    }
+
+  }
+}

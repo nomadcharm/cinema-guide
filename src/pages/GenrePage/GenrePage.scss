@@ -1,0 +1,68 @@
+@import "../../scss/mixins/hover";
+
+.films-by-genre {
+  padding-top: 160px;
+  padding-bottom: 160px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__title-block {
+    display: flex;
+    align-items: center;
+    margin-bottom: 64px;
+  }
+
+  &__title {
+    margin: 0;
+  }
+  
+  &__nav-back {
+    margin-right: 16px;
+    width: 40px;
+    height: 40px;
+    transition: scale 0.3s ease;
+
+    & svg {
+      fill: var(--clr-white);
+    }
+
+    @include hover {
+      scale: 1.2;
+
+      & svg {
+        fill: var(--clr-melrose);
+      }
+    }
+  }
+
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px 40px;
+    margin-bottom: 64px;
+  }
+
+  &__item {
+    display: flex;
+    width: calc((100% - 160px) / 5);
+    animation: fadeIn 1s;
+  }
+
+  &__load-btn {
+    align-self: center;
+    padding: 16px 48px;
+    border-radius: 28px;
+    font-size: 18px;
+    font-weight: 700;
+    white-space: no-wrap;
+    color: var(--clr-white);
+    background-color: var(--clr-blue-marguerite);
+
+    @include hover {
+      background-color: red;
+    }
+  }
+}

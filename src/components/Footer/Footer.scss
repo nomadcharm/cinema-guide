@@ -1,0 +1,72 @@
+@import "../../scss/mixins/breakpoints";
+
+.footer {
+  padding-top: 42px;
+  padding-bottom: 42px;
+
+  @include tablet-768 {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    @include tablet-768 {
+      flex-direction: column;
+      gap: 30px;
+      align-items: start;
+    }
+  }
+
+  &__sub {
+    font-size: 18px;
+    line-height: 24px;
+
+    &--company {
+      margin-right: 12px;
+      font-weight: 700;
+
+      @include tablet-768 {
+        display: block;
+        margin-bottom: 8px;
+      }
+
+      @include mobile-576 {
+        margin-bottom: 2px;
+      }
+    }
+
+    &--copy {
+      padding-left: 36px;
+      color: var(--clr-white-70);
+      background-image: url("../../assets/img/icon-copyright.svg");
+      background-position: left center;
+      background-repeat: no-repeat;
+      background-size: 24px 24px;
+
+      @include mobile-576 {
+        padding-left: 32px;
+        font-size: 14px;
+        line-height: 20px;
+        background-size: 20px 20px;
+      }
+    }
+  }
+}
+
+.socials {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  font-size: 0;
+
+  &__icon {
+    @include mobile-576 {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

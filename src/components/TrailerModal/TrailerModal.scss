@@ -1,0 +1,110 @@
+.trailer-modal {
+  position: fixed;
+  z-index: 99;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  background-color: var(--clr-woodsmoke-90);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+
+  &.is-active {
+    pointer-events: all;
+    opacity: 1;
+
+    &__inner:hover {
+      &:hover .trailer-modal__close {
+        background-color: red;
+      }
+    }
+  }
+
+  &__inner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 960px;
+    height: 540px;
+    border: 1px solid var(--clr-white-50);
+    background-color: var(--clr-cape-god);
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: -1;
+      top: 0;
+      right: -75px;
+      bottom: 0;
+      left: 0;
+    }
+
+    &:hover .trailer-modal__title,
+    &:hover .trailer-modal__close,
+    &:hover .trailer-modal__play {
+      display: block;
+    }
+  }
+
+  &__title {
+    position: absolute;
+    bottom: 24px;
+    left: 20px;
+    display: block;
+    width: 920px;
+    height: 80px;
+    padding: 24px 40px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    background-color: var(--clr-woodsmoke-50);
+
+    &.active {
+      display: none
+    }
+  }
+
+  &__close {
+    position: absolute;
+    top: 0;
+    right: -72px;
+    display: block;
+    width: 48px;
+    height: 48px;
+    background-image: url('../../assets//img/icon-close.svg');
+    background-repeat: no-repeat;
+    background-size: 48px 48px;
+
+    &.paused {
+      display: none;
+    }
+  }
+
+  &__play {
+    position: absolute;
+    z-index: 99999999;
+    top: 50%;
+    left: 50%;
+    display: none;
+    width: 80px;
+    height: 80px;
+    transform: translate(-50%, -50%);
+    background-image: url('../../assets//img/icon-play.svg');
+    background-repeat: no-repeat;
+    background-size: 80px 80px;
+    transition: background-image 0.1s ease-in-out;
+    cursor: pointer;
+
+    &.on-play {
+      background-image: url('../../assets//img/icon-pause.svg');
+    }
+
+    &.paused {
+      display: block;
+    }
+  }
+}

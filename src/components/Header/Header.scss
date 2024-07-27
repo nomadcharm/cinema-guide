@@ -1,0 +1,53 @@
+@import "../../scss/mixins/breakpoints";
+
+.header {
+  position: absolute;
+  z-index: 999999;
+  top: 0;
+  left: 0;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  width: 100%;
+  background-color: var(--clr-black-50);
+
+  @include tablet-1024 {
+    position: static;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  &__container {
+    display: flex;
+    align-items: center;
+  }
+
+  &__logo {
+    margin-right: 80px;
+  }
+
+  &__nav {
+    margin-right: 40px;
+  }
+
+  .nav {
+    &__list {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      font-size: 24px;
+      line-height: 32px;
+    }
+
+    &__link--active {
+      padding-bottom: 10px;
+      border-bottom: 1.5px solid var(--clr-heliotrope);
+    }
+  }
+
+  .login-btn {
+    font-size: 24px;
+    line-height: 32px;
+    color: var(--clr-white);
+  }
+}
+
