@@ -52,6 +52,7 @@
 .button {
   flex-shrink: 0;
   padding: 16px 48px;
+  height: 56px;
   border-radius: 28px;
   font-size: 18px;
   font-weight: 700;
@@ -124,4 +125,15 @@
   &.low {
     background-color: var(--clr-thunderbird);
   }
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+  
+  & svg {
+    fill: var(--clr-black-40);
+  }
+
 }

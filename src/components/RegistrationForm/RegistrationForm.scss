@@ -1,0 +1,24 @@
+.registration {
+  position: relative;
+
+  &__title {
+    margin-bottom: 24px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    color: var(--clr-black);
+  }
+
+  &__form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: min(100%, 340px);
+  }
+
+  &__submit {
+    margin-top: 12px;
+    margin-bottom: 24px;
+  }
+}
+

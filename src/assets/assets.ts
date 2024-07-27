@@ -12,6 +12,9 @@ import close from './img/icon-close.svg';
 import play from './img/icon-play.svg';
 import pause from './img/icon-pause.svg';
 import popcorn from './img/icon-popcorn.png';
+import email from './img/icon-mail.svg';
+import person from './img/icon-person.svg';
+import key from './img/icon-key.svg';
 
 // genre cards
 import history from './img/genre-history.webp';
@@ -70,4 +73,7 @@ export {
   play,
   pause,
   popcorn,
+  email,
+  person,
+  key,
 }
