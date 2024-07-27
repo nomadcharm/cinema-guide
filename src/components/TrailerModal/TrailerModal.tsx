@@ -51,9 +51,15 @@ const TrailerModal: FC<TrailerModalProps> = ({ film, active, handleModalCall }):
   }, [active, playerRef]);
 
   return (
-    <div className={active ? "trailer-modal is-active" : "trailer-modal"}>
+    <div 
+      className={active ? "trailer-modal is-active" : "trailer-modal"} 
+      onClick={(e) => {
+        if ((e.target as HTMLElement).className === "trailer-modal is-active") {
+          handleModalCall();
+        }
+      }}
+    >
       <div className="trailer-modal__inner">
-
         <button 
           className="trailer-modal__play visually-hidden"
           ref={playButtonRef}

@@ -7,7 +7,7 @@ import { ReactSVG } from "react-svg";
 
 const AuthModal = () => {
   const [authMode, setAuthMode] = useState<string>("register");
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
 
   const handleAuthModalCall = () => {
     setIsModalOpen((prevState) =>
@@ -22,9 +22,16 @@ const AuthModal = () => {
   };
 
   return (
-    <div className={isModalOpen ? "auth-modal is-open" : "auth-modal"}>
+    <div className={isModalOpen ? "auth-modal is-open" : "auth-modal"}
+      onClick={(e) => {
+        if ((e.target as HTMLElement).className === "auth-modal is-open") {
+          handleAuthModalCall();
+        }
+      }}>
       <div className="auth-modal__inner">
-        <button className="auth-modal__close" onClick={() => handleAuthModalCall()}>
+        <button className="auth-modal__close"
+          onClick={() => handleAuthModalCall()}
+        >
           <ReactSVG src={close} />
         </button>
         <img className="auth-modal__logo" src={logo} alt="Cinema Guide" width={180} />
