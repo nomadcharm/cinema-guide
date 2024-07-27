@@ -10,7 +10,7 @@ const LazyFilmPage = lazy(() => import('../pages/FilmPage/FilmPage'));
 
 const AppRoutes: FC = (): ReactElement => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL}>
       <Suspense fallback={<LazyMainLoader />}>
         <Routes>
           <Route path={"/"} element={<LazyMainPage />} />
