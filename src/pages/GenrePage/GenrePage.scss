@@ -18,7 +18,7 @@
   &__title {
     margin: 0;
   }
-  
+
   &__nav-back {
     margin-right: 16px;
     width: 40px;
@@ -27,6 +27,10 @@
 
     & svg {
       fill: var(--clr-white);
+    }
+
+    &:focus-visible svg {
+      fill: var(--clr-melrose);
     }
 
     @include hover {
@@ -61,8 +65,8 @@
     color: var(--clr-white);
     background-color: var(--clr-blue-marguerite);
 
-    @include hover {
-      background-color: red;
-    }
+    // @include hover {
+    //   background-color: red;
+    // }
   }
 }

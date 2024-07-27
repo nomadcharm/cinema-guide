@@ -2,7 +2,7 @@ import { FC, ReactElement, useEffect, useRef, useState } from 'react';
 import './TrailerModal.scss';
 import ReactPlayer from 'react-player';
 import { Film } from '../../models/FilmSchemas';
-import Preloader from './Preloader';
+import Preloader from '../Loaders/Preloader/Preloader';
 
 // http://localhost:5173/movie/801888
 // закрытие окна, если видео недоступно

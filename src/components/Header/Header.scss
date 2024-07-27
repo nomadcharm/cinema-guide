@@ -23,6 +23,14 @@
 
   &__logo {
     margin-right: 80px;
+    outline: 2px solid transparent;
+    outline-offset: 5px;
+    border-radius: 2px;
+    transition: outline-color 0.3s ease-in-out;
+
+    &:focus-visible {
+      outline-color: var(--clr-heliotrope);
+    }
   }
 
   &__nav {
@@ -50,4 +58,3 @@
     color: var(--clr-white);
   }
 }
-
