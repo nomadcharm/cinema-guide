@@ -1,6 +1,6 @@
-import { FC, ReactElement } from 'react';
-import { ok, telegram, vk, youtube } from '../../assets/assets';
-import './Footer.scss';
+import { FC, ReactElement } from "react";
+import { ok, telegram, vk, youtube } from "../../assets/assets";
+import "./Footer.scss";
 
 const Footer: FC = (): ReactElement => {
 

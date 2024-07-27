@@ -1,13 +1,13 @@
-import { FC, ReactElement } from 'react';
-import { PathMatch, useMatch } from 'react-router'
-import Layout from '../../components/Layout/Layout';
-import { formatCurrency, formatLanguageTag } from '../../utils';
-import FilmBanner from '../../components/FilmBanner/FilmBanner';
-import { useFilmInfo, useSetPageTitle } from '../../hooks';
-import './FilmPage.scss'
+import { FC, ReactElement } from "react";
+import { PathMatch, useMatch } from "react-router"
+import Layout from "../../components/Layout/Layout";
+import { formatCurrency, formatLanguageTag } from "../../utils";
+import FilmBanner from "../../components/FilmBanner/FilmBanner";
+import { useFilmInfo, useSetPageTitle } from "../../hooks";
+import "./FilmPage.scss";
 
 const FilmPage: FC = (): ReactElement => {
-  const matchId: PathMatch<"id"> | null = useMatch('/movie/:id');
+  const matchId: PathMatch<"id"> | null = useMatch("/movie/:id");
   const id = Number(matchId?.params?.id);
   const film = useFilmInfo(id);
 
@@ -28,7 +28,7 @@ const FilmPage: FC = (): ReactElement => {
                   </dt>
                   <dd className="film-details__description">
                     <span>
-                      {film.language ? formatLanguageTag.of(film.language) : 'Нет информации'}
+                      {film.language ? formatLanguageTag.of(film.language) : "Нет информации"}
                     </span>
                   </dd>
                 </dl>
@@ -38,7 +38,7 @@ const FilmPage: FC = (): ReactElement => {
                   </dt>
                   <dd className="film-details__description">
                     <span>
-                      {film.budget ? formatCurrency(film.budget) : 'Нет информации'}
+                      {film.budget ? formatCurrency(film.budget) : "Нет информации"}
                     </span>
                   </dd>
                 </dl>
@@ -48,7 +48,7 @@ const FilmPage: FC = (): ReactElement => {
                   </dt>
                   <dd className="film-details__description">
                     <span>
-                      {film.revenue ? formatCurrency(film.revenue) : 'Нет информации'}
+                      {film.revenue ? formatCurrency(film.revenue) : "Нет информации"}
                     </span>
                   </dd>
                 </dl>
@@ -58,7 +58,7 @@ const FilmPage: FC = (): ReactElement => {
                   </dt>
                   <dd className="film-details__description">
                     <span>
-                      {film.director ? film.director : 'Нет информации'}
+                      {film.director ? film.director : "Нет информации"}
                     </span>
                   </dd>
                 </dl>
@@ -68,7 +68,7 @@ const FilmPage: FC = (): ReactElement => {
                   </dt>
                   <dd className="film-details__description">
                     <span>
-                      {film.production ? film.production : 'Нет информации'}
+                      {film.production ? film.production : "Нет информации"}
                     </span>
                   </dd>
                 </dl>
@@ -78,7 +78,7 @@ const FilmPage: FC = (): ReactElement => {
                   </dt>
                   <dd className="film-details__description">
                     <span>
-                      {film.awardsSummary ? film.awardsSummary : 'Нет информации'}
+                      {film.awardsSummary ? film.awardsSummary : "Нет информации"}
                     </span>
                   </dd>
                 </dl>
@@ -89,7 +89,7 @@ const FilmPage: FC = (): ReactElement => {
         </div>
       </section>
     </Layout>
-  )
-}
+  );
+};
 
-export default FilmPage
+export default FilmPage;

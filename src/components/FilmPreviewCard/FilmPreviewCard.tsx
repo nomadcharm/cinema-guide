@@ -1,10 +1,10 @@
-import { FC, ReactElement } from 'react';
-import { Link } from 'react-router-dom';
-import { FilmPreview } from '../../models/FilmSchemas';
-import { cardStub } from '../../assets/assets';
-import './FilmPreviewCard.scss';
+import { FC, ReactElement } from "react";
+import { Link } from "react-router-dom";
+import { FilmPreview } from "../../models/FilmSchemas";
+import { cardStub } from "../../assets/assets";
+import "./FilmPreviewCard.scss";
 
-// import { LazyLoadImage } from 'react-lazy-load-image-component';
+// import { LazyLoadImage } from "react-lazy-load-image-component";
 
 const FilmPreviewCard: FC<FilmPreview> = ({ id, title, posterUrl }): ReactElement => {
 

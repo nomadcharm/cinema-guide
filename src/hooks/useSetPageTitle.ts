@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect } from "react";
 
 export const useSetPageTitle = (title: string, dep?: string): void => {
   useEffect(() => {

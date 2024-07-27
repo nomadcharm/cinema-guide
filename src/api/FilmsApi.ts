@@ -1,12 +1,12 @@
-import { Film, FilmList, FilmPreview } from '../models/FilmSchemas';
-import { Genres } from '../models/GenresSchema';
+import { Film, FilmList, FilmPreview } from "../models/FilmSchemas";
+import { Genres } from "../models/GenresSchema";
 
 const BASE_MOVIE_URL: string = `https://cinemaguide.skillbox.cc/movie`;
 
 const fetchAllFilms = async (): Promise<FilmList> => {
   const data: Response = await fetch(`${BASE_MOVIE_URL}`);
   return data.json();
-}
+};
 
 const fetchRandomFilm = async (): Promise<Film> => {
   const data: Response = await fetch(`${BASE_MOVIE_URL}/random`);
@@ -36,7 +36,7 @@ const fetchFilmsByGenre = async (genre: string, page: number): Promise<Array<Fil
 const fetchFilmsByTitle = async (searchItem: string): Promise<FilmList> => {
   const data: Response = await fetch(`${BASE_MOVIE_URL}/?title=${searchItem}`);
   return data.json();
-}
+};
 
 export {
   fetchAllFilms,

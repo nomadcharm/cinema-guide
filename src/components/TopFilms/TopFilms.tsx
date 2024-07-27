@@ -1,7 +1,7 @@
-import { FC, ReactElement } from 'react';
-import { useTopFilms } from '../../hooks';
-import FilmPreviewCard from '../FilmPreviewCard/FilmPreviewCard';
-import './TopFilms.scss';
+import { FC, ReactElement } from "react";
+import { useTopFilms } from "../../hooks";
+import FilmPreviewCard from "../FilmPreviewCard/FilmPreviewCard";
+import "./TopFilms.scss";
 
 const TopFilms: FC = (): ReactElement => {
   const topFilms = useTopFilms();

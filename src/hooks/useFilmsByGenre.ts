@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { fetchFilmsByGenre } from '../api/FilmsApi';
-import { FilmPreview } from '../models/FilmSchemas';
+import { useEffect, useState } from "react";
+import { fetchFilmsByGenre } from "../api/FilmsApi";
+import { FilmPreview } from "../models/FilmSchemas";
 
 export const useFilmsByGenre = (genre: string): [Array<FilmPreview>, number, React.Dispatch<React.SetStateAction<number>>, boolean] => {
   const [filmsByGenre, setFilmsByGenre] = useState<Array<FilmPreview>>([]);

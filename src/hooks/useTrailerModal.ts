@@ -1,4 +1,4 @@
-import {useState} from 'react';
+import {useState} from "react";
 
 export const useTrailerModal = (): [boolean, () => void] => {
   const [active, setActive] = useState<boolean>(false);

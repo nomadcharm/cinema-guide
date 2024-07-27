@@ -1,13 +1,13 @@
-import { FC, lazy, ReactElement } from 'react';
-import { Link } from 'react-router-dom';
-import { Film } from '../../models/FilmSchemas';
-import './FilmBanner.scss';
-import { formatTime, setRatingColor } from '../../utils';
-import { backdropStub, toRefresh, toFavor } from '../../assets/assets';
-import { useTrailerModal } from '../../hooks';
-import { ReactSVG } from 'react-svg';
+import { FC, lazy, ReactElement } from "react";
+import { Link } from "react-router-dom";
+import { Film } from "../../models/FilmSchemas";
+import "./FilmBanner.scss";
+import { formatTime, setRatingColor } from "../../utils";
+import { backdropStub, toRefresh, toFavor } from "../../assets/assets";
+import { useTrailerModal } from "../../hooks";
+import { ReactSVG } from "react-svg";
 
-const LazyTrailerModal = lazy(() => import('../../components/TrailerModal/TrailerModal'));
+const LazyTrailerModal = lazy(() => import("../../components/TrailerModal/TrailerModal"));
 
 interface FilmBannerProps {
   film: Film | null,
@@ -80,8 +80,7 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
         </div>
       </section>
     </>
-  )
-
-}
+  );
+};
 
 export default FilmBanner;

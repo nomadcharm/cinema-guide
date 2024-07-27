@@ -1,12 +1,12 @@
-import { FC, lazy, ReactElement, Suspense } from 'react';
-import { BrowserRouter } from 'react-router-dom';
-import { Route, Routes } from 'react-router';
+import { FC, lazy, ReactElement, Suspense } from "react";
+import { BrowserRouter } from "react-router-dom";
+import { Route, Routes } from "react-router";
 
-const LazyMainLoader = lazy(() => import('../components/Loaders/MainLoader/MainLoader'));
-const LazyMainPage = lazy(() => import('../pages/MainPage/MainPage'));
-const LazyGenresPage = lazy(() => import('../pages/GenresPage/GenresPage'));
-const LazyGenrePage = lazy(() => import('../pages/GenrePage/GenrePage'));
-const LazyFilmPage = lazy(() => import('../pages/FilmPage/FilmPage'));
+const LazyMainLoader = lazy(() => import("../components/Loaders/MainLoader/MainLoader"));
+const LazyMainPage = lazy(() => import("../pages/MainPage/MainPage"));
+const LazyGenresPage = lazy(() => import("../pages/GenresPage/GenresPage"));
+const LazyGenrePage = lazy(() => import("../pages/GenrePage/GenrePage"));
+const LazyFilmPage = lazy(() => import("../pages/FilmPage/FilmPage"));
 
 const AppRoutes: FC = (): ReactElement => {
   return (

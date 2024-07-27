@@ -1,9 +1,9 @@
-import { FC, ReactElement } from 'react';
-import { Link } from 'react-router-dom';
-import Layout from '../../components/Layout/Layout';
-import { useSetPageTitle, useGenres } from '../../hooks';
-import { pickGenrePoster } from '../../utils';
-import './GenresPage.scss';
+import { FC, ReactElement } from "react";
+import { Link } from "react-router-dom";
+import Layout from "../../components/Layout/Layout";
+import { useSetPageTitle, useGenres } from "../../hooks";
+import { pickGenrePoster } from "../../utils";
+import "./GenresPage.scss";
 
 const GenresPage: FC = (): ReactElement => {
   useSetPageTitle(`Жанры | Cinema Guide`)

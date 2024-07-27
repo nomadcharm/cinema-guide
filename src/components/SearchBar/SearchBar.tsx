@@ -1,11 +1,11 @@
-import { Link } from 'react-router-dom';
-import { formatTime, setRatingColor } from '../../utils';
-import './SearchBar.scss';
-import { fetchFilmsByTitle } from '../../api/FilmsApi';
-import { useEffect, useState } from 'react';
-import { FilmList } from '../../models/FilmSchemas';
-import { useDebounce } from '../../hooks';
-import { popcorn } from '../../assets/assets';
+import { Link } from "react-router-dom";
+import { formatTime, setRatingColor } from "../../utils";
+import { fetchFilmsByTitle } from "../../api/FilmsApi";
+import { useEffect, useState } from "react";
+import { FilmList } from "../../models/FilmSchemas";
+import { useDebounce } from "../../hooks";
+import { popcorn } from "../../assets/assets";
+import "./SearchBar.scss";
 
 const SearchBar = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
@@ -35,9 +35,9 @@ const SearchBar = () => {
     handleSearch(debouncedSearch);
   }, [debouncedSearch])
 
-  const modal: HTMLElement | null = document.querySelector('#modal')
+  const modal: HTMLElement | null = document.querySelector("#modal")
 
-  window.addEventListener('click', (e) => {
+  window.addEventListener("click", (e) => {
     if (modal && !modal.contains(e.target as Node)) {
       setModalIsOpen(false)
     }
@@ -45,7 +45,7 @@ const SearchBar = () => {
 
   useEffect(() => {
     if (inputValue && modal) {
-      modal.classList.add('active');
+      modal.classList.add("active");
     }
   }, [inputValue, modal]);
 
@@ -63,7 +63,7 @@ const SearchBar = () => {
         <ul className="search-bar__results-list">
           {searchResults && searchResults.map(result => {
             return <li className="search-bar__results-item" key={result.id} >
-              <Link to={`/movie/${result.id}`} onClick={() => { setModalIsOpen(false), setInputValue('') }}>
+              <Link to={`/movie/${result.id}`} onClick={() => { setModalIsOpen(false), setInputValue("") }}>
                 <article className="search-card">
                   <img src={result.posterUrl ? result.posterUrl : popcorn} alt={result.title} width={40} height={52} />
                   <div className="search-card__content">
@@ -86,7 +86,7 @@ const SearchBar = () => {
       </div>
 
     </div>
-  )
-}
+  );
+};
 
-export default SearchBar
+export default SearchBar;

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { fetchTopFilms } from '../api/FilmsApi';
-import { FilmList } from '../models/FilmSchemas';
+import { useEffect, useState } from "react";
+import { fetchTopFilms } from "../api/FilmsApi";
+import { FilmList } from "../models/FilmSchemas";
 
 export const useTopFilms = () => {
   const [topFilms, setTopFilms] = useState<FilmList>([]);

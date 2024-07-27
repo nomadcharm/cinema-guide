@@ -1,11 +1,8 @@
-import { FC, ReactElement, useEffect, useRef, useState } from 'react';
-import './TrailerModal.scss';
-import ReactPlayer from 'react-player';
-import { Film } from '../../models/FilmSchemas';
-import Preloader from '../Loaders/Preloader/Preloader';
-
-// http://localhost:5173/movie/801888
-// закрытие окна, если видео недоступно
+import { FC, ReactElement, useEffect, useRef, useState } from "react";
+import ReactPlayer from "react-player";
+import { Film } from "../../models/FilmSchemas";
+import Preloader from "../Loaders/Preloader/Preloader";
+import "./TrailerModal.scss";
 
 interface TrailerModalProps {
   film: Film,
@@ -28,21 +25,21 @@ const TrailerModal: FC<TrailerModalProps> = ({ film, active, handleModalCall }):
 
   const handleOnReady = (): void => {
     setLoading(false);
-    closeButtonRef.current?.classList.add('visually-hidden', 'paused');
+    closeButtonRef.current?.classList.add("visually-hidden", "paused");
   };
 
   const handleOnPlay = (): void => {
-    closeButtonRef.current?.classList.remove('visually-hidden');
-    titleBlockRef.current?.classList.remove('visually-hidden');
-    playButtonRef.current?.classList.remove('visually-hidden');
-    playButtonRef.current?.classList.add('on-play');
+    closeButtonRef.current?.classList.remove("visually-hidden");
+    titleBlockRef.current?.classList.remove("visually-hidden");
+    playButtonRef.current?.classList.remove("visually-hidden");
+    playButtonRef.current?.classList.add("on-play");
   };
 
   const handleOnPause = (): void => {
     setIsPlaying(false);
-    closeButtonRef.current?.classList.remove('visually-hidden');
-    playButtonRef.current?.classList.remove('on-play');
-    titleBlockRef.current?.classList.remove('visually-hidden');
+    closeButtonRef.current?.classList.remove("visually-hidden");
+    playButtonRef.current?.classList.remove("on-play");
+    titleBlockRef.current?.classList.remove("visually-hidden");
   };
 
   useEffect(() => {

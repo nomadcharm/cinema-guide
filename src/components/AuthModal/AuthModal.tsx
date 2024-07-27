@@ -1,6 +1,6 @@
 import { useState } from "react";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
-import LoginForm from "../LoginForm/LoginForm";
+import LoginForm from "../Login Form/LoginForm";
 import { logo } from "../../assets/assets";
 import "./AuthModal.scss";
 

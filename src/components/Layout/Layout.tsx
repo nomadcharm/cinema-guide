@@ -1,6 +1,6 @@
-import { FC, ReactNode} from 'react';
-import Header from '../Header/Header';
-import Footer from '../Footer/Footer';
+import { FC, ReactNode} from "react";
+import Header from "../Header/Header";
+import Footer from "../Footer/Footer";
 
 interface LayoutProps {
   children: ReactNode

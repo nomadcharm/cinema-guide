@@ -1,1 +1,1 @@
-export const formatLanguageTag: Intl.DisplayNames = new Intl.DisplayNames("en", { type: 'language' });
+export const formatLanguageTag: Intl.DisplayNames = new Intl.DisplayNames("en", { type: "language" });

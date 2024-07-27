@@ -1,10 +1,8 @@
-import { FC, ReactElement } from 'react';
-import { Link, NavLink } from 'react-router-dom';
-import { logo } from '../../assets/assets';
-import './Header.scss';
-import SearchBar from '../SearchBar/SearchBar';
-
-
+import { FC, ReactElement } from "react";
+import { Link, NavLink } from "react-router-dom";
+import SearchBar from "../SearchBar/SearchBar";
+import { logo } from "../../assets/assets";
+import "./Header.scss";
 
 const Header: FC = (): ReactElement => {
 
@@ -32,7 +30,7 @@ const Header: FC = (): ReactElement => {
 
       </div>
     </header >
-  )
-}
+  );
+};
 
 export default Header;
