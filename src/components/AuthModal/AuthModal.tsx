@@ -1,36 +1,29 @@
-import { useState } from "react";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 import LoginForm from "../Login Form/LoginForm";
 import { close, logo } from "../../assets/assets";
 import "./AuthModal.scss";
 import { ReactSVG } from "react-svg";
+import { useAuthModal } from "../../hooks";
+import { FC } from "react";
 
-const AuthModal = () => {
-  const [authMode, setAuthMode] = useState<string>("register");
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(true);
+interface AuthModalProps {
+  isOpen: boolean;
+  handleAuthFormCall: () => void;
+}
 
-  const handleAuthModalCall = () => {
-    setIsModalOpen((prevState) =>
-      prevState = !prevState
-    )
-  }
-
-  const handleClick = () => {
-    setAuthMode((prevState) =>
-      prevState === "register" ? "login" : "register"
-    );
-  };
+const AuthModal: FC<AuthModalProps> = ({isOpen, handleAuthFormCall}) => {
+  const [authMode, , handleClick, ] = useAuthModal();
 
   return (
-    <div className={isModalOpen ? "auth-modal is-open" : "auth-modal"}
+    <div className={isOpen ? "auth-modal is-open" : "auth-modal"}
       onClick={(e) => {
         if ((e.target as HTMLElement).className === "auth-modal is-open") {
-          handleAuthModalCall();
+          handleAuthFormCall();
         }
       }}>
       <div className="auth-modal__inner">
         <button className="auth-modal__close"
-          onClick={() => handleAuthModalCall()}
+          onClick={() => handleAuthFormCall()}
         >
           <ReactSVG src={close} />
         </button>
