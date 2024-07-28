@@ -1,11 +1,18 @@
 import { UserOnAuth, UserOnAuthSchema } from "../models/UserSchemas";
 
-const BASE_AUTH_URL = `https://cinemaguide.skillbox.cc/auth`;
 const BASE_URL = `https://cinemaguide.skillbox.cc`;
+const BASE_AUTH_URL = `https://cinemaguide.skillbox.cc/auth`;
 
-// const registerUser = () => {
-
-// }
+const registerUser = (email: string, name: string, surname: string, password: string) => {
+  return fetch(`${BASE_URL}/user`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    credentials: "include",
+    body: JSON.stringify({ email, name, surname, password })
+  })
+}
 
 const loginUser = (email: string, password: string): Promise<Response> => {
   return fetch(`${BASE_AUTH_URL}/login`, {
@@ -37,50 +44,8 @@ const fetchCurrentUser = (): Promise<UserOnAuth> => {
 }
 
 export {
+  registerUser,
   loginUser,
   logoutUser,
   fetchCurrentUser,
 }
-
-// function logoutUser(): Promise<void> {
-//   return fetch(`${URL_LOGOUT}`, {
-//     method: 'POST',
-//     headers: {
-//       'Content-Type': 'application/json'
-//     }
-//   })
-//     .then(() => undefined)
-// }
-
-// // const loginUser = (email: string, password: string): Promise<void> => {
-// //   return fetch("https://cinemaguide.skillbox.cc/auth/login", {
-// //     method: "POST",
-// //     headers: {
-// //       "Content-Type": "application/json"
-// //     },
-// //     credentials: "include",
-// //     body: JSON.stringify({ email, password })
-// //   })
-// //   .then(response => validateResponse(response))
-// //   .then(() => undefined)
-// // }
-
-// axios
-
-// import axios from "./config"
-// const LOGIN_URL = `/auth/login`;
-
-// const loginUser = async (email: string, password: string) => {
-//   const data = await axios.post(LOGIN_URL, JSON.stringify({ email, password }),
-//     {
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//       withCredentials: true,
-//     });
-
-//   const accessToken = data?.data?.accessToken;
-//   return accessToken;
-// }
-
-// export { loginUser }
