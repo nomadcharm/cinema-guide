@@ -51,15 +51,18 @@
       border-bottom: 1.5px solid var(--clr-heliotrope);
     }
   }
+}
 
-  .login-btn {
+.login-btn {
+  font-size: 24px;
+  line-height: 32px;
+  color: var(--clr-white);
+
+  &__link--active {
+    padding-bottom: 10px;
     font-size: 24px;
     line-height: 32px;
     color: var(--clr-white);
-
-    &__link--active {
-      padding-bottom: 10px;
-      border-bottom: 1.5px solid var(--clr-heliotrope);
-    }
+    border-bottom: 1.5px solid var(--clr-heliotrope);
   }
 }
