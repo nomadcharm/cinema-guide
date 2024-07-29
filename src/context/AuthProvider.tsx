@@ -4,14 +4,17 @@ import { UserOnAuth } from "../models/UserSchemas";
 
 interface AuthContextProps {
   currentUser: UserOnAuth | null;
+  getCurrentUser: () => void;
 }
 
-export const AuthContext = createContext<AuthContextProps>({ currentUser: null });
+export const AuthContext = createContext<AuthContextProps>({
+  currentUser: null, getCurrentUser: () => {}
+});
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<UserOnAuth | null>(null);
 
-  const getCurrentUser = async () => {
+  const getCurrentUser = async (): Promise<void> => {
     const user: UserOnAuth = await fetchCurrentUser();
     setCurrentUser(user);
   };
@@ -21,10 +24,11 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ currentUser }}>
+    <AuthContext.Provider value={{ currentUser, getCurrentUser }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
 export default AuthContext;
+

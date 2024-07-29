@@ -1,17 +1,17 @@
 import { ReactSVG } from "react-svg";
-import { email, key } from "../../assets/assets";
-import FormField from "../FormField/FormField";
-import "./LoginForm.scss";
+import { useMutation } from "@tanstack/react-query";
+import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { UserOnLogin, UserOnLoginSchema } from "../../models/UserSchemas";
-import { useMutation } from "@tanstack/react-query";
 import { queryClient } from "../../api/queryClient";
+import { UserOnLogin, UserOnLoginSchema } from "../../models/UserSchemas";
+import FormField from "../FormField/FormField";
+import { email, key } from "../../assets/assets";
 import { loginUser } from "../../api/UserApi";
-import { useNavigate } from "react-router";
+import "./LoginForm.scss";
 
 const LoginForm = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const {
     register,

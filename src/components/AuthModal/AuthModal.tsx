@@ -1,5 +1,5 @@
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
-import LoginForm from "../Login Form/LoginForm";
+import LoginForm from "../LoginForm/LoginForm";
 import { close, logo } from "../../assets/assets";
 import "./AuthModal.scss";
 import { ReactSVG } from "react-svg";
