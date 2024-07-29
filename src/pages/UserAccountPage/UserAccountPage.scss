@@ -1,3 +1,90 @@
-.account {
-  padding-top: 200px;
+.user-account {
+  padding-top: 160px;
+  padding-bottom: 160px;
+
+  &__title {
+    margin-bottom: 64px;
+  }
+
+  &__nav {
+    display: flex;
+    align-items: flex-start;
+    gap: 64px;
+  }
+
+  &__tab {
+    margin-bottom: 64px;
+    padding-left: 32px;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 32px;
+    background-position: left center;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+
+    &--settings {
+      background-image: url("../../assets/img/icon-person-fill.svg");
+    }
+
+    &--favourites {
+      background-image: url("../../assets/img/icon-heart-empty-fill.svg");
+    }
+
+    &.active {
+      padding-bottom: 10px;
+      border-bottom: 1.5px solid var(--clr-heliotrope);
+    }
+  }
+
+  &__content {
+    margin-bottom: 64px;
+  }
+
+  &__info {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    &:not(:last-child) {
+      margin-bottom: 40px;
+    }
+
+    &--email::before {
+      content: "";
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: var(--clr-white-50);
+      background-image: url("../../assets//img/icon-mail-fill.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 24px 24px;
+    }
+  }
+
+  &__category {
+    margin-bottom: 4px;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  &__details {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+  }
+
+  &__initials {
+    padding: 14px;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    border-radius: 50%;
+    background-color: var(--clr-white-50);
+  }
 }
