@@ -12,7 +12,7 @@ interface AuthModalProps {
 }
 
 const AuthModal: FC<AuthModalProps> = ({isOpen, handleAuthFormCall}) => {
-  const [authMode, , handleClick, ] = useAuthModal();
+  const [authMode, , , handleClick, ] = useAuthModal();
 
   return (
     <div className={isOpen ? "auth-modal is-open" : "auth-modal"}
