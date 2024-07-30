@@ -131,9 +131,18 @@
   position: absolute;
   left: 16px;
   top: 16px;
-  
+
   & svg {
     fill: var(--clr-black-40);
   }
 
+}
+
+.error-message {
+  position: absolute;
+  bottom: 83px;
+  right: 0;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--clr-bittersweet);
 }

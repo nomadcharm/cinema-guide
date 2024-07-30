@@ -8,52 +8,63 @@ import { UserOnLogin, UserOnLoginSchema } from "../../models/UserSchemas";
 import FormField from "../FormField/FormField";
 import { email, key } from "../../assets/assets";
 import { loginUser } from "../../api/UserApi";
+import { useState } from "react";
 import "./LoginForm.scss";
 
 const LoginForm = () => {
+  const [errorMessage, setErrorMessage] = useState('');
+
   const navigate = useNavigate();
 
   const {
     register,
     handleSubmit,
     reset,
-    // formState: {errors}
+    formState: {errors}
   } = useForm<UserOnLogin>({
     resolver: zodResolver(UserOnLoginSchema)
   })
 
   const loginMutation = useMutation({
     mutationFn: (data: UserOnLogin) => loginUser(data.email, data.password),
-    async onSuccess() {
+    onSuccess() {
       // queryClient.invalidateQueries({ queryKey: ["users", "current"] });
       navigate("/profile");
+      reset()
     },
+    onError(error: Error) {
+      setErrorMessage(error.message)
+    }
   }, queryClient);
 
   const onSubmit = async (data: UserOnLogin): Promise<void> => {
     loginMutation.mutate(data);
-    reset()
   };
 
   return (
     <div className="login">
       <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
-        <FormField>
+        <FormField errorMessage={errors.email?.message}>
           <ReactSVG className="input-icon" src={email} />
           <input
+            {...register("email")}
             type="text"
             placeholder="Электронная почта"
-            {...register("email")}
+            onInput={() => setErrorMessage("")}
           />
         </FormField>
-        <FormField >
+        <FormField errorMessage={errors.password?.message}>
           <ReactSVG className="input-icon" src={key} />
           <input
+            {...register("password")}
             type="text"
             placeholder="Пароль"
-            {...register("password")}
+            onInput={() => setErrorMessage("")}
           />
         </FormField>
+        {
+          errorMessage && <p className="error-message">{errorMessage}</p>
+        }
         <button className="button button-primary login__submit">Войти</button>
       </form>
     </div>

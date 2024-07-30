@@ -1,10 +1,10 @@
 import { z } from "zod";
 
 const UserSchema = z.object({
-  name: z.string(),
-  surname: z.string(),
-  email: z.string(),
-  password: z.string(),
+  name: z.string().min(2, {message: "Имя пользователя должно содержать не менее 2х символов"}),
+  surname: z.string().min(2, {message: "Имя пользователя должно содержать не менее 2х символов"}),
+  email: z.string().email({message: "Невалидный формат email"}),
+  password: z.string().min(8, {message: "Пароль должен состоять из не менее 8 символов"}),
   favorites: z.array(z.string()),
 });
 

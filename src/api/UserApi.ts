@@ -1,4 +1,5 @@
 import { UserOnAuth, UserOnAuthSchema } from "../models/UserSchemas";
+import validateResponse from "./responseValidation";
 
 const BASE_URL = `https://cinemaguide.skillbox.cc`;
 const BASE_AUTH_URL = `https://cinemaguide.skillbox.cc/auth`;
@@ -23,6 +24,7 @@ const loginUser = (email: string, password: string): Promise<Response> => {
     credentials: "include",
     body: JSON.stringify({ email, password })
   })
+    .then((response) => validateResponse(response))
 }
 
 const logoutUser = (): Promise<Response> => {
