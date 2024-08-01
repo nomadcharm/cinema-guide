@@ -1,11 +1,12 @@
-import { FC, lazy, ReactElement } from "react";
+import { FC, lazy, ReactElement, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Film } from "../../models/FilmSchemas";
-import "./FilmBanner.scss";
-import { formatTime, setRatingColor } from "../../utils";
-import { backdropStub, toRefresh, toFavor } from "../../assets/assets";
-import { useTrailerModal } from "../../hooks";
 import { ReactSVG } from "react-svg";
+import { Film } from "../../models/FilmSchemas";
+import { addFilmToFavorites, removeFromFavorites } from "../../api/FavoritesApi";
+import { backdropStub, toRefresh, toFavor, favored } from "../../assets/assets";
+import { useFavorites, useTrailerModal } from "../../hooks";
+import { formatTime, setRatingColor } from "../../utils";
+import "./FilmBanner.scss";
 
 const LazyTrailerModal = lazy(() => import("../../components/TrailerModal/TrailerModal"));
 
@@ -17,6 +18,18 @@ interface FilmBannerProps {
 
 const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): ReactElement => {
   const [active, handleModalCall] = useTrailerModal();
+  const [favorites, getFavorites] = useFavorites()
+
+  const [isFavored, setIsFavored] = useState<boolean>(false);
+
+  useEffect(() => {
+    getFavorites()
+    if (film && favorites.map(fav => fav.id).includes(film.id)) {
+      setIsFavored(true);
+    } else {
+      setIsFavored(false);
+    }
+  }, [film, favorites, getFavorites]);
 
   return (
     <>
@@ -48,17 +61,29 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
                       filmPage ? (
                         <>
                           <button className="button button-primary" onClick={() => handleModalCall()}>Трейлер</button>
-                          <button className="button button-icon button-favorite" aria-label="Добавить в избранное">
-                            <ReactSVG src={toFavor} />
+                          <button
+                            className="button button-icon button-favorite"
+                            aria-label="Добавить в избранное"
+                            onClick={isFavored ? () => removeFromFavorites(film.id) : () => addFilmToFavorites(film.id.toString())}
+                          >
+                            {
+                              isFavored ?
+                                <ReactSVG src={favored} /> :
+                                <ReactSVG src={toFavor} />
+                            }
+
                           </button>
                         </>
-
                       ) : (
                         <>
                           <button className="button button-primary" onClick={() => handleModalCall()}>Трейлер</button>
                           <Link className="button button-secondary" to={`/movie/${film.id}`}>О фильме</Link>
-                          <button className="button button-icon button-favorite" aria-label="Добавить в избранное">
-                            <ReactSVG src={toFavor} />
+                          <button
+                            className="button button-icon button-favorite"
+                            aria-label="Добавить в избранное"
+                            onClick={isFavored ? () => removeFromFavorites(film.id) : () => addFilmToFavorites(film.id.toString())}
+                          >
+                            <ReactSVG src={isFavored ? favored : toFavor} className={isFavored ? "svg-favored" : "svg"} />
                           </button>
                           <button className="button button-icon button-refresh" onClick={handleRefresh} aria-label="Загрузить новый случайный фильм">
                             <ReactSVG src={toRefresh} />
@@ -68,7 +93,6 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
                     }
                   </div>
                 </div>
-
 
                 <div className="film-banner__backdrop">
                   <img src={film.backdropUrl ? film.backdropUrl : backdropStub} alt={film.title} width={900} height={530} />

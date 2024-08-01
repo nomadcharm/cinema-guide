@@ -8,6 +8,7 @@ import backdropStub from './img/stub-banner.avif'
 import back from './img/icon-back.svg';
 import toRefresh from './img/icon-refresh.svg';
 import toFavor from './img/icon-heart.svg';
+import favored from './img/icon-heart-filled.svg';
 import close from './img/icon-close.svg';
 import play from './img/icon-play.svg';
 import pause from './img/icon-pause.svg';
@@ -69,6 +70,7 @@ export {
   adventure,
   toRefresh,
   toFavor,
+  favored,
   close,
   play,
   pause,
