@@ -88,3 +88,54 @@
     background-color: var(--clr-white-50);
   }
 }
+
+.user-favorites {
+  &__list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 64px 40px;
+  }
+
+  &__remove-btn {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 40px;
+    height: 40px;
+    background-image: url('../../assets//img/icon-close.svg');
+    background-repeat: no-repeat;
+    background-size: 40px 40px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out ;
+  }
+
+  &__item {
+    position: relative;
+    display: flex;
+    flex-shrink: 0;
+    width: calc((100% - 160px) / 5);
+    animation: fadeIn 1s ease;
+
+    &:hover .film-card {
+      border-color: var(--clr-white);
+      transition: 0.3s ease-in-out;
+    }
+
+    &:hover .user-favorites__remove-btn {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+
+}
+
+// .film-card {
+//   width: 100%;
+//   max-height: 336px;
+//   border: 1px solid var(--clr-white-25);
+//   border-radius: 12px;
+//   overflow: hidden;
+//   box-shadow: var(--shd-card);
+// }

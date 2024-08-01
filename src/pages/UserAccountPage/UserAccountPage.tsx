@@ -4,32 +4,35 @@ import Layout from "../../components/Layout/Layout";
 import "./UserAccountPage.scss"
 import { queryClient } from "../../api/queryClient";
 import { useNavigate } from "react-router";
+import { useSetPageTitle, useFavorites } from "../../hooks";
 import { useContext, useEffect } from "react";
 import AuthContext from "../../context/AuthProvider";
-import { useSetPageTitle } from "../../hooks";
+import FilmPreviewCard from "../../components/FilmPreviewCard/FilmPreviewCard";
+import { removeFromFavorites } from "../../api/FavoritesApi";
 
 const UserAccountPage = () => {
-  useSetPageTitle(`Мой аккаунт | Cinema Guide`)
+  useSetPageTitle(`Мой аккаунт | Cinema Guide`);
+  const { currentUser } = useContext(AuthContext)
 
   const navigate = useNavigate();
-
-  const { currentUser, getCurrentUser } = useContext(AuthContext);
-
-  useEffect(() => {
-    getCurrentUser();
-  }, []);
 
   const logoutMutation = useMutation({
     mutationFn: () => logoutUser(),
     onSuccess() {
-      // queryClient.invalidateQueries({ queryKey: ["users", "current"], })
-      navigate("/")
+      queryClient.invalidateQueries({ queryKey: ["users", "current"] }),
+        navigate("/")
     }
   }, queryClient)
 
   const handleLogout = () => {
     logoutMutation.mutate()
   }
+
+  const [favorites, getFavorites] = useFavorites();
+
+  useEffect(() => {
+    getFavorites()
+  }, [getFavorites])
 
   return (
     <Layout>
@@ -66,6 +69,7 @@ const UserAccountPage = () => {
                     </div>
                   </div>
                 </div>
+
                 <button
                   className="button button-primary"
                   onClick={() => handleLogout()}
@@ -73,6 +77,27 @@ const UserAccountPage = () => {
               </> :
               <img src="https://media.tenor.com/_BiwWBWhYucAAAAe/what-huh.png" alt="" />
           }
+
+          <section className="user-favorites">
+            {
+              favorites ? (
+                <ul className="user-favorites__list">
+                  {
+                    favorites.map((film) => {
+                      return <li className="user-favorites__item" key={film.id}>
+                        <button
+                          className="user-favorites__remove-btn"
+                          onClick={() => removeFromFavorites(film.id)}
+                          aria-label="Удалить фильм из избранного"
+                        />
+                        <FilmPreviewCard id={film.id} title={film.title} posterUrl={film.posterUrl} />
+                      </li>
+                    })
+                  }
+                </ul>
+              ) : null
+            }
+          </section>
         </div>
       </section>
     </Layout>
