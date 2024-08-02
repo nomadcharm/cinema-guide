@@ -14,5 +14,10 @@ module.exports = {
       'warn',
       { allowConstantExport: true },
     ],
+    'no-duplicate-imports': 2,
+    'no-fallthrough': 2,
+    'no-duplicate-case': 2,
+    'default-case': 2,
+    'no-loop-func': 2,
   },
 }

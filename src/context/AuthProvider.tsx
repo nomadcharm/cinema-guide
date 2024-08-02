@@ -1,34 +1,38 @@
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useCallback, useEffect, useState } from "react";
 import { fetchCurrentUser } from "../api/UserApi";
 import { UserOnAuth } from "../models/UserSchemas";
 
 interface AuthContextProps {
   currentUser: UserOnAuth | null;
   getCurrentUser: () => void;
+  clearCurrentUser: () => void;
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-  currentUser: null, getCurrentUser: () => {}
+  currentUser: null, getCurrentUser: () => {}, clearCurrentUser: () => {}
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<UserOnAuth | null>(null);
 
-  const getCurrentUser = async (): Promise<void> => {
+  const getCurrentUser = useCallback(async (): Promise<void> => {
     const user: UserOnAuth = await fetchCurrentUser();
     setCurrentUser(user);
-  };
-  
-  useEffect( () => {
-    getCurrentUser();
   }, []);
 
+  const clearCurrentUser = () => {
+    setCurrentUser(null);
+  };
+
+  useEffect( () => {
+    getCurrentUser();
+  }, [getCurrentUser]);
+
   return (
-    <AuthContext.Provider value={{ currentUser, getCurrentUser }}>
+    <AuthContext.Provider value={{ currentUser, getCurrentUser, clearCurrentUser }}>
       {children}
     </AuthContext.Provider>
   );
 };
 
 export default AuthContext;
-

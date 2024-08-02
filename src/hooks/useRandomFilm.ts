@@ -12,7 +12,7 @@ export const useRandomFilm = (): [Film | null, () => Promise<void>] => {
 
   useEffect(() => {
     getRandomFilm();
-  }, []);
+  }, [getRandomFilm]);
 
   return [randomFilm, getRandomFilm];
 };

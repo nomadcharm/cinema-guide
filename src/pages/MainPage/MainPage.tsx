@@ -1,9 +1,8 @@
-import { FC, ReactElement} from "react";
+import { FC, ReactElement } from "react";
 import { useRandomFilm, useSetPageTitle } from "../../hooks";
 import Layout from "../../components/Layout/Layout";
 import FilmBanner from "../../components/FilmBanner/FilmBanner";
 import TopFilms from "../../components/TopFilms/TopFilms";
-
 
 const MainPage: FC = (): ReactElement => {
   useSetPageTitle(`Cinema Guide`)

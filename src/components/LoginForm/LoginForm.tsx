@@ -3,12 +3,12 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useState } from "react";
 import { queryClient } from "../../api/queryClient";
 import { UserOnLogin, UserOnLoginSchema } from "../../models/UserSchemas";
 import FormField from "../FormField/FormField";
 import { email, key } from "../../assets/assets";
 import { loginUser } from "../../api/UserApi";
-import { useState } from "react";
 import "./LoginForm.scss";
 
 const LoginForm = () => {
@@ -20,20 +20,19 @@ const LoginForm = () => {
     register,
     handleSubmit,
     reset,
-    formState: {errors}
+    formState: {errors},
   } = useForm<UserOnLogin>({
     resolver: zodResolver(UserOnLoginSchema)
-  })
+  });
 
   const loginMutation = useMutation({
     mutationFn: (data: UserOnLogin) => loginUser(data.email, data.password),
     onSuccess() {
-      // queryClient.invalidateQueries({ queryKey: ["users", "current"] });
       navigate("/profile");
-      reset()
+      reset();
     },
     onError(error: Error) {
-      setErrorMessage(error.message)
+      setErrorMessage(error.message);
     }
   }, queryClient);
 

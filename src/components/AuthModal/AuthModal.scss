@@ -41,5 +41,13 @@
     font-weight: 700;
     line-height: 24px;
   }
+}
 
+.error-message {
+  position: absolute;
+  bottom: 83px;
+  right: 0;
+  font-size: 14px;
+  line-height: 18px;
+  color: var(--clr-bittersweet);
 }
