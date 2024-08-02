@@ -18,18 +18,29 @@ interface FilmBannerProps {
 
 const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): ReactElement => {
   const [active, handleModalCall] = useTrailerModal();
-  const [favorites, getFavorites] = useFavorites()
-
+  const [favorites, getFavorites] = useFavorites();
   const [isFavored, setIsFavored] = useState<boolean>(false);
 
   useEffect(() => {
-    getFavorites()
-    if (film && favorites.map(fav => fav.id).includes(film.id)) {
+    getFavorites();
+  }, [getFavorites]);
+
+  useEffect(() => {
+    if (film && favorites.some(fav => fav.id === film.id)) {
       setIsFavored(true);
     } else {
       setIsFavored(false);
     }
-  }, [film, favorites, getFavorites]);
+  }, [film, favorites]);
+
+  const toggleFavorite = (id: number) => {
+    if (isFavored) {
+      removeFromFavorites(id);
+    } else {
+      addFilmToFavorites(id.toString());
+    }
+    setIsFavored(!isFavored);
+  };
 
   return (
     <>
@@ -64,7 +75,7 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
                           <button
                             className="button button-icon button-favorite"
                             aria-label="Добавить в избранное"
-                            onClick={isFavored ? () => removeFromFavorites(film.id) : () => addFilmToFavorites(film.id.toString())}
+                            onClick={() => toggleFavorite(film.id)}
                           >
                             {
                               isFavored ?
@@ -81,7 +92,7 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
                           <button
                             className="button button-icon button-favorite"
                             aria-label="Добавить в избранное"
-                            onClick={isFavored ? () => removeFromFavorites(film.id) : () => addFilmToFavorites(film.id.toString())}
+                            onClick={() => toggleFavorite(film.id)}
                           >
                             <ReactSVG src={isFavored ? favored : toFavor} className={isFavored ? "svg-favored" : "svg"} />
                           </button>
