@@ -82,14 +82,13 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
                           <button
                             className="button button-icon button-favorite"
                             aria-label="Добавить в избранное"
-                            onClick={() => toggleFavorite(film.id)}
+                            onClick={currentUser ? () => toggleFavorite(film.id) : () => handleAuthModalCall()}
                           >
                             {
                               isFavored ?
                                 <ReactSVG src={favored} /> :
                                 <ReactSVG src={toFavor} />
                             }
-
                           </button>
                         </>
                       ) : (

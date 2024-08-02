@@ -1,4 +1,4 @@
-import { FC, ReactElement, useContext, useEffect} from "react";
+import { FC, ReactElement, useContext, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../../context/AuthProvider";
 import AuthModal from "../AuthModal/AuthModal";
