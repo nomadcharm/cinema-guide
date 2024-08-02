@@ -1,12 +1,14 @@
-import { FC, lazy, ReactElement, useEffect, useState } from "react";
+import { FC, lazy, ReactElement, useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import { Film } from "../../models/FilmSchemas";
 import { addFilmToFavorites, removeFromFavorites } from "../../api/FavoritesApi";
 import { backdropStub, toRefresh, toFavor, favored } from "../../assets/assets";
-import { useFavorites, useTrailerModal } from "../../hooks";
+import { useAuthModal, useFavorites, useTrailerModal } from "../../hooks";
 import { formatTime, setRatingColor } from "../../utils";
 import "./FilmBanner.scss";
+import AuthContext from "../../context/AuthProvider";
+import AuthModal from "../AuthModal/AuthModal";
 
 const LazyTrailerModal = lazy(() => import("../../components/TrailerModal/TrailerModal"));
 
@@ -20,6 +22,9 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
   const [active, handleModalCall] = useTrailerModal();
   const [favorites, getFavorites] = useFavorites();
   const [isFavored, setIsFavored] = useState<boolean>(false);
+
+  const { currentUser } = useContext(AuthContext);
+  const [, isModalOpen, handleAuthModalCall] = useAuthModal();
 
   useEffect(() => {
     getFavorites();
@@ -47,6 +52,8 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
       {
         film && <LazyTrailerModal film={film} active={active} handleModalCall={handleModalCall} />
       }
+
+      <AuthModal isOpen={isModalOpen} handleAuthFormCall={handleAuthModalCall} />
 
       <section className="film-banner">
         <div className="container film-banner__container">
@@ -92,7 +99,7 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
                           <button
                             className="button button-icon button-favorite"
                             aria-label="Добавить в избранное"
-                            onClick={() => toggleFavorite(film.id)}
+                            onClick={currentUser ? () => toggleFavorite(film.id) : () => handleAuthModalCall()}
                           >
                             <ReactSVG src={isFavored ? favored : toFavor} className={isFavored ? "svg-favored" : "svg"} />
                           </button>
