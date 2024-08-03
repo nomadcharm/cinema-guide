@@ -13,7 +13,7 @@ const FavoriteFilms: FC = () => {
   return (
     <div className="favorites">
       {
-        favorites ? (
+        favorites && favorites.length > 0 ? (
           <ul className="favorites__list">
             {
               favorites.map((film) => {
@@ -28,7 +28,7 @@ const FavoriteFilms: FC = () => {
               })
             }
           </ul>
-        ) : null
+        ) : <p className="favorites__empty-list">Добавьте первый фильм в избранное</p>
       }
     </div>
   );
