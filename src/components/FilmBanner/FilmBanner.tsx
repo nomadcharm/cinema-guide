@@ -6,11 +6,11 @@ import { addFilmToFavorites, removeFromFavorites } from "../../api/FavoritesApi"
 import { backdropStub, toRefresh, toFavor, favored } from "../../assets/assets";
 import { useAuthModal, useFavorites, useTrailerModal } from "../../hooks";
 import { formatTime, setRatingColor } from "../../utils";
-import "./FilmBanner.scss";
 import AuthContext from "../../context/AuthProvider";
-import AuthModal from "../AuthModal/AuthModal";
+import "./FilmBanner.scss";
 
 const LazyTrailerModal = lazy(() => import("../../components/TrailerModal/TrailerModal"));
+const LazyAuthModal = lazy(() => import("../AuthModal/AuthModal"))
 
 interface FilmBannerProps {
   film: Film | null,
@@ -53,7 +53,7 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
         film && <LazyTrailerModal film={film} active={active} handleModalCall={handleModalCall} />
       }
 
-      <AuthModal isOpen={isModalOpen} handleAuthFormCall={handleAuthModalCall} />
+      <LazyAuthModal isOpen={isModalOpen} handleAuthFormCall={handleAuthModalCall} />
 
       <section className="film-banner">
         <div className="container film-banner__container">

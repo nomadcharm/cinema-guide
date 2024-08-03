@@ -1,10 +1,10 @@
+import { FC } from "react";
+import { ReactSVG } from "react-svg";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 import LoginForm from "../LoginForm/LoginForm";
+import { useAuthModal } from "../../hooks";
 import { close, logo } from "../../assets/assets";
 import "./AuthModal.scss";
-import { ReactSVG } from "react-svg";
-import { useAuthModal } from "../../hooks";
-import { FC } from "react";
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -22,8 +22,10 @@ const AuthModal: FC<AuthModalProps> = ({isOpen, handleAuthFormCall}) => {
         }
       }}>
       <div className="auth-modal__inner">
-        <button className="auth-modal__close"
+        <button 
+          className="auth-modal__close"
           onClick={() => handleAuthFormCall()}
+          aria-label="Закрыть окно"
         >
           <ReactSVG src={close} />
         </button>
