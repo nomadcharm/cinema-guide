@@ -1,0 +1,53 @@
+.user {
+  &__data {
+    margin-bottom: 64px;
+  }
+
+  &__info {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+
+    &:not(:last-child) {
+      margin-bottom: 40px;
+    }
+
+    &--email::before {
+      content: "";
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background-color: var(--clr-white-50);
+      background-image: url("../../assets//img/icon-mail-fill.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 24px 24px;
+    }
+  }
+
+  &__category {
+    margin-bottom: 4px;
+    font-size: 18px;
+    line-height: 24px;
+  }
+
+  &__details {
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+  }
+
+  &__initials {
+    padding: 14px;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 32px;
+    border-radius: 50%;
+    background-color: var(--clr-white-50);
+  }
+}
