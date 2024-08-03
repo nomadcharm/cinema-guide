@@ -37,11 +37,11 @@ const UserAccountPage: FC = () => {
             </li>
           </ul>
 
-          <div className={currentTabIndex === 0 ? "user-account__tab-content active" : "user-account__tab-content"}>
+          <div className={currentTabIndex === 0 ? "user-account__tab-content tab-1 active" : "user-account__tab-content tab-1"}>
             <FavoriteFilms />
           </div>
 
-          <div className={currentTabIndex === 1 ? "user-account__tab-content active" : "user-account__tab-content"}>
+          <div className={currentTabIndex === 1 ? "user-account__tab-content tab-2 active" : "user-account__tab-content tab-2"}>
             <UserSettings />
           </div>
         </div>

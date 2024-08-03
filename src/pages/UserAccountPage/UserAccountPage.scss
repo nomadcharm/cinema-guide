@@ -1,24 +1,28 @@
 .user-account {
   padding-top: 160px;
-  padding-bottom: 160px;
+
+  &:has(.user-account__tab-content.tab-2.active) {
+    padding-bottom: 160px;
+  }
 
   &__title {
-    margin-bottom: 64px;
+    margin-bottom: 74px;
   }
 
   &__nav {
     display: flex;
     align-items: flex-start;
     gap: 64px;
+    margin-bottom: 70px;
   }
 
   &__tab {
-    margin-bottom: 64px;
+    position: relative;
     padding-left: 32px;
     font-size: 24px;
     font-weight: 400;
     line-height: 32px;
-    background-position: left top 2px;
+    background-position: left top 3.5px;
     background-repeat: no-repeat;
     background-size: 24px 24px;
     cursor: pointer;
@@ -32,8 +36,15 @@
     }
 
     &.active {
-      padding-bottom: 10px;
-      border-bottom: 1.5px solid var(--clr-heliotrope);
+      &::before {
+        content: "";
+        position: absolute;
+        width: 100%;
+        height: 1.5px;
+        left: 0;
+        bottom: -6px;
+        background-color: var(--clr-heliotrope);
+      }
     }
   }
 
@@ -43,5 +54,21 @@
     &.active {
       display: block;
     }
+  }
+}
+
+.tab-1 {
+  position: relative;
+  left: -70px;
+  top: -70px;
+  padding: 0 70px;
+  padding-top: 70px;
+  margin-bottom: -70px;
+  width: calc(100% + 140px);
+  height: 558px;
+  overflow: scroll;
+
+  &::-webkit-scrollbar {
+    display: none;
   }
 }

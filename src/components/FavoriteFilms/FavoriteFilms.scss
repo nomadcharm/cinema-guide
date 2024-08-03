@@ -1,4 +1,6 @@
 .favorites {
+  position: relative;
+
   &__list {
     display: flex;
     flex-wrap: wrap;
@@ -16,7 +18,7 @@
     background-size: 40px 40px;
     opacity: 0;
     visibility: hidden;
-    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out ;
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
   }
 
   &__item {
