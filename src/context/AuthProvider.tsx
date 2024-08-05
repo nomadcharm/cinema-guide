@@ -4,17 +4,29 @@ import { UserOnAuth } from "../models/UserSchemas";
 import AuthModal from "../components/AuthModal/AuthModal";
 
 interface AuthContextProps {
+  authMode: string,
+  setAuthMode: React.Dispatch<React.SetStateAction<string>>,
   currentUser: UserOnAuth | null;
   getCurrentUser: () => void;
   clearCurrentUser: () => void;
+  handleAuthModalCall: () => void;
+  handleClick: () => void;
 }
 
 export const AuthContext = createContext<AuthContextProps>({
-  currentUser: null, getCurrentUser: () => {}, clearCurrentUser: () => {}
+  authMode: "login",
+  setAuthMode: () => {},
+  currentUser: null,
+  getCurrentUser: () => { },
+  clearCurrentUser: () => { },
+  handleAuthModalCall: () => { },
+  handleClick: () => { },
 });
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
   const [currentUser, setCurrentUser] = useState<UserOnAuth | null>(null);
+  const [authMode, setAuthMode] = useState<string>("login");
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const getCurrentUser = useCallback(async (): Promise<void> => {
     const user: UserOnAuth = await fetchCurrentUser();
@@ -25,13 +37,36 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     setCurrentUser(null);
   };
 
-  useEffect( () => {
+  useEffect(() => {
     getCurrentUser();
   }, [getCurrentUser]);
 
+  const handleAuthModalCall = () => {
+    setIsModalOpen((prevState) =>
+      prevState = !prevState
+    );
+  };
+
+  const handleClick = () => {
+    setAuthMode((authMode) =>
+      authMode === "register" ? "login" : "register"
+    );
+  };
+
+  console.log(authMode)
+
   return (
-    <AuthContext.Provider value={{ currentUser, getCurrentUser, clearCurrentUser }}>
-      {/* <AuthModal /> */}
+    <AuthContext.Provider
+      value={{
+        authMode,
+        setAuthMode,
+        currentUser,
+        getCurrentUser,
+        clearCurrentUser,
+        handleAuthModalCall,
+        handleClick
+      }}>
+      <AuthModal isOpen={isModalOpen} />
       {children}
     </AuthContext.Provider>
   );

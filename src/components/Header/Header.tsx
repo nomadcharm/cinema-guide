@@ -1,15 +1,13 @@
 import { FC, ReactElement, useContext, useEffect } from "react";
 import { Link, NavLink } from "react-router-dom";
 import AuthContext from "../../context/AuthProvider";
-import AuthModal from "../AuthModal/AuthModal";
-import { useAuthModal } from "../../hooks";
 import SearchBar from "../SearchBar/SearchBar";
 import { logo } from "../../assets/assets";
 import "./Header.scss";
 
 const Header: FC = (): ReactElement => {
   const { currentUser, getCurrentUser } = useContext(AuthContext);
-  const [, isModalOpen, handleAuthModalCall] = useAuthModal();
+  const {handleAuthModalCall} = useContext(AuthContext);
 
   useEffect(() => {
     getCurrentUser();
@@ -17,8 +15,6 @@ const Header: FC = (): ReactElement => {
 
   return (
     <>
-      <AuthModal isOpen={isModalOpen} handleAuthFormCall={handleAuthModalCall} />
-
       <header className="header">
         <div className="container header__container">
           <Link className="header__logo" to={"/"} >

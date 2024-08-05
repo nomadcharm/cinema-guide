@@ -4,13 +4,12 @@ import { ReactSVG } from "react-svg";
 import { Film } from "../../models/FilmSchemas";
 import { addFilmToFavorites, removeFromFavorites } from "../../api/FavoritesApi";
 import { backdropStub, toRefresh, toFavor, favored } from "../../assets/assets";
-import { useAuthModal, useFavorites, useTrailerModal } from "../../hooks";
+import { useFavorites, useTrailerModal } from "../../hooks";
 import { formatTime, setRatingColor } from "../../utils";
 import AuthContext from "../../context/AuthProvider";
 import "./FilmBanner.scss";
 
 const LazyTrailerModal = lazy(() => import("../../components/TrailerModal/TrailerModal"));
-const LazyAuthModal = lazy(() => import("../AuthModal/AuthModal"))
 
 interface FilmBannerProps {
   film: Film | null,
@@ -23,8 +22,7 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
   const [favorites, getFavorites] = useFavorites();
   const [isFavored, setIsFavored] = useState<boolean>(false);
 
-  const { currentUser } = useContext(AuthContext);
-  const [, isModalOpen, handleAuthModalCall] = useAuthModal();
+  const { currentUser, handleAuthModalCall } = useContext(AuthContext);
 
   useEffect(() => {
     getFavorites();
@@ -52,8 +50,6 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
       {
         film && <LazyTrailerModal film={film} active={active} handleModalCall={handleModalCall} />
       }
-
-      <LazyAuthModal isOpen={isModalOpen} handleAuthFormCall={handleAuthModalCall} />
 
       <section className="film-banner">
         <div className="container film-banner__container">

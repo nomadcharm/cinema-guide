@@ -1,7 +1,7 @@
 import { ReactSVG } from "react-svg";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import FormField from "../FormField/FormField";
 import { UserOnRegister, UserOnRegisterSchema } from "../../models/UserSchemas";
@@ -9,12 +9,12 @@ import { email, key, person } from "../../assets/assets";
 import { queryClient } from "../../api/queryClient";
 import { registerUser } from "../../api/UserApi";
 import "./RegistrationForm.scss";
-import { useAuthModal } from "../../hooks";
+import AuthContext from "../../context/AuthProvider";
 
 const RegistrationForm = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [registrationComplete, setRegistrationComplete] = useState<boolean>(false);
-  const [, , , handleClick] = useAuthModal();
+  const { setAuthMode } = useContext(AuthContext)
 
   const {
     register,
@@ -52,14 +52,10 @@ const RegistrationForm = () => {
     <div className="registration">
       {
         registrationComplete ? (
-
-          // вынести кнопки регистрации / входа в authModal???? 
-          // один authModal на все приложение?
-
           <>
             <h3>Регистрация завершена</h3>
             <p>Используйте вашу электронную почту для входа</p>
-            <button className="button button-primary login__submit" onClick={() => handleClick()}>Войти</button>
+            <button className="button button-primary login__submit" onClick={() => setAuthMode("login")}>Войти</button>
           </>
         ) : (
           <>

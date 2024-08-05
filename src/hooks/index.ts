@@ -1,4 +1,3 @@
-import { useAuthModal } from "./useAuthModal";
 import { useFavorites } from "./useFavorites";
 import { useFilmInfo } from "./useFilmInfo";
 import { useFilmsByGenre } from "./useFilmsByGenre";
@@ -11,7 +10,6 @@ import { useTrailerModal } from "./useTrailerModal";
 import { useDebounce } from "./useDebounce";
 
 export {
-  useAuthModal,
   useDebounce,
   useFavorites,
   useFilmInfo,

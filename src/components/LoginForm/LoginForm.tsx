@@ -3,17 +3,18 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { queryClient } from "../../api/queryClient";
 import { UserOnLogin, UserOnLoginSchema } from "../../models/UserSchemas";
-import FormField from "../FormField/FormField";
 import { email, key } from "../../assets/assets";
 import { loginUser } from "../../api/UserApi";
+import FormField from "../FormField/FormField";
+import AuthContext from "../../context/AuthProvider";
 import "./LoginForm.scss";
 
 const LoginForm = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
-
+  const { handleAuthModalCall } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const {
@@ -29,6 +30,7 @@ const LoginForm = () => {
     mutationFn: (data: UserOnLogin) => loginUser(data.email, data.password),
     onSuccess() {
       navigate("/profile");
+      handleAuthModalCall();
       reset();
     },
     onError(error: Error) {

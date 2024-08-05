@@ -1,30 +1,29 @@
-import { FC } from "react";
+import { FC, useContext } from "react";
 import { ReactSVG } from "react-svg";
 import RegistrationForm from "../RegistrationForm/RegistrationForm";
 import LoginForm from "../LoginForm/LoginForm";
-import { useAuthModal } from "../../hooks";
 import { close, logo } from "../../assets/assets";
+import AuthContext from "../../context/AuthProvider";
 import "./AuthModal.scss";
 
 interface AuthModalProps {
   isOpen: boolean;
-  handleAuthFormCall: () => void;
 }
 
-const AuthModal: FC<AuthModalProps> = ({isOpen, handleAuthFormCall}) => {
-  const [authMode, , , handleClick] = useAuthModal();
+const AuthModal: FC<AuthModalProps> = ({ isOpen }) => {
+  const { authMode, handleAuthModalCall, handleClick } = useContext(AuthContext);
 
   return (
     <div className={isOpen ? "auth-modal is-open" : "auth-modal"}
       onClick={(e) => {
         if ((e.target as HTMLElement).className === "auth-modal is-open") {
-          handleAuthFormCall();
+          handleAuthModalCall();
         }
       }}>
       <div className="auth-modal__inner">
-        <button 
+        <button
           className="auth-modal__close"
-          onClick={() => handleAuthFormCall()}
+          onClick={() => handleAuthModalCall()}
           aria-label="Закрыть окно"
         >
           <ReactSVG src={close} />

@@ -1,5 +1,4 @@
 import { FC, lazy, ReactElement, Suspense } from "react";
-import { BrowserRouter } from "react-router-dom";
 import { Route, Routes } from "react-router";
 
 const LazyMainLoader = lazy(() => import("../components/Loaders/MainLoader/MainLoader"));
@@ -11,17 +10,15 @@ const LazyUserAccount = lazy(() => import("../pages/UserAccountPage/UserAccountP
 
 const AppRoutes: FC = (): ReactElement => {
   return (
-      <BrowserRouter basename={import.meta.env.BASE_URL}>
-        <Suspense fallback={<LazyMainLoader />}>
-          <Routes>
-            <Route path={""} element={<LazyMainPage />} />
-            <Route path={"/genres"} element={<LazyGenresPage />} />
-            <Route path={"/movie"} element={<LazyGenrePage />} />
-            <Route path={"/movie/:id"} element={<LazyFilmPage />} />
-            <Route path={"/profile"} element={<LazyUserAccount />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
+    <Suspense fallback={<LazyMainLoader />}>
+      <Routes>
+        <Route path={""} element={<LazyMainPage />} />
+        <Route path={"/genres"} element={<LazyGenresPage />} />
+        <Route path={"/movie"} element={<LazyGenrePage />} />
+        <Route path={"/movie/:id"} element={<LazyFilmPage />} />
+        <Route path={"/profile"} element={<LazyUserAccount />} />
+      </Routes>
+    </Suspense>
   );
 };
 
