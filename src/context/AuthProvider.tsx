@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useCallback, useEffect, useState } from "react";
 import { fetchCurrentUser } from "../api/UserApi";
 import { UserOnAuth } from "../models/UserSchemas";
+import AuthModal from "../components/AuthModal/AuthModal";
 
 interface AuthContextProps {
   currentUser: UserOnAuth | null;
@@ -30,6 +31,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider value={{ currentUser, getCurrentUser, clearCurrentUser }}>
+      {/* <AuthModal /> */}
       {children}
     </AuthContext.Provider>
   );

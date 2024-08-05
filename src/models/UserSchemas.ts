@@ -1,16 +1,17 @@
 import { z } from "zod";
 
 const UserSchema = z.object({
-  name: z.string().min(2, {message: "Имя пользователя должно содержать не менее 2х символов"}),
-  surname: z.string().min(2, {message: "Имя пользователя должно содержать не менее 2х символов"}),
-  email: z.string().email({message: "Невалидный формат email"}),
-  password: z.string().min(8, {message: "Пароль должен состоять из не менее 8 символов"}),
+  name: z.string().min(2, { message: "Имя должно содержать не менее 2х символов" }),
+  surname: z.string().min(2, { message: "Фамилия должна содержать не менее 2х символов" }),
+  email: z.string().email({ message: "Невалидный формат email" }),
+  password: z.string().min(8, { message: "Пароль должен состоять из не менее 8 символов" }),
+  confirmPassword: z.string().min(8, { message: "Пароль должен состоять из не менее 8 символов" }).optional(),
   favorites: z.array(z.string()),
-});
+})
 
-const UserOnRegisterSchema = UserSchema.omit({favorites: true});
-const UserOnLoginSchema = UserSchema.pick({ email: true, password: true});
-const UserOnAuthSchema = UserSchema.omit({ password: true });
+const UserOnRegisterSchema = UserSchema.omit({ favorites: true });
+const UserOnLoginSchema = UserSchema.pick({ email: true, password: true });
+const UserOnAuthSchema = UserSchema.omit({ password: true, confirmPassword: true });
 
 type User = z.infer<typeof UserSchema>;
 type UserOnRegister = z.infer<typeof UserOnRegisterSchema>

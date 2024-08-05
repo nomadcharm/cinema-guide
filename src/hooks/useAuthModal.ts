@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export const useAuthModal = (): [string, boolean, () => void, () => void] => {
-  const [authMode, setAuthMode] = useState<string>("login");
+  const [authMode, setAuthMode] = useState<string>("register");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   const handleAuthModalCall = () => {
@@ -11,10 +11,12 @@ export const useAuthModal = (): [string, boolean, () => void, () => void] => {
   };
 
   const handleClick = () => {
-    setAuthMode((prevState) =>
-      prevState === "register" ? "login" : "register"
+    setAuthMode((authMode) =>
+      authMode === "register" ? "login" : "register"
     );
   };
+
+  console.log(authMode)
 
   return [authMode, isModalOpen, handleAuthModalCall, handleClick];
 };

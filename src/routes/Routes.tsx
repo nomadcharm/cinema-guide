@@ -11,17 +11,17 @@ const LazyUserAccount = lazy(() => import("../pages/UserAccountPage/UserAccountP
 
 const AppRoutes: FC = (): ReactElement => {
   return (
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <Suspense fallback={<LazyMainLoader />}>
-        <Routes>
-          <Route path={""} element={<LazyMainPage />} />
-          <Route path={"/genres"} element={<LazyGenresPage />} />
-          <Route path={"/movie"} element={<LazyGenrePage />} />
-          <Route path={"/movie/:id"} element={<LazyFilmPage />} />
-          <Route path={"/profile"} element={<LazyUserAccount />}/>
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+      <BrowserRouter basename={import.meta.env.BASE_URL}>
+        <Suspense fallback={<LazyMainLoader />}>
+          <Routes>
+            <Route path={""} element={<LazyMainPage />} />
+            <Route path={"/genres"} element={<LazyGenresPage />} />
+            <Route path={"/movie"} element={<LazyGenrePage />} />
+            <Route path={"/movie/:id"} element={<LazyFilmPage />} />
+            <Route path={"/profile"} element={<LazyUserAccount />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
   );
 };
 

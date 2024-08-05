@@ -13,6 +13,7 @@ const registerUser = (email: string, name: string, surname: string, password: st
     credentials: "include",
     body: JSON.stringify({ email, name, surname, password })
   })
+  .then((response) => validateResponse(response))
 }
 
 const loginUser = (email: string, password: string): Promise<Response> => {

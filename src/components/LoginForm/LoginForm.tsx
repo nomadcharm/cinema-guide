@@ -12,7 +12,7 @@ import { loginUser } from "../../api/UserApi";
 import "./LoginForm.scss";
 
 const LoginForm = () => {
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string>("");
 
   const navigate = useNavigate();
 
@@ -20,7 +20,7 @@ const LoginForm = () => {
     register,
     handleSubmit,
     reset,
-    formState: {errors},
+    formState: { errors },
   } = useForm<UserOnLogin>({
     resolver: zodResolver(UserOnLoginSchema)
   });
