@@ -6,15 +6,13 @@ import { logo } from "../../assets/assets";
 import "./Header.scss";
 
 const Header: FC = (): ReactElement => {
-  const { currentUser, getCurrentUser } = useContext(AuthContext);
-  const {handleAuthModalCall} = useContext(AuthContext);
+  const { currentUser, getCurrentUser, handleAuthModalCall } = useContext(AuthContext);
 
   useEffect(() => {
     getCurrentUser();
   }, [getCurrentUser]);
 
   return (
-    <>
       <header className="header">
         <div className="container header__container">
           <Link className="header__logo" to={"/"} >
@@ -48,7 +46,6 @@ const Header: FC = (): ReactElement => {
 
         </div>
       </header >
-    </>
   );
 };
 

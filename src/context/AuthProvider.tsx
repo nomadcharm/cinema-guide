@@ -15,7 +15,7 @@ interface AuthContextProps {
 
 export const AuthContext = createContext<AuthContextProps>({
   authMode: "login",
-  setAuthMode: () => {},
+  setAuthMode: () => { },
   currentUser: null,
   getCurrentUser: () => { },
   clearCurrentUser: () => { },
@@ -52,8 +52,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
       authMode === "register" ? "login" : "register"
     );
   };
-
-  console.log(authMode)
 
   return (
     <AuthContext.Provider
