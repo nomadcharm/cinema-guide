@@ -8,8 +8,8 @@ import { UserOnRegister, UserOnRegisterSchema } from "../../models/UserSchemas";
 import { email, key, person } from "../../assets/assets";
 import { queryClient } from "../../api/queryClient";
 import { registerUser } from "../../api/UserApi";
-import "./RegistrationForm.scss";
 import AuthContext from "../../context/AuthProvider";
+import "./RegistrationForm.scss";
 
 const RegistrationForm = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
@@ -52,11 +52,11 @@ const RegistrationForm = () => {
     <div className="registration">
       {
         registrationComplete ? (
-          <>
-            <h3>Регистрация завершена</h3>
-            <p>Используйте вашу электронную почту для входа</p>
+          <div className="registration-complete">
+            <h3 className="registration__title">Регистрация завершена</h3>
+            <p className="registration__text">Используйте вашу электронную почту для входа</p>
             <button className="button button-primary login__submit" onClick={() => setAuthMode("login")}>Войти</button>
-          </>
+          </div>
         ) : (
           <>
             <h3 className="registration__title">Регистрация</h3>

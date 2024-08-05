@@ -9,6 +9,13 @@
     color: var(--clr-black);
   }
 
+  &__text {
+    margin-bottom: 24px;
+    font-size: 18px;
+    line-height: 24px;
+    color: var(--clr-black);
+  }
+
   &__form {
     display: flex;
     flex-direction: column;
@@ -22,3 +29,11 @@
   }
 }
 
+.registration-complete {
+  display: flex;
+  flex-direction: column;
+
+  & > .login__submit {
+    margin: 0;
+  }
+}

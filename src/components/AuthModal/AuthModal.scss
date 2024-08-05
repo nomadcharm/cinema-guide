@@ -24,6 +24,12 @@
     border-radius: 24px;
     text-align: center;
     background-color: var(--clr-white);
+
+    &:has(.registration-complete) {
+      & > .auth-modal__button {
+        display: none;
+      }
+    }
   }
 
   &__close {
