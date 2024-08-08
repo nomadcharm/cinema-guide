@@ -53,17 +53,18 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     );
   };
 
+  const contextValue = {
+    authMode,
+    setAuthMode,
+    currentUser,
+    getCurrentUser,
+    clearCurrentUser,
+    handleAuthModalCall,
+    handleClick,
+  };
+
   return (
-    <AuthContext.Provider
-      value={{
-        authMode,
-        setAuthMode,
-        currentUser,
-        getCurrentUser,
-        clearCurrentUser,
-        handleAuthModalCall,
-        handleClick
-      }}>
+    <AuthContext.Provider value={contextValue}>
       <AuthModal isOpen={isModalOpen} />
       {children}
     </AuthContext.Provider>
