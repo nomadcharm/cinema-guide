@@ -10,6 +10,11 @@
     padding-bottom: 40px;
   }
 
+  @include tablet-768 {
+    padding-top: 25px;
+    padding-bottom: 40px;
+  }
+
   &__title {
     margin: 0;
     margin-bottom: 64px;

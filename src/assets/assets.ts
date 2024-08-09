@@ -16,6 +16,9 @@ import popcorn from './img/icon-popcorn.png';
 import email from './img/icon-mail.svg';
 import person from './img/icon-person.svg';
 import key from './img/icon-key.svg';
+import search from './img/icon-search.svg';
+import menu from './img/icon-menu.svg';
+import searchClose from './img/icon-close-2.svg';
 
 // genre cards
 import history from './img/genre-history.webp';
@@ -78,4 +81,7 @@ export {
   email,
   person,
   key,
+  search,
+  menu,
+  searchClose,
 }

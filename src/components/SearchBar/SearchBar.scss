@@ -1,7 +1,23 @@
+@import "../../scss/mixins/breakpoints";
+
 .search-bar {
   position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
   margin-right: auto;
   width: min(100%, 559px);
+
+  &.mobile {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    max-width: 335px;
+  }
+
+  &__label {
+    width: 100%;
+  }
 
   &__input {
     padding: 12px;
@@ -21,6 +37,22 @@
       font-size: 18px;
       line-height: 24px;
       color: var(--clr-white-50);
+    }
+  }
+
+  &__close-btn {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translate(0, -50%);
+  }
+
+  &__btn {
+    margin-right: 20px;
+    font-size: 0;
+
+    svg{
+      fill: var(--clr-white);
     }
   }
 

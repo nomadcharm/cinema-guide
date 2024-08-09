@@ -4,14 +4,17 @@ import { fetchFilmsByTitle } from "../../api/FilmsApi";
 import { useEffect, useState } from "react";
 import { FilmList } from "../../models/FilmSchemas";
 import { useDebounce } from "../../hooks";
-import { popcorn } from "../../assets/assets";
+import { popcorn, searchClose } from "../../assets/assets";
 import "./SearchBar.scss";
+import { useWindowWidth } from './../../hooks/useWindowWidth';
+import { ReactSVG } from "react-svg";
 
 const SearchBar = () => {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
   const [inputValue, setInputValue] = useState<string>("");
   const [searchResults, setSearchResults] = useState<FilmList>([]);
   const debouncedSearch = useDebounce(inputValue);
+  const windowWidth = useWindowWidth();
 
   const handleSearch = async (searchItem: string): Promise<void> => {
     return await fetchFilmsByTitle(searchItem)
@@ -50,14 +53,23 @@ const SearchBar = () => {
   }, [inputValue, modal]);
 
   return (
-    <div className="search-bar">
-      <input
-        className="search-bar__input"
-        type="text"
-        placeholder="Поиск"
-        value={inputValue}
-        onChange={(e) => handleInput(e.target.value)}
-      />
+    <div className={windowWidth <= 1024 ? "search-bar mobile" : "search-bar"}>
+      <label className="search-bar__label">
+        <input
+          className="search-bar__input"
+          type="text"
+          placeholder="Поиск"
+          value={inputValue}
+          onChange={(e) => handleInput(e.target.value)}
+        />
+        {
+          windowWidth <= 1024 ? (
+            <button className="search-bar__close-btn" onClick={() => console.log("close")}>
+              <ReactSVG src={searchClose} />
+            </button>
+          ) : null
+        }
+      </label>
 
       <div className={modalIsOpen ? "search-bar__dropdown active" : "search-bar__dropdown"} id="modal">
         <ul className="search-bar__results-list">

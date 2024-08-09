@@ -31,19 +31,43 @@
     &:focus-visible {
       outline-color: var(--clr-heliotrope);
     }
+
+    @include tablet-1024 {
+      margin-right: auto;
+      width: 136px;
+    }
   }
 
   &__nav {
     margin-right: 40px;
+
+    @include tablet-1024 {
+      margin-right: 30px
+    }
+  }
+
+  &__nav-btn {
+    margin-right: 20px;
+    font-size: 0;
+
+    & svg {
+      fill: var(--clr-white);
+    }
   }
 
   .nav {
+
     &__list {
       display: flex;
       align-items: center;
       gap: 40px;
       font-size: 24px;
       line-height: 32px;
+
+      @include tablet-1024 {
+        font-size: 20px;
+        line-height: 28px;
+      }
     }
 
     &__link--active {
@@ -63,12 +87,29 @@
 }
 
 .login-btn {
+  margin-left: 10px;
   font-size: 24px;
   line-height: 32px;
   color: var(--clr-white);
 
-  &__link--active {
+  @include tablet-1024 {
+    margin-left: 0;
+    font-size: 20px;
+    line-height: 28px;
+  }
+
+  &__mobile {
+    font-size: 0;
+    line-height: 0;
+
+    & svg {
+      fill: var(--clr-white);
+    }
+  }
+
+  &__profile {
     position: relative;
+    margin-left: 10px;
     font-size: 24px;
     line-height: 32px;
     color: var(--clr-white);
