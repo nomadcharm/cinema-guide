@@ -5,7 +5,7 @@ import FilmBanner from "../../components/FilmBanner/FilmBanner";
 import TopFilms from "../../components/TopFilms/TopFilms";
 
 const MainPage: FC = (): ReactElement => {
-  useSetPageTitle(`Cinema Guide`)
+  useSetPageTitle(`Cinema Guide`);
   const [randomFilm, getRandomFilm] = useRandomFilm();
 
   return (

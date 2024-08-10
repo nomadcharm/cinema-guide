@@ -9,6 +9,7 @@ import { useRandomFilm } from "./useRandomFilm";
 import { useSetPageTitle } from "./useSetPageTitle";
 import { useTopFilms } from "./useTopFilms";
 import { useTrailerModal } from "./useTrailerModal";
+import { useTrailerPlayer } from "./useTrailerPLayer";
 import { useWindowWidth } from "./useWindowWidth";
 
 export {
@@ -23,5 +24,6 @@ export {
   useSetPageTitle,
   useTopFilms,
   useTrailerModal,
+  useTrailerPlayer,
   useWindowWidth,
 };

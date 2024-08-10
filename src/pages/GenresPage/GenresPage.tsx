@@ -6,7 +6,7 @@ import { pickGenrePoster } from "../../utils";
 import "./GenresPage.scss";
 
 const GenresPage: FC = (): ReactElement => {
-  useSetPageTitle(`Жанры | Cinema Guide`)
+  useSetPageTitle(`Жанры | Cinema Guide`);
   const genres = useGenres();
 
   return (

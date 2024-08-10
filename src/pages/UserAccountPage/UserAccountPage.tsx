@@ -8,6 +8,7 @@ import "./UserAccountPage.scss"
 const UserAccountPage: FC = () => {
   useSetPageTitle(`Мой аккаунт | Cinema Guide`);
   const windowWidth = useWindowWidth();
+  
   const [currentTabIndex, setCurrentTabIndex] = useState<number>(0);
 
   const handleTabClick = (index: number) => {
