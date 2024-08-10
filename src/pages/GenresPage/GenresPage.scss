@@ -45,11 +45,11 @@
     animation: fadeIn 2s;
 
     @include desktop-1200 {
-      width: calc((100% - 72px) / 3);
+      width: calc((100% - 48px) / 3);
     }
 
     @include tablet-1024 {
-      width: calc((100% - 48px) / 2);
+      width: calc((100% - 24px) / 2);
     }
 
     @include tablet-768 {

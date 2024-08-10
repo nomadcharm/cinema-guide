@@ -70,41 +70,39 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
                     </div>
                   </div>
 
-                  <div className="film-banner__actions">
-                    {
-                      filmPage ? (
-                        <>
-                          <button className="button button-primary" onClick={() => handleModalCall()}>Трейлер</button>
-                          <button
-                            className="button button-icon button-favorite"
-                            aria-label="Добавить в избранное"
-                            onClick={currentUser ? () => toggleFavorite(film.id) : () => handleAuthModalCall()}
-                          >
-                            {
-                              isFavored ?
-                                <ReactSVG src={favored} /> :
-                                <ReactSVG src={toFavor} />
-                            }
-                          </button>
-                        </>
-                      ) : (
-                        <>
-                          <button className="button button-primary" onClick={() => handleModalCall()}>Трейлер</button>
-                          <Link className="button button-secondary" to={`/movie/${film.id}`}>О фильме</Link>
-                          <button
-                            className="button button-icon button-favorite"
-                            aria-label="Добавить в избранное"
-                            onClick={currentUser ? () => toggleFavorite(film.id) : () => handleAuthModalCall()}
-                          >
-                            <ReactSVG src={isFavored ? favored : toFavor} className={isFavored ? "svg-favored" : "svg"} />
-                          </button>
-                          <button className="button button-icon button-refresh" onClick={handleRefresh} aria-label="Загрузить новый случайный фильм">
-                            <ReactSVG src={toRefresh} />
-                          </button>
-                        </>
-                      )
-                    }
-                  </div>
+                  {
+                    filmPage ? (
+                      <div className="film-banner__actions film-banner__actions--film-page">
+                        <button className="button button-primary button-film-trailer" onClick={() => handleModalCall()}>Трейлер</button>
+                        <button
+                          className="button button-icon button-favorite"
+                          aria-label="Добавить в избранное"
+                          onClick={currentUser ? () => toggleFavorite(film.id) : () => handleAuthModalCall()}
+                        >
+                          {
+                            isFavored ?
+                              <ReactSVG src={favored} /> :
+                              <ReactSVG src={toFavor} />
+                          }
+                        </button>
+                      </div>
+                    ) : (
+                      <div className="film-banner__actions film-banner__actions--random">
+                        <button className="button button-primary button-trailer" onClick={() => handleModalCall()}>Трейлер</button>
+                        <Link className="button button-secondary button-about" to={`/movie/${film.id}`}>О фильме</Link>
+                        <button
+                          className="button button-icon button-favorite"
+                          aria-label="Добавить в избранное"
+                          onClick={currentUser ? () => toggleFavorite(film.id) : () => handleAuthModalCall()}
+                        >
+                          <ReactSVG src={isFavored ? favored : toFavor} className={isFavored ? "svg-favored" : "svg"} />
+                        </button>
+                        <button className="button button-icon button-refresh" onClick={handleRefresh} aria-label="Загрузить новый случайный фильм">
+                          <ReactSVG src={toRefresh} />
+                        </button>
+                      </div>
+                    )
+                  }
                 </div>
 
                 <div className="film-banner__backdrop">

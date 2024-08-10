@@ -1,8 +1,25 @@
+@import "../../scss/mixins/breakpoints";
 @import "../../scss/mixins/hover";
 
 .films-by-genre {
   padding-top: 160px;
   padding-bottom: 160px;
+
+  &:not(:has(.films-by-genre__load-btn)) {
+    & .films-by-genre__list {
+      margin-bottom: 0;
+    }
+  }
+
+  @include tablet-1024 {
+    padding-top: 80px;
+    padding-bottom: 40px;
+  }
+
+  @include tablet-768 {
+    padding-top: 25px;
+    padding-bottom: 40px;
+  }
 
   &__container {
     display: flex;
@@ -13,6 +30,10 @@
     display: flex;
     align-items: center;
     margin-bottom: 64px;
+
+    @include tablet-768 {
+      margin-bottom: 38px;
+    }
   }
 
   &__title {
@@ -25,8 +46,19 @@
     height: 40px;
     transition: scale 0.3s ease;
 
+    @include tablet-768 {
+      margin-right: 8px;
+      width: 32px;
+      height: 32px;
+    }
+
     & svg {
       fill: var(--clr-white);
+
+      @include tablet-768 {
+        width: 32px;
+        height: 32px;
+      }
     }
 
     &:focus-visible svg {
@@ -47,12 +79,36 @@
     flex-wrap: wrap;
     gap: 64px 40px;
     margin-bottom: 64px;
+
+    @include desktop-1200 {
+      gap: 40px 24px;
+    }
+
+    @include tablet-1024 {
+      gap: 24px;
+    }
+
+    @include tablet-768 {
+      margin-bottom: 40px;
+    }
   }
 
   &__item {
     display: flex;
     width: calc((100% - 160px) / 5);
     animation: fadeIn 1s;
+
+    @include desktop-1200 {
+      width: calc((100% - 48px) / 3);
+    }
+
+    @include tablet-1024 {
+      width: calc((100% - 24px) / 2);
+    }
+
+    @include tablet-768 {
+      width: 100%;
+    }
   }
 
   &__load-btn {
@@ -65,8 +121,8 @@
     color: var(--clr-white);
     background-color: var(--clr-blue-marguerite);
 
-    // @include hover {
-    //   background-color: red;
-    // }
+    @include mobile-576 {
+      width: 100%;
+    }
   }
 }

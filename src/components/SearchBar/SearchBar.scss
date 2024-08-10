@@ -12,7 +12,9 @@
     position: absolute;
     top: 12px;
     right: 20px;
+    // left: 20px;
     max-width: 335px;
+    // width: 100%;
   }
 
   &__label {
@@ -51,7 +53,7 @@
     margin-right: 20px;
     font-size: 0;
 
-    svg{
+    svg {
       fill: var(--clr-white);
     }
   }
@@ -67,9 +69,29 @@
     border-radius: 0px 0px 8px 8px;
     background-color: var(--clr-cape-god);
     opacity: 1;
-    
+
     &.active {
       display: block;
+    }
+
+    @include tablet-1024 {
+      top: 54px;
+      border-radius: 8px;
+    }
+  }
+
+  &__results-list {
+    position: relative;
+    z-index: 9999999999 !important;
+
+    @include tablet-1024 {
+      display: flex;
+      padding: 0 6px;
+      overflow-x: scroll;
+      
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 
@@ -81,6 +103,17 @@
 .search-card {
   display: flex;
   gap: 16px;
+
+  @include tablet-1024 {
+    flex-direction: column;
+    width: 220px;
+  }
+
+  & img {
+    @include tablet-1024 {
+      width: 158px;
+    }
+  }
 
   &__content {
     display: flex;
@@ -95,6 +128,11 @@
     line-height: 20px;
     color: var(--clr-white-70);
 
+    @include tablet-1024 {
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
     & .rating {
       padding: 5px 8px 5px 22px;
       font-size: 12px;
@@ -102,6 +140,10 @@
       line-height: 16px;
       background-position: left 8px center;
       background-size: 10px 10px;
+
+      @include tablet-1024 {
+        padding: 2px 8px 2px 22px;
+      }
     }
   }
 

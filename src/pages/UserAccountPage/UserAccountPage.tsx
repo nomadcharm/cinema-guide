@@ -2,12 +2,12 @@ import { FC, useState } from "react";
 import Layout from "../../components/Layout/Layout";
 import UserSettings from "../../components/UserSettings/UserSettings";
 import FavoriteFilms from "../../components/FavoriteFilms/FavoriteFilms";
-import { useSetPageTitle } from "../../hooks";
+import { useSetPageTitle, useWindowWidth } from "../../hooks";
 import "./UserAccountPage.scss"
 
 const UserAccountPage: FC = () => {
   useSetPageTitle(`Мой аккаунт | Cinema Guide`);
-
+  const windowWidth = useWindowWidth();
   const [currentTabIndex, setCurrentTabIndex] = useState<number>(0);
 
   const handleTabClick = (index: number) => {
@@ -26,14 +26,14 @@ const UserAccountPage: FC = () => {
                 className={currentTabIndex === 0 ?
                   "user-account__tab user-account__tab--favourites active" :
                   "user-account__tab user-account__tab--favourites"}
-              >Избранные фильмы</h3>
+              >{windowWidth <= 768 ? "Избранное" : "Избранные фильмы"}</h3>
             </li>
             <li className="user-account__nav-item" onClick={() => handleTabClick(1)}>
               <h3
                 className={currentTabIndex === 1 ?
                   "user-account__tab user-account__tab--settings active" :
                   "user-account__tab user-account__tab--settings"}
-              >Настройка аккаунта</h3>
+              >{windowWidth <= 768 ? "Настройки" : "Настройка аккаунта"}</h3>
             </li>
           </ul>
 

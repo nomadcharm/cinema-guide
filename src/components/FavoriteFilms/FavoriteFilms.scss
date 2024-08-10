@@ -1,3 +1,5 @@
+@import "../../scss/mixins/breakpoints";
+
 .favorites {
   position: relative;
 
@@ -9,6 +11,16 @@
     display: flex;
     flex-wrap: wrap;
     gap: 64px 40px;
+    padding-bottom: 60px;
+
+    @include tablet-768 {
+      flex-wrap: nowrap;
+      overflow: scroll;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
   }
 
   &__remove-btn {
@@ -31,6 +43,10 @@
     flex-shrink: 0;
     width: calc((100% - 160px) / 5);
     animation: fadeIn 1s ease;
+
+    @include tablet-768 {
+      width: 224px;
+    }
 
     &:hover .film-card {
       border-color: var(--clr-white);

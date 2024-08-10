@@ -11,7 +11,7 @@
   background-color: var(--clr-black-50);
 
   @include tablet-1024 {
-    position: static;
+    position: relative;
     padding-top: 16px;
     padding-bottom: 16px;
   }

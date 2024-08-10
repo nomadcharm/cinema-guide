@@ -1,3 +1,5 @@
+@import "../../scss/mixins/breakpoints";
+
 .auth-modal {
   position: fixed;
   z-index: 99999999;
@@ -20,13 +22,19 @@
   &__inner {
     position: relative;
     padding: 64px 40px;
-    width: 420px;
+    width: min(100%, 420px);
     border-radius: 24px;
     text-align: center;
     background-color: var(--clr-white);
 
+    @include tablet-1024 {
+      padding: 64px 20px;
+      padding-bottom: 32px;
+      width: min(100%, 335px);
+    }
+
     &:has(.registration-complete) {
-      & > .auth-modal__button {
+      &>.auth-modal__button {
         display: none;
       }
     }
@@ -36,10 +44,19 @@
     position: absolute;
     top: 0;
     right: -72px;
+
+    @include tablet-1024 {
+      top: 8px;
+      right: 8px;
+    }
   }
 
   &__logo {
     margin-bottom: 40px;
+
+    @include tablet-768 {
+      margin-bottom: 32px;
+    }
   }
 
   &__button {

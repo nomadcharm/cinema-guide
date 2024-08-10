@@ -1,13 +1,31 @@
+@import "../../scss/mixins/breakpoints";
+
 .user-account {
   padding-top: 160px;
   min-height: calc(100vh - 120px);
 
+  @include tablet-1024 {
+    padding-top: 60px;
+  }
+
+  @include mobile-576 {
+    padding-top: 24px;
+  }
+
   &:has(.user-account__tab-content.tab-2.active) {
     padding-bottom: 160px;
+
+    @include mobile-576 {
+      padding-bottom: 148px;
+    }
   }
 
   &__title {
     margin-bottom: 74px;
+
+    @include mobile-576 {
+      margin-bottom: 48px;
+    }
   }
 
   &__nav {
@@ -15,6 +33,11 @@
     align-items: flex-start;
     gap: 64px;
     margin-bottom: 70px;
+
+    @include mobile-576 {
+      gap: 24px;
+      margin-bottom: 48px;
+    }
   }
 
   &__tab {

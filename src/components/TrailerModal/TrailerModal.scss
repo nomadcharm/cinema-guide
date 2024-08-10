@@ -1,3 +1,5 @@
+@import "../../scss/mixins/breakpoints";
+
 .trailer-modal {
   position: fixed;
   z-index: 99;
@@ -33,14 +35,28 @@
     border: 1px solid var(--clr-white-50);
     background-color: var(--clr-cape-god);
 
+    @include desktop-1200 {
+      width: 663px;
+      height: 375px;
+    }
+
+    @include mobile-576 {
+      width: 375px;
+      height: 212px;
+    }
+
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       z-index: -1;
       top: 0;
       right: -75px;
       bottom: 0;
       left: 0;
+
+      @include desktop-1200 {
+        display: none;
+      }
     }
 
     &:hover .trailer-modal__title,
@@ -63,8 +79,20 @@
     line-height: 32px;
     background-color: var(--clr-woodsmoke-50);
 
+    @include desktop-1200 {
+      left: 0;
+      bottom: 0;
+      width: 100%;
+      font-size: 18px;
+      line-height: 24px;
+    }
+
+    @include mobile-576 {
+      bottom: -80px;
+    }
+
     &.active {
-      display: none
+      display: none;
     }
   }
 
@@ -78,6 +106,14 @@
     background-image: url('../../assets//img/icon-close.svg');
     background-repeat: no-repeat;
     background-size: 48px 48px;
+
+    @include desktop-1200 {
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      background-size: 32px 32px;
+    }
 
     &.paused {
       display: none;
@@ -98,6 +134,12 @@
     background-size: 80px 80px;
     transition: background-image 0.1s ease-in-out;
     cursor: pointer;
+
+    @include desktop-1200 {
+      width: 64px;
+      height: 64px;
+      background-size: 64px 64px;
+    }
 
     &.on-play {
       background-image: url('../../assets//img/icon-pause.svg');

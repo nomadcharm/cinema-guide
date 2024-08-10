@@ -102,8 +102,11 @@
 }
 
 .rating {
-  padding: 3px 12px 3px 32px;
+  padding: 4px 12px 4px 32px;
   border-radius: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
   color: var(--clr-white);
   background-image: url("./assets/img/star.svg");
   background-position: left 12px center;

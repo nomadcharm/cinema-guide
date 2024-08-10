@@ -1,3 +1,6 @@
+@import "../../scss/mixins/breakpoints";
+@import "../../scss/mixins/hover";
+
 .film-card {
   width: 100%;
   max-height: 336px;
@@ -5,6 +8,10 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: var(--shd-card);
+
+  @include desktop-1200 {
+    max-height: 100%;
+  }
 
   &__img {
     width: 100%;

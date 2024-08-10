@@ -1,12 +1,27 @@
+@import "../../scss/mixins/breakpoints";
+
 .user {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+
+  @include mobile-576 {
+    align-items: normal;
+  }
+
   &__data {
     margin-bottom: 64px;
+
+    @include mobile-576 {
+      margin-bottom: 40px;
+    }
   }
 
   &__info {
     position: relative;
     display: flex;
     align-items: center;
+    align-items: flex-start;
     gap: 16px;
 
     &:not(:last-child) {
@@ -25,6 +40,11 @@
       background-position: center;
       background-repeat: no-repeat;
       background-size: 24px 24px;
+
+      @include mobile-576 {
+        width: 48px;
+        height: 48px;
+      }
     }
   }
 
@@ -32,12 +52,23 @@
     margin-bottom: 4px;
     font-size: 18px;
     line-height: 24px;
+
+    @include mobile-576 {
+      font-size: 14px;
+      line-height: 20px;
+      color: var(--clr-white-50);
+    }
   }
 
   &__details {
     font-size: 24px;
     font-weight: 700;
     line-height: 32px;
+
+    @include mobile-576 {
+      font-size: 18px;
+      line-height: 24px;
+    }
   }
 
   &__initials {
@@ -49,5 +80,11 @@
     line-height: 32px;
     border-radius: 50%;
     background-color: var(--clr-white-50);
+
+    @include mobile-576 {
+      padding: 8px;
+      width: 48px;
+      height: 48px;
+    }
   }
 }
