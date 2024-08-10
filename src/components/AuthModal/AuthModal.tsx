@@ -1,11 +1,10 @@
 import { FC, lazy, Suspense, useContext } from "react";
 import { ReactSVG } from "react-svg";
-// import RegistrationForm from "../RegistrationForm/RegistrationForm";
-import LoginForm from "../LoginForm/LoginForm";
 import { close, logo } from "../../assets/assets";
+import MainLoader from "../Loaders/MainLoader/MainLoader";
+import LoginForm from "../LoginForm/LoginForm";
 import AuthContext from "../../context/AuthProvider";
 import "./AuthModal.scss";
-import MainLoader from "../Loaders/MainLoader/MainLoader";
 
 interface AuthModalProps {
   isOpen: boolean;

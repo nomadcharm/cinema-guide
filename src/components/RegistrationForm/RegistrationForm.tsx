@@ -14,7 +14,7 @@ import "./RegistrationForm.scss";
 const RegistrationForm = () => {
   const [errorMessage, setErrorMessage] = useState<string>("");
   const [registrationComplete, setRegistrationComplete] = useState<boolean>(false);
-  const { setAuthMode } = useContext(AuthContext)
+  const { setAuthMode } = useContext(AuthContext);
 
   const {
     register,

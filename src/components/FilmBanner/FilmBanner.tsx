@@ -1,10 +1,9 @@
-import { FC, lazy, ReactElement, useContext, useEffect, useState } from "react";
+import { FC, lazy, ReactElement, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import { Film } from "../../models/FilmSchemas";
-import { addFilmToFavorites, removeFromFavorites } from "../../api/FavoritesApi";
 import { backdropStub, toRefresh, toFavor, favored } from "../../assets/assets";
-import { useFavorites, useTrailerModal } from "../../hooks";
+import { useFavorites, useMarkFavorite, useTrailerModal } from "../../hooks";
 import { formatTime, setRatingColor } from "../../utils";
 import AuthContext from "../../context/AuthProvider";
 import "./FilmBanner.scss";
@@ -20,30 +19,12 @@ interface FilmBannerProps {
 const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): ReactElement => {
   const [active, handleModalCall] = useTrailerModal();
   const [favorites, getFavorites] = useFavorites();
-  const [isFavored, setIsFavored] = useState<boolean>(false);
-
+  const [isFavored, toggleFavorite] = useMarkFavorite(film, favorites);
   const { currentUser, handleAuthModalCall } = useContext(AuthContext);
 
   useEffect(() => {
     getFavorites();
   }, [getFavorites]);
-
-  useEffect(() => {
-    if (film && favorites.some(fav => fav.id === film.id)) {
-      setIsFavored(true);
-    } else {
-      setIsFavored(false);
-    }
-  }, [film, favorites]);
-
-  const toggleFavorite = (id: number) => {
-    if (isFavored) {
-      removeFromFavorites(id);
-    } else {
-      addFilmToFavorites(id.toString());
-    }
-    setIsFavored(!isFavored);
-  };
 
   return (
     <>
