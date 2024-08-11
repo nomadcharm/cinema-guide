@@ -11,10 +11,14 @@
     display: flex;
     flex-wrap: wrap;
     gap: 64px 40px;
-    padding-bottom: 60px;
+    padding-bottom: 68px;
 
-    @include tablet-768 {
+    @include tablet-1024 {
       flex-wrap: nowrap;
+      margin-top: -40px;
+      padding-top: 40px;
+      margin-left: -20px;
+      padding-left: 20px;
       overflow: scroll;
 
       &::-webkit-scrollbar {
@@ -44,7 +48,7 @@
     width: calc((100% - 160px) / 5);
     animation: fadeIn 1s ease;
 
-    @include tablet-768 {
+    @include tablet-1024 {
       width: 224px;
     }
 

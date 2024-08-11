@@ -8,7 +8,7 @@
     padding-top: 32px;
     padding-bottom: 32px;
   }
-  
+
   &__title {
     margin-bottom: 64px;
 
@@ -16,7 +16,7 @@
       margin-bottom: 40px;
     }
   }
-  
+
   &__list {
     display: flex;
     flex-wrap: wrap;
@@ -24,14 +24,22 @@
 
     @include tablet-1024 {
       flex-wrap: nowrap;
-      overflow: scroll;
+      overflow-x: auto;
+
+      padding-top: 70px;
+      margin-top: -70px;
+      padding-left: 12px;
+      margin-left: -12px;
+      margin-right: -20px;
+      padding-bottom: 50px;
+      margin-bottom: -50px;
 
       &::-webkit-scrollbar {
         display: none;
       }
     }
   }
-  
+
   &__item {
     position: relative;
     display: flex;
@@ -42,10 +50,15 @@
     @include tablet-1024 {
       width: 224px;
     }
+
+    &:last-child {
+      margin-right: 20px;
+    }
   }
 
   &__number {
     position: absolute;
+    z-index: 11111;
     top: -12px;
     left: -12px;
     padding: 8px 24px;
