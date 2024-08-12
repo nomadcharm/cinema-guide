@@ -4,7 +4,6 @@ import { useFilmInfo } from "./useFilmInfo";
 import { useFilmsByGenre } from "./useFilmsByGenre";
 import { useGenres } from "./useGenres";
 import { useMarkFavorite } from "./useMarkFavorite";
-import { useNavigateBack } from "./useNavigateBack";
 import { useRandomFilm } from "./useRandomFilm";
 import { useSearch } from "./useSearch";
 import { useSetPageTitle } from "./useSetPageTitle";
@@ -20,7 +19,6 @@ export {
   useFilmsByGenre,
   useGenres,
   useMarkFavorite,
-  useNavigateBack,
   useRandomFilm,
   useSearch,
   useSetPageTitle,

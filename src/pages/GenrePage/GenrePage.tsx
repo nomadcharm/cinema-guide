@@ -1,18 +1,19 @@
 import { FC, ReactElement } from "react";
+import { NavigateFunction, useNavigate } from "react-router";
+import { ReactSVG } from "react-svg";
 import Layout from "../../components/Layout/Layout";
-import { useFilmsByGenre, useNavigateBack, useSetPageTitle } from "../../hooks";
+import { useFilmsByGenre, useSetPageTitle } from "../../hooks";
 import FilmPreviewCard from "../../components/FilmPreviewCard/FilmPreviewCard";
 import { capitalizeString } from "../../utils";
 import { back } from "../../assets/assets";
 import "./GenrePage.scss";
-import { ReactSVG } from "react-svg";
 
 const GenrePage: FC = (): ReactElement => {
   const searchParams: URLSearchParams = new URLSearchParams(window.location.search);
   const genre: string = searchParams.get("genre") ?? "";
 
   const [filmsByGenre, page, setPage, hasMoreFilms] = useFilmsByGenre(genre);
-  const handleNavigateBack = useNavigateBack();
+  const navigate: NavigateFunction = useNavigate();
 
   useSetPageTitle(`${capitalizeString(genre)} | Cinema Guide`, genre);
 
@@ -21,7 +22,7 @@ const GenrePage: FC = (): ReactElement => {
       <section className="films-by-genre">
         <div className="container films-by-genre__container">
           <div className="films-by-genre__title-block">
-            <button className="films-by-genre__nav-back" onClick={() => handleNavigateBack()}>
+            <button className="films-by-genre__nav-back" onClick={() => navigate(-1)}>
               <ReactSVG src={back} />
             </button>
             <h1 className="page-title films-by-genre__title">{capitalizeString(genre)}</h1>
