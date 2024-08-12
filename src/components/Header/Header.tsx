@@ -1,4 +1,4 @@
-import { FC, ReactElement, useContext, useEffect, useState } from "react";
+import { FC, ReactElement, useContext, useEffect, useRef } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import AuthContext from "../../context/AuthProvider";
 import SearchBar from "../SearchBar/SearchBar";
@@ -12,14 +12,15 @@ const Header: FC = (): ReactElement => {
   const windowWidth = useWindowWidth();
   const navigate = useNavigate();
 
+  const navRef = useRef<HTMLDivElement>(null);
+
+  const handleMobileNav = (): void => {
+    navRef.current?.classList.toggle("open");
+  }
+
   useEffect(() => {
     getCurrentUser();
   }, [getCurrentUser]);
-
-  const [isSearchOpen, setIsSearchOpen] = useState<boolean>(false);
-  console.log(isSearchOpen)
-
-  const handleMobileSearch = (): void => setIsSearchOpen(prev => !prev);
 
   return (
     <header className="header">
@@ -28,30 +29,33 @@ const Header: FC = (): ReactElement => {
           <img src={logo} alt="Cinema Guide" width={240} />
         </Link>
 
-        {
-          windowWidth >= 768 ? (
-            <nav className="header__nav nav">
-              <ul className="nav__list">
-                <li>
-                  <NavLink className={({ isActive }) => isActive ? "nav__link nav__link--active" : "nav__link"} to={"/"}>Главная</NavLink>
-                </li>
-                <li>
-                  <NavLink className={({ isActive }) => isActive ? "nav__link nav__link--active" : "nav__link"} to={"/genres"}>Жанры</NavLink>
-                </li>
-              </ul>
-            </nav>
-          ) : (
-            <button className="header__nav-btn">
-              <ReactSVG src={menu} />
-            </button>
-          )
-        }
+        <nav className="header__nav nav" ref={navRef}>
+          <ul className="nav__list">
+            <li>
+              <NavLink
+                className={({ isActive }) => isActive ? "nav__link nav__link--active" : "nav__link"}
+                to={"/"}
+                onClick={handleMobileNav}
+              >Главная</NavLink>
+            </li>
+            <li>
+              <NavLink
+                className={({ isActive }) => isActive ? "nav__link nav__link--active" : "nav__link"}
+                to={"/genres"}
+                onClick={handleMobileNav}
+              >Жанры</NavLink>
+            </li>
+          </ul>
+        </nav>
+        <button className="header__nav-btn" onClick={handleMobileNav}>
+          <ReactSVG src={menu} />
+        </button>
 
         {
-          windowWidth >= 1024 || isSearchOpen ? (
+          windowWidth >= 1024 ? (
             <SearchBar />
           ) : (
-            <button className="search-bar__btn" onClick={() => handleMobileSearch()}>
+            <button className="search-bar__btn" onClick={() => console.log(1)}>
               <ReactSVG src={search} />
             </button>
           )

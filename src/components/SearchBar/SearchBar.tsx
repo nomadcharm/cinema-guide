@@ -8,11 +8,10 @@ import "./SearchBar.scss";
 
 const SearchBar = () => {
   const windowWidth = useWindowWidth();
-
   const { modalIsOpen, setModalIsOpen, inputValue, setInputValue, handleInput, searchResults } = useSearch();
 
   return (
-    <div className={windowWidth <= 1024 ? "search-bar mobile" : "search-bar"}>
+    <div className={windowWidth <= 1024 ? "search-bar mobile" : "search-bar"} >
       <label className="search-bar__label">
         <input
           className="search-bar__input"
@@ -23,7 +22,7 @@ const SearchBar = () => {
         />
         {
           windowWidth <= 1024 ? (
-            <button className="search-bar__close-btn" onClick={() => console.log("close")}>
+            <button className="search-bar__close-btn" onClick={() => console.log('close')}>
               <ReactSVG src={searchClose} />
             </button>
           ) : null
