@@ -8,11 +8,19 @@
   margin-right: auto;
   width: min(100%, 559px);
 
-  &.mobile {
-    position: absolute;
-    top: 12px;
+  @include tablet-1024 {
+    display: none;
     max-width: 335px;
   }
+
+  &.open {
+    position: absolute;
+    z-index: 999;
+    right: 20px;
+    top: 0px;
+    display: block;
+  }
+
 
   &__label {
     width: 100%;
@@ -47,11 +55,16 @@
   }
 
   &__btn {
+    display: none;
     margin-right: 20px;
     font-size: 0;
 
     svg {
       fill: var(--clr-white);
+    }
+
+    @include tablet-1024 {
+      display: block;
     }
   }
 
@@ -88,7 +101,7 @@
 
     @include tablet-1024 {
       top: 54px;
-      border-radius: 0px 0px 8px 8px;
+      border-radius: 8px;
 
       &::-webkit-scrollbar {
         display: none;

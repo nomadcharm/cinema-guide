@@ -1,17 +1,27 @@
 import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
+import { useContext } from "react";
 import { formatTime, setRatingColor } from "../../utils";
 import { popcorn, searchClose } from "../../assets/assets";
 import { useWindowWidth } from './../../hooks/useWindowWidth';
-import { useSearch } from "../../hooks";
 import "./SearchBar.scss";
+import { SearchContext } from "../../context/SearchProvider";
 
-const SearchBar = () => {
+const SearchBar = ()  => {
   const windowWidth = useWindowWidth();
-  const { modalIsOpen, setModalIsOpen, inputValue, setInputValue, handleInput, searchResults } = useSearch();
+  const { 
+    searchBarRef, 
+    handleMobileSearch, 
+    modalIsOpen, 
+    setModalIsOpen, 
+    inputValue, 
+    setInputValue, 
+    handleInput, 
+    searchResults 
+  } = useContext(SearchContext);
 
   return (
-    <div className={windowWidth <= 1024 ? "search-bar mobile" : "search-bar"} >
+    <div className="search-bar" ref={searchBarRef}>
       <label className="search-bar__label">
         <input
           className="search-bar__input"
@@ -22,7 +32,7 @@ const SearchBar = () => {
         />
         {
           windowWidth <= 1024 ? (
-            <button className="search-bar__close-btn" onClick={() => console.log('close')}>
+            <button className="search-bar__close-btn" onClick={handleMobileSearch}>
               <ReactSVG src={searchClose} />
             </button>
           ) : null

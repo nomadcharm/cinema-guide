@@ -6,9 +6,11 @@ import { logo, menu, person, search } from "../../assets/assets";
 import "./Header.scss";
 import { ReactSVG } from "react-svg";
 import { useWindowWidth } from "../../hooks";
+import { SearchContext } from "../../context/SearchProvider";
 
 const Header: FC = (): ReactElement => {
   const { currentUser, getCurrentUser, handleAuthModalCall } = useContext(AuthContext);
+  const { handleMobileSearch } = useContext(SearchContext);
   const windowWidth = useWindowWidth();
   const navigate = useNavigate();
 
@@ -51,15 +53,10 @@ const Header: FC = (): ReactElement => {
           <ReactSVG src={menu} />
         </button>
 
-        {
-          windowWidth >= 1024 ? (
-            <SearchBar />
-          ) : (
-            <button className="search-bar__btn" onClick={() => console.log(1)}>
-              <ReactSVG src={search} />
-            </button>
-          )
-        }
+        <SearchBar />
+        <button className="search-bar__btn" onClick={handleMobileSearch}>
+          <ReactSVG src={search} />
+        </button>
 
         {windowWidth < 768 ? (
           <button className="login-btn login-btn__mobile" onClick={currentUser ? () => navigate("/profile") : () => handleAuthModalCall()}>

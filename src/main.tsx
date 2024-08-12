@@ -5,13 +5,16 @@ import "./index.scss";
 // import React from "react";
 import { AuthProvider } from "./context/AuthProvider.tsx";
 import { BrowserRouter } from "react-router-dom";
+import SearchProvider from "./context/SearchProvider.tsx";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   // <React.StrictMode>
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <AuthProvider>
+  <BrowserRouter basename={import.meta.env.BASE_URL}>
+    <AuthProvider>
+      <SearchProvider>
         <App />
-      </AuthProvider>
-    </BrowserRouter>
+      </SearchProvider>
+    </AuthProvider>
+  </BrowserRouter>
   // {/* </React.StrictMode>, */}
 )
