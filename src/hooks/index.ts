@@ -6,6 +6,7 @@ import { useGenres } from "./useGenres";
 import { useMarkFavorite } from "./useMarkFavorite";
 import { useNavigateBack } from "./useNavigateBack";
 import { useRandomFilm } from "./useRandomFilm";
+import { useSearch } from "./useSearch";
 import { useSetPageTitle } from "./useSetPageTitle";
 import { useTopFilms } from "./useTopFilms";
 import { useTrailerModal } from "./useTrailerModal";
@@ -21,6 +22,7 @@ export {
   useMarkFavorite,
   useNavigateBack,
   useRandomFilm,
+  useSearch,
   useSetPageTitle,
   useTopFilms,
   useTrailerModal,

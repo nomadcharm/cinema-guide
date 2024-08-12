@@ -1,56 +1,15 @@
 import { Link } from "react-router-dom";
-import { formatTime, setRatingColor } from "../../utils";
-import { fetchFilmsByTitle } from "../../api/FilmsApi";
-import { useEffect, useState } from "react";
-import { FilmList } from "../../models/FilmSchemas";
-import { useDebounce } from "../../hooks";
-import { popcorn, searchClose } from "../../assets/assets";
-import "./SearchBar.scss";
-import { useWindowWidth } from './../../hooks/useWindowWidth';
 import { ReactSVG } from "react-svg";
+import { formatTime, setRatingColor } from "../../utils";
+import { popcorn, searchClose } from "../../assets/assets";
+import { useWindowWidth } from './../../hooks/useWindowWidth';
+import { useSearch } from "../../hooks";
+import "./SearchBar.scss";
 
 const SearchBar = () => {
-  const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
-  const [inputValue, setInputValue] = useState<string>("");
-  const [searchResults, setSearchResults] = useState<FilmList>([]);
-  const debouncedSearch = useDebounce(inputValue);
   const windowWidth = useWindowWidth();
 
-  const handleSearch = async (searchItem: string): Promise<void> => {
-    return await fetchFilmsByTitle(searchItem)
-      .then((filmList) => {
-        const filmsFound = filmList.filter(film => {
-          return searchItem &&
-            film &&
-            film.title.toLowerCase().trim().includes(searchItem.toLowerCase().trim());
-        });
-
-        setSearchResults(filmsFound);
-      });
-  };
-
-  const handleInput = (value: string): void => {
-    setModalIsOpen(true);
-    setInputValue(value);
-  };
-
-  useEffect(() => {
-    handleSearch(debouncedSearch);
-  }, [debouncedSearch])
-
-  const modal: HTMLElement | null = document.querySelector("#modal")
-
-  window.addEventListener("click", (e) => {
-    if (modal && !modal.contains(e.target as Node)) {
-      setModalIsOpen(false)
-    }
-  })
-
-  useEffect(() => {
-    if (inputValue && modal) {
-      modal.classList.add("active");
-    }
-  }, [inputValue, modal]);
+  const { modalIsOpen, setModalIsOpen, inputValue, setInputValue, handleInput, searchResults } = useSearch();
 
   return (
     <div className={windowWidth <= 1024 ? "search-bar mobile" : "search-bar"}>
@@ -73,8 +32,8 @@ const SearchBar = () => {
 
       <div className={modalIsOpen ? "search-bar__dropdown active" : "search-bar__dropdown"} id="modal">
         <ul className="search-bar__results-list">
-          {searchResults && searchResults.map(result => {
-            return <li className="search-bar__results-item" key={result.id} >
+          {searchResults && searchResults.length > 0 && (searchResults.map(result => {
+            return <li className="search-bar__results-item" key={result.id}>
               <Link to={`/movie/${result.id}`} onClick={() => { setModalIsOpen(false), setInputValue("") }}>
                 <article className="search-card">
                   <img src={result.posterUrl ? result.posterUrl : popcorn} alt={result.title} width={40} height={52} />
@@ -82,7 +41,7 @@ const SearchBar = () => {
                     <div className="search-card__info">
                       <p className={setRatingColor(result.tmdbRating)}>{result.tmdbRating.toFixed(1)}</p>
                       <p className="search-card__release-year">{result.releaseYear}</p>
-                      <p className="search-card__genre">{result.genres[0]}</p>
+                      <p className="search-card__genre">{result.genres[0]}{result.genres.length > 1 && ','} {result.genres[1]}</p>
                       <p className="search-card__runtime">{formatTime(result.runtime)}</p>
                     </div>
                     <p className="search-card__title">
@@ -92,7 +51,7 @@ const SearchBar = () => {
                 </article>
               </Link>
             </li>
-          }).slice(0, 5)
+          }))
           }
         </ul>
       </div>
