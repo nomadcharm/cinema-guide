@@ -12,9 +12,7 @@
     position: absolute;
     top: 12px;
     right: 20px;
-    // left: 20px;
     max-width: 335px;
-    // width: 100%;
   }
 
   &__label {
@@ -64,11 +62,26 @@
     right: 0;
     left: 0;
     display: none;
-    // padding: 8px;
     width: 100%;
+    max-height: 501px;
     border-radius: 0px 0px 8px 8px;
     background-color: var(--clr-cape-god);
+    overflow-y: scroll;
     opacity: 1;
+
+    &::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 0px 0px 8px 0px;
+      background-color: var(--clr-cape-god);
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 8px;
+      background-color: var(--clr-white-25);
+    }
 
     &.active {
       display: block;
@@ -76,7 +89,11 @@
 
     @include tablet-1024 {
       top: 54px;
-      border-radius: 8px;
+      border-radius: 0px 0px 8px 8px;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
     }
   }
 
@@ -88,7 +105,7 @@
       display: flex;
       padding: 0 6px;
       overflow-x: scroll;
-      
+
       &::-webkit-scrollbar {
         display: none;
       }
