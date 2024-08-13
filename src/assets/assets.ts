@@ -19,6 +19,8 @@ import key from './img/icon-key.svg';
 import search from './img/icon-search.svg';
 import menu from './img/icon-menu.svg';
 import searchClose from './img/icon-close-2.svg';
+import eye from './img/icon-eye.svg';
+import eyeSlash from './img/icon-eye-slash.svg';
 
 // genre cards
 import history from './img/genre-history.webp';
@@ -84,4 +86,6 @@ export {
   search,
   menu,
   searchClose,
+  eye,
+  eyeSlash,
 }

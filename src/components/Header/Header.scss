@@ -75,6 +75,7 @@
       padding: 26px 20px;
       border-radius: 0 0 8px 8px;
       background-color: var(--clr-black);
+      animation: fadeIn 0.3s;
 
       &::after {
         content: "";

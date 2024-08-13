@@ -138,7 +138,15 @@
   & svg {
     fill: var(--clr-black-40);
   }
+}
 
+.password-icon {
+  width: 16px;
+  height: 16px;
+
+  & svg {
+    stroke: var(--clr-black-40);
+  }
 }
 
 ::-webkit-scrollbar {

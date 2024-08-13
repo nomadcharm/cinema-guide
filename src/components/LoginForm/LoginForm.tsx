@@ -6,13 +6,15 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext, useState } from "react";
 import { queryClient } from "../../api/queryClient";
 import { UserOnLogin, UserOnLoginSchema } from "../../models/UserSchemas";
-import { email, key } from "../../assets/assets";
+import { email, eye, eyeSlash, key } from "../../assets/assets";
 import { loginUser } from "../../api/UserApi";
+import { useShowPassword } from "../../hooks";
 import FormField from "../FormField/FormField";
 import AuthContext from "../../context/AuthProvider";
 import "./LoginForm.scss";
 
 const LoginForm = () => {
+  const [isPasswordShown, handleShowPassword] = useShowPassword();
   const [errorMessage, setErrorMessage] = useState<string>("");
   const { handleAuthModalCall } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ const LoginForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
+    clearErrors,
   } = useForm<UserOnLogin>({
     resolver: zodResolver(UserOnLoginSchema)
   });
@@ -38,6 +41,11 @@ const LoginForm = () => {
     }
   }, queryClient);
 
+  const handleInputChange = (fieldName: "email" | "password") => {
+    setErrorMessage("");
+    clearErrors(fieldName);
+  };
+
   const onSubmit = async (data: UserOnLogin): Promise<void> => {
     loginMutation.mutate(data);
   };
@@ -51,25 +59,30 @@ const LoginForm = () => {
             {...register("email")}
             type="text"
             placeholder="Электронная почта"
-            onInput={() => setErrorMessage("")}
+            onChange={() => handleInputChange("email")}
           />
         </FormField>
         <FormField errorMessage={errors.password?.message}>
           <ReactSVG className="input-icon" src={key} />
           <input
             {...register("password")}
-            type="text"
+            type={isPasswordShown ? "text" : "password"}
             placeholder="Пароль"
-            onInput={() => setErrorMessage("")}
+            onChange={() => handleInputChange("password")}
           />
+          <button className="login__show-password" type="button" onClick={() => handleShowPassword()}>
+            <ReactSVG className="password-icon" src={isPasswordShown ? eyeSlash : eye} />
+          </button>
         </FormField>
+
         {
           errorMessage && <p className="error-message">{errorMessage}</p>
         }
+
         <button className="button button-primary login__submit">Войти</button>
       </form>
     </div>
-  )
-}
+  );
+};
 
 export default LoginForm;

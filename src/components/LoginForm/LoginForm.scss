@@ -11,4 +11,13 @@
     margin-top: 12px;
     margin-bottom: 24px;
   }
+
+  &__show-password {
+    position: absolute;
+    top: 16px;
+    right: 12px;
+    display: flex;
+    width: 24px;
+    height: 24px;
+  }
 }

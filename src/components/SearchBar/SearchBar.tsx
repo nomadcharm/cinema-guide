@@ -7,17 +7,17 @@ import { useWindowWidth } from './../../hooks/useWindowWidth';
 import "./SearchBar.scss";
 import { SearchContext } from "../../context/SearchProvider";
 
-const SearchBar = ()  => {
+const SearchBar = () => {
   const windowWidth = useWindowWidth();
-  const { 
-    searchBarRef, 
-    handleMobileSearch, 
-    modalIsOpen, 
-    setModalIsOpen, 
-    inputValue, 
-    setInputValue, 
-    handleInput, 
-    searchResults 
+  const {
+    searchBarRef,
+    handleMobileSearch,
+    modalIsOpen,
+    setModalIsOpen,
+    inputValue,
+    setInputValue,
+    handleInput,
+    searchResults
   } = useContext(SearchContext);
 
   return (
@@ -64,7 +64,6 @@ const SearchBar = ()  => {
           }
         </ul>
       </div>
-
     </div>
   );
 };

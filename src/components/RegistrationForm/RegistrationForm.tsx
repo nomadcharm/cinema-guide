@@ -3,11 +3,12 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useContext, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
-import FormField from "../FormField/FormField";
 import { UserOnRegister, UserOnRegisterSchema } from "../../models/UserSchemas";
-import { email, key, person } from "../../assets/assets";
+import { email, eye, eyeSlash, key, person } from "../../assets/assets";
 import { queryClient } from "../../api/queryClient";
 import { registerUser } from "../../api/UserApi";
+import { useShowPassword } from "../../hooks";
+import FormField from "../FormField/FormField";
 import AuthContext from "../../context/AuthProvider";
 import "./RegistrationForm.scss";
 
@@ -21,6 +22,7 @@ const RegistrationForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
+    clearErrors,
   } = useForm<UserOnRegister>({
     resolver: zodResolver(UserOnRegisterSchema)
   });
@@ -48,6 +50,14 @@ const RegistrationForm = () => {
     registrationMutation.mutate(regData);
   };
 
+  const [isPasswordShown, handleShowPassword] = useShowPassword();
+  const [isConfirmPasswordShown, handleShowConfirmPassword] = useShowPassword();
+
+  const handleInputChange = (fieldName: "email" | "name" | "surname" | "password" | "confirmPassword") => {
+    setErrorMessage("");
+    clearErrors(fieldName);
+  };
+
   return (
     <div className="registration">
       {
@@ -67,7 +77,7 @@ const RegistrationForm = () => {
                   {...register("email")}
                   type="text"
                   placeholder="Электронная почта"
-                  onInput={() => setErrorMessage("")}
+                  onChange={() => handleInputChange("email")}
                 />
               </FormField>
               <FormField errorMessage={errors.name?.message}>
@@ -76,7 +86,7 @@ const RegistrationForm = () => {
                   {...register("name")}
                   type="text"
                   placeholder="Имя"
-                  onInput={() => setErrorMessage("")}
+                  onChange={() => handleInputChange("name")}
                 />
               </FormField>
               <FormField errorMessage={errors.surname?.message}>
@@ -85,31 +95,39 @@ const RegistrationForm = () => {
                   {...register("surname")}
                   type="text"
                   placeholder="Фамилия"
-                  onInput={() => setErrorMessage("")}
+                  onChange={() => handleInputChange("surname")}
                 />
               </FormField>
               <FormField errorMessage={errors.password?.message}>
                 <ReactSVG className="input-icon" src={key} />
                 <input
                   {...register("password")}
-                  type="text"
+                  type={isPasswordShown ? "text" : "password"}
                   placeholder="Пароль"
-                  onInput={() => setErrorMessage("")}
+                  onChange={() => handleInputChange("password")}
                 />
+                <button className="registration__show-password" type="button" onClick={() => handleShowPassword()}>
+                  <ReactSVG className="password-icon" src={isPasswordShown ? eyeSlash : eye} />
+                </button>
               </FormField>
               <FormField errorMessage={errors.confirmPassword?.message}>
                 <ReactSVG className="input-icon" src={key} />
                 <input
                   {...register("confirmPassword")}
-                  type="text"
+                  type={isConfirmPasswordShown ? "text" : "password"}
                   placeholder="Подтвердить пароль"
-                  onInput={() => setErrorMessage("")}
+                  onChange={() => handleInputChange("confirmPassword")}
                 />
+                <button className="registration__show-password" type="button" onClick={() => handleShowConfirmPassword()}>
+                  <ReactSVG className="password-icon" src={isConfirmPasswordShown ? eyeSlash : eye} />
+                </button>
               </FormField>
+
               {
                 errorMessage && <p className="error-message">{errorMessage}</p>
               }
-              <button className="button button-primary registration__submit">Создать аккаунт</button>
+              
+              <button className="button button-primary registration__submit" type="submit">Создать аккаунт</button>
             </form>
           </>
         )
