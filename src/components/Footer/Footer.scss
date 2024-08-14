@@ -1,4 +1,5 @@
 @import "../../scss/mixins/breakpoints";
+@import "../../scss//mixins/hover";
 
 .footer {
   padding-top: 42px;
@@ -60,9 +61,16 @@
   font-size: 0;
 
   &__icon {
+    transition: scale 0.3s ease-in-out;
+
     @include mobile-576 {
       width: 24px;
       height: 24px;
     }
-  }
+
+    @include hover {
+      scale: 1.1;
+    }
+
+  } 
 }

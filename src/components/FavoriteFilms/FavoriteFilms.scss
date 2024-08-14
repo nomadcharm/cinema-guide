@@ -52,11 +52,6 @@
       width: 224px;
     }
 
-    &:hover .film-card {
-      border-color: var(--clr-white);
-      transition: 0.3s ease-in-out;
-    }
-
     &:hover .favorites__remove-btn {
       opacity: 1;
       visibility: visible;

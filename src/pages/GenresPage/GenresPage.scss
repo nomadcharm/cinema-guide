@@ -64,7 +64,7 @@
   box-shadow: var(--shd-card);
   background-color: var(--clr-dove-gray);
   overflow: hidden;
-  transition: scale 0.3s ease;
+  transition: scale 0.3s ease-in-out;
 
   @include hover {
     scale: 1.03;

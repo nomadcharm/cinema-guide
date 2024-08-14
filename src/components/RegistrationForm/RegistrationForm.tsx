@@ -24,6 +24,12 @@ const RegistrationForm = () => {
     formState: { errors },
     clearErrors,
   } = useForm<UserOnRegister>({
+    defaultValues: {
+      email: "",
+      name: "",
+      surname: "",
+      password: "",
+    },
     resolver: zodResolver(UserOnRegisterSchema)
   });
 

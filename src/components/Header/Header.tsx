@@ -1,24 +1,23 @@
 import { FC, ReactElement, useContext, useEffect, useRef } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import AuthContext from "../../context/AuthProvider";
-import SearchBar from "../SearchBar/SearchBar";
-import { logo, menu, person, search } from "../../assets/assets";
-import "./Header.scss";
 import { ReactSVG } from "react-svg";
-import { useWindowWidth } from "../../hooks";
+import AuthContext from "../../context/AuthProvider";
 import { SearchContext } from "../../context/SearchProvider";
+import { useWindowWidth } from "../../hooks";
+import { logo, menu, person, search } from "../../assets/assets";
+import SearchBar from "../SearchBar/SearchBar";
+import "./Header.scss";
 
 const Header: FC = (): ReactElement => {
   const { currentUser, getCurrentUser, handleAuthModalCall } = useContext(AuthContext);
   const { handleMobileSearch } = useContext(SearchContext);
   const windowWidth = useWindowWidth();
-  const navigate = useNavigate();
-
   const navRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   const handleMobileNav = (): void => {
     navRef.current?.classList.toggle("open");
-  }
+  };
 
   useEffect(() => {
     getCurrentUser();

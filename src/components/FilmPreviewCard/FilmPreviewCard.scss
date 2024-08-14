@@ -8,6 +8,11 @@
   border-radius: 12px;
   overflow: hidden;
   box-shadow: var(--shd-card);
+  transition: border-color 0.3s ease-in-out;
+
+  @include hover {
+    border-color: var(--clr-white);
+  }
 
   @include desktop-1200 {
     max-height: 100%;

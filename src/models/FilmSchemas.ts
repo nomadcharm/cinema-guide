@@ -30,7 +30,7 @@ const FilmSchema = z.object({
 });
 
 const FilmListSchema = z.array(FilmSchema);
-const FilmPreviewSchema = FilmSchema.pick({id: true, title: true, posterUrl: true });
+const FilmPreviewSchema = FilmSchema.pick({id: true, title: true, posterUrl: true, tmdbRating: true });
 
 type Film = z.infer<typeof FilmSchema>;
 type FilmList = z.infer<typeof FilmListSchema>;

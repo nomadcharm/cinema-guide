@@ -28,6 +28,10 @@ const LoginForm = () => {
     setError,
     clearErrors,
   } = useForm<UserOnLogin>({
+    defaultValues: {
+      email: "",
+      password: "",
+    },
     resolver: zodResolver(UserOnLoginSchema)
   });
 
@@ -92,7 +96,7 @@ const LoginForm = () => {
           errorMessage && <p className="error-message">{errorMessage}</p>
         }
 
-        <button className="button button-primary login__submit">Войти</button>
+        <button className="button button-primary login__submit" type="submit">Войти</button>
       </form>
     </div>
   );
