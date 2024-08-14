@@ -1,7 +1,7 @@
 import { ReactSVG } from "react-svg";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { UserOnRegister, UserOnRegisterSchema } from "../../models/UserSchemas";
 import { email, eye, eyeSlash, key, person } from "../../assets/assets";
@@ -58,6 +58,12 @@ const RegistrationForm = () => {
     clearErrors(fieldName);
   };
 
+  const firstInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (firstInputRef.current) firstInputRef.current.focus();
+  }, [firstInputRef.current]);
+
   return (
     <div className="registration">
       {
@@ -75,6 +81,10 @@ const RegistrationForm = () => {
                 <ReactSVG className="input-icon" src={email} />
                 <input
                   {...register("email")}
+                  ref={(e) => {
+                    register("email").ref(e);
+                    firstInputRef.current = e;
+                  }}
                   type="text"
                   placeholder="Электронная почта"
                   onChange={() => handleInputChange("email")}
@@ -126,7 +136,7 @@ const RegistrationForm = () => {
               {
                 errorMessage && <p className="error-message">{errorMessage}</p>
               }
-              
+
               <button className="button button-primary registration__submit" type="submit">Создать аккаунт</button>
             </form>
           </>

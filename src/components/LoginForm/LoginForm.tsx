@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { queryClient } from "../../api/queryClient";
 import { UserOnLogin, UserOnLoginSchema } from "../../models/UserSchemas";
 import { email, eye, eyeSlash, key } from "../../assets/assets";
@@ -17,6 +17,7 @@ const LoginForm = () => {
   const [isPasswordShown, handleShowPassword] = useShowPassword();
   const [errorMessage, setErrorMessage] = useState<string>("");
   const { handleAuthModalCall } = useContext(AuthContext);
+
   const navigate = useNavigate();
 
   const {
@@ -24,6 +25,7 @@ const LoginForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
+    setError,
     clearErrors,
   } = useForm<UserOnLogin>({
     resolver: zodResolver(UserOnLoginSchema)
@@ -38,6 +40,7 @@ const LoginForm = () => {
     },
     onError(error: Error) {
       setErrorMessage(error.message);
+      setError('email', { type: 'manual', message: error.message });
     }
   }, queryClient);
 
@@ -50,6 +53,12 @@ const LoginForm = () => {
     loginMutation.mutate(data);
   };
 
+  const firstInputRef = useRef<HTMLInputElement | null>(null);
+
+  useEffect(() => {
+    if (firstInputRef.current) firstInputRef.current.focus();
+  }, [firstInputRef.current]);
+
   return (
     <div className="login">
       <form className="login__form" onSubmit={handleSubmit(onSubmit)}>
@@ -57,6 +66,10 @@ const LoginForm = () => {
           <ReactSVG className="input-icon" src={email} />
           <input
             {...register("email")}
+            ref={(e) => {
+              register("email").ref(e);
+              firstInputRef.current = e;
+            }}
             type="text"
             placeholder="Электронная почта"
             onChange={() => handleInputChange("email")}
