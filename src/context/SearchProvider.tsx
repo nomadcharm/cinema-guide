@@ -34,8 +34,8 @@ const SearchProvider = ({ children }: { children: ReactNode }) => {
 
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
   const [inputValue, setInputValue] = useState<string>("");
-  const debouncedSearch = useDebounce(inputValue);
   const [searchResults, setSearchResults] = useState<FilmList>([]);
+  const debouncedSearch = useDebounce(inputValue);
 
   const handleInput = (value: string): void => {
     setModalIsOpen(true);
