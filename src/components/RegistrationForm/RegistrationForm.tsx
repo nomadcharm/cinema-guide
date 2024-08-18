@@ -1,13 +1,12 @@
 import { ReactSVG } from "react-svg";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { UserOnRegister, UserOnRegisterSchema } from "../../models/UserSchemas";
-import { email, eye, eyeSlash, key, person } from "../../assets/assets";
+import { email, key, person } from "../../assets/assets";
 import { queryClient } from "../../api/queryClient";
 import { registerUser } from "../../api/UserApi";
-import { useShowPassword } from "../../hooks";
 import FormField from "../FormField/FormField";
 import AuthContext from "../../context/AuthProvider";
 import "./RegistrationForm.scss";
@@ -56,19 +55,10 @@ const RegistrationForm = () => {
     registrationMutation.mutate(regData);
   };
 
-  const [isPasswordShown, handleShowPassword] = useShowPassword();
-  const [isConfirmPasswordShown, handleShowConfirmPassword] = useShowPassword();
-
   const handleInputChange = (fieldName: "email" | "name" | "surname" | "password" | "confirmPassword") => {
     setErrorMessage("");
     clearErrors(fieldName);
   };
-
-  const firstInputRef = useRef<HTMLInputElement | null>(null);
-
-  useEffect(() => {
-    if (firstInputRef.current) firstInputRef.current.focus();
-  }, [firstInputRef.current]);
 
   return (
     <div className="registration">
@@ -87,10 +77,6 @@ const RegistrationForm = () => {
                 <ReactSVG className="input-icon" src={email} />
                 <input
                   {...register("email")}
-                  ref={(e) => {
-                    register("email").ref(e);
-                    firstInputRef.current = e;
-                  }}
                   type="text"
                   placeholder="Электронная почта"
                   onChange={() => handleInputChange("email")}
@@ -118,25 +104,19 @@ const RegistrationForm = () => {
                 <ReactSVG className="input-icon" src={key} />
                 <input
                   {...register("password")}
-                  type={isPasswordShown ? "text" : "password"}
+                  type="password"
                   placeholder="Пароль"
                   onChange={() => handleInputChange("password")}
                 />
-                <button className="registration__show-password" type="button" onClick={() => handleShowPassword()}>
-                  <ReactSVG className="password-icon" src={isPasswordShown ? eyeSlash : eye} />
-                </button>
               </FormField>
               <FormField errorMessage={errors.confirmPassword?.message}>
                 <ReactSVG className="input-icon" src={key} />
                 <input
                   {...register("confirmPassword")}
-                  type={isConfirmPasswordShown ? "text" : "password"}
+                  type="password"
                   placeholder="Подтвердить пароль"
                   onChange={() => handleInputChange("confirmPassword")}
                 />
-                <button className="registration__show-password" type="button" onClick={() => handleShowConfirmPassword()}>
-                  <ReactSVG className="password-icon" src={isConfirmPasswordShown ? eyeSlash : eye} />
-                </button>
               </FormField>
 
               {
