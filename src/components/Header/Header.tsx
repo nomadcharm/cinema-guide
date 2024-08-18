@@ -48,17 +48,21 @@ const Header: FC = (): ReactElement => {
             </li>
           </ul>
         </nav>
-        <button className="header__nav-btn" onClick={handleMobileNav}>
+        <button className="header__nav-btn" onClick={handleMobileNav} aria-label="Открыть меню">
           <ReactSVG src={menu} />
         </button>
 
         <SearchBar />
-        <button className="search-bar__btn" onClick={handleMobileSearch}>
+        <button className="search-bar__btn" onClick={handleMobileSearch} aria-label="Поиск">
           <ReactSVG src={search} />
         </button>
 
         {windowWidth < 768 ? (
-          <button className="login-btn login-btn__mobile" onClick={currentUser ? () => navigate("/profile") : () => handleAuthModalCall()}>
+          <button 
+            className="login-btn login-btn__mobile" 
+            onClick={currentUser ? () => navigate("/profile") : () => handleAuthModalCall()} 
+            aria-label="Вход и регистрация"
+          >
             <ReactSVG src={person} />
           </button>
         ) : (

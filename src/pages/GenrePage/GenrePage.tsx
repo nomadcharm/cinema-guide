@@ -22,7 +22,7 @@ const GenrePage: FC = (): ReactElement => {
       <section className="films-by-genre">
         <div className="container films-by-genre__container">
           <div className="films-by-genre__title-block">
-            <button className="films-by-genre__nav-back" onClick={() => navigate(-1)}>
+            <button className="films-by-genre__nav-back" onClick={() => navigate(-1)} aria-label="К списку жанров">
               <ReactSVG src={back} />
             </button>
             <h1 className="page-title films-by-genre__title">{capitalizeString(genre)}</h1>
