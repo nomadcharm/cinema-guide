@@ -134,9 +134,10 @@
   position: absolute;
   left: 16px;
   top: 16px;
-
+  
   & svg {
     fill: var(--clr-black-40);
+    transition: fill 0.3s ease-in-out;
   }
 }
 

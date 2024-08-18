@@ -23,7 +23,6 @@ const LoginForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
-    setError,
     clearErrors,
   } = useForm<UserOnLogin>({
     defaultValues: {
@@ -42,7 +41,6 @@ const LoginForm = () => {
     },
     onError(error: Error) {
       setErrorMessage(error.message);
-      setError('email', { type: 'manual', message: error.message });
     }
   }, queryClient);
 

@@ -1,7 +1,8 @@
+@import "../../scss//mixins/hover";
+
 .form-field {
   position: relative;
   display: flex;
-  // align-items: center;
   width: 100%;
 
   &>input {
@@ -15,9 +16,18 @@
     line-height: 24px;
     text-align: left;
     color: var(--clr-black);
+    transition: border-color 0.3s ease-in-out;
 
     &::placeholder {
       color: var(--clr-black-40);
+    }
+
+    &:focus-visible {
+      border-color: var(--clr-melrose);
+    }
+
+    @include hover {
+      border-color: var(--clr-melrose);;
     }
   }
 
@@ -28,6 +38,18 @@
 
     &>.input-icon svg {
       fill: var(--clr-bittersweet);
+    }
+  }
+
+  &:has(> input:focus-visible) {
+    &>.input-icon svg {
+      fill: var(--clr-melrose);
+    }
+  }
+
+  &:has(> input:hover) {
+    &>.input-icon svg {
+      fill: var(--clr-melrose);
     }
   }
 
