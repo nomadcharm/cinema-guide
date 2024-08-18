@@ -31,7 +31,7 @@ const fetchGenres = async (): Promise<Genres> => {
 const fetchFilmsByGenre = async (genre: string, page: number): Promise<Array<FilmPreview>> => {
   const data: Response = await fetch(`${BASE_MOVIE_URL}?genre=${genre}&count=10&page=${page}`);
   const response = await data.json();
-  return response.sort((a: FilmPreview, b: FilmPreview) => b.tmdbRating - a.tmdbRating)
+  return response.sort((a: FilmPreview, b: FilmPreview) => (b.tmdbRating ?? 0) - (a.tmdbRating ?? 0));
 };
 
 const fetchFilmsByTitle = async (searchItem: string): Promise<FilmList> => {
