@@ -1,10 +1,17 @@
+class AuthError extends Error {
+  constructor(message: string) {
+      super(message);
+      this.name = "AuthError";
+  }
+}
+
 const validateResponse = async (response: Response): Promise<Response> => {
   if (response.status === 400) {
-    throw new Error("Неправильный email или пароль")
+    throw new AuthError("Неправильный email или пароль")
   } else if (response.status === 404) {
-    throw new Error("Пользователя с таким email не существует")
+    throw new AuthError("Пользователя с таким email не существует")
   } else if (response.status === 409) {
-    throw new Error("Пользователь с таким email уже зарегистрирован")
+    throw new AuthError("Пользователь с таким email уже зарегистрирован")
   }
 
   return response;

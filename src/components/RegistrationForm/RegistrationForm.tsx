@@ -12,7 +12,6 @@ import AuthContext from "../../context/AuthProvider";
 import "./RegistrationForm.scss";
 
 const RegistrationForm = () => {
-  const [errorMessage, setErrorMessage] = useState<string>("");
   const [registrationComplete, setRegistrationComplete] = useState<boolean>(false);
   const { setAuthMode } = useContext(AuthContext);
 
@@ -21,6 +20,7 @@ const RegistrationForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
+    setError,
     clearErrors,
   } = useForm<UserOnRegister>({
     defaultValues: {
@@ -28,6 +28,7 @@ const RegistrationForm = () => {
       name: "",
       surname: "",
       password: "",
+      confirmPassword: "",
     },
     resolver: zodResolver(UserOnRegisterSchema)
   });
@@ -36,28 +37,28 @@ const RegistrationForm = () => {
     mutationFn: (data: UserOnRegister) => registerUser(data.email, data.name, data.surname, data.password),
     onSuccess() {
       setRegistrationComplete(true);
-      reset()
+      reset();
     },
     onError(error: Error) {
-      setErrorMessage(error.message)
-      setRegistrationComplete(false)
+      setError("root", { type: "server", message: error.message });
+
+      if (error.name !== "AuthError") {
+        setError("email" || "name" || "surname" || "password" || "confirmPassword", { type: "manual", message: error.message });
+      }
+
+      setRegistrationComplete(false);
     }
-  }, queryClient)
+  }, queryClient);
 
   const onRegistration = (data: UserOnRegister) => {
     if (data.password !== data.confirmPassword) {
-      setErrorMessage("Пароли не совпадают");
+      setError("root", { type: "password", message: "Пароли не совпадают" });
       return;
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { confirmPassword, ...regData } = data;
     registrationMutation.mutate(regData);
-  };
-
-  const handleInputChange = (fieldName: "email" | "name" | "surname" | "password" | "confirmPassword") => {
-    setErrorMessage("");
-    clearErrors(fieldName);
   };
 
   return (
@@ -79,7 +80,7 @@ const RegistrationForm = () => {
                   {...register("email")}
                   type="text"
                   placeholder="Электронная почта"
-                  onChange={() => handleInputChange("email")}
+                  onChange={() => clearErrors("email")}
                 />
               </FormField>
               <FormField errorMessage={errors.name?.message}>
@@ -88,7 +89,7 @@ const RegistrationForm = () => {
                   {...register("name")}
                   type="text"
                   placeholder="Имя"
-                  onChange={() => handleInputChange("name")}
+                  onChange={() => clearErrors("name")}
                 />
               </FormField>
               <FormField errorMessage={errors.surname?.message}>
@@ -97,7 +98,7 @@ const RegistrationForm = () => {
                   {...register("surname")}
                   type="text"
                   placeholder="Фамилия"
-                  onChange={() => handleInputChange("surname")}
+                  onChange={() => clearErrors("surname")}
                 />
               </FormField>
               <FormField errorMessage={errors.password?.message}>
@@ -106,7 +107,7 @@ const RegistrationForm = () => {
                   {...register("password")}
                   type="password"
                   placeholder="Пароль"
-                  onChange={() => handleInputChange("password")}
+                  onChange={() => clearErrors("password")}
                 />
               </FormField>
               <FormField errorMessage={errors.confirmPassword?.message}>
@@ -115,12 +116,12 @@ const RegistrationForm = () => {
                   {...register("confirmPassword")}
                   type="password"
                   placeholder="Подтвердить пароль"
-                  onChange={() => handleInputChange("confirmPassword")}
+                  onChange={() => clearErrors("confirmPassword")}
                 />
               </FormField>
 
               {
-                errorMessage && <p className="error-message">{errorMessage}</p>
+                errors.root && <p className="error-message">{errors.root.message}</p>
               }
 
               <button className="button button-primary registration__submit" type="submit">Создать аккаунт</button>

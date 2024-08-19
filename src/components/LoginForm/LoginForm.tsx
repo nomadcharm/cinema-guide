@@ -3,7 +3,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { queryClient } from "../../api/queryClient";
 import { UserOnLogin, UserOnLoginSchema } from "../../models/UserSchemas";
 import { email, key } from "../../assets/assets";
@@ -13,9 +13,7 @@ import AuthContext from "../../context/AuthProvider";
 import "./LoginForm.scss";
 
 const LoginForm = () => {
-  const [errorMessage, setErrorMessage] = useState<string>("");
   const { handleAuthModalCall } = useContext(AuthContext);
-
   const navigate = useNavigate();
 
   const {
@@ -23,6 +21,7 @@ const LoginForm = () => {
     handleSubmit,
     reset,
     formState: { errors },
+    setError,
     clearErrors,
   } = useForm<UserOnLogin>({
     defaultValues: {
@@ -40,14 +39,13 @@ const LoginForm = () => {
       reset();
     },
     onError(error: Error) {
-      setErrorMessage(error.message);
+      setError("root", { type: "server", message: error.message });
+
+      if (error.name !== "AuthError") {
+        setError("email" || "password", { type: "manual", message: error.message });
+      }
     }
   }, queryClient);
-
-  const handleInputChange = (fieldName: "email" | "password") => {
-    setErrorMessage("");
-    clearErrors(fieldName);
-  };
 
   const onSubmit = async (data: UserOnLogin): Promise<void> => {
     loginMutation.mutate(data);
@@ -62,7 +60,7 @@ const LoginForm = () => {
             {...register("email")}
             type="text"
             placeholder="Электронная почта"
-            onChange={() => handleInputChange("email")}
+            onChange={() => clearErrors("email")}
           />
         </FormField>
         <FormField errorMessage={errors.password?.message}>
@@ -71,12 +69,12 @@ const LoginForm = () => {
             {...register("password")}
             type="password"
             placeholder="Пароль"
-            onChange={() => handleInputChange("password")}
+            onChange={() => clearErrors("password")}
           />
         </FormField>
 
         {
-          errorMessage && <p className="error-message">{errorMessage}</p>
+          errors.root && <p className="error-message">{errors.root?.message}</p>
         }
 
         <button className="button button-primary login__submit" type="submit">Войти</button>
