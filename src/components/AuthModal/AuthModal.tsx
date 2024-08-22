@@ -1,24 +1,21 @@
-import { FC, lazy, Suspense, useContext } from "react";
+import { FC, ReactNode, lazy, useContext } from "react";
 import { ReactSVG } from "react-svg";
+import { AuthModalProps } from "../../models/ComponentProps";
 import { close, logo } from "../../assets/assets";
-import MainLoader from "../Loaders/MainLoader/MainLoader";
 import LoginForm from "../LoginForm/LoginForm";
 import AuthContext from "../../context/AuthProvider";
 import "./AuthModal.scss";
 
-interface AuthModalProps {
-  isOpen: boolean;
-}
-
 const RegistrationForm = lazy(() => import("../RegistrationForm/RegistrationForm"));
 
-const AuthModal: FC<AuthModalProps> = ({ isOpen }) => {
+const AuthModal: FC<AuthModalProps> = ({ isOpen }): ReactNode => {
   const { authMode, handleAuthModalCall, handleClick } = useContext(AuthContext);
 
   return (
     <div className={isOpen ? "auth-modal is-open" : "auth-modal"}
       onClick={(e) => {
-        if ((e.target as HTMLElement).className === "auth-modal is-open") {
+        const target: EventTarget = e.target;
+        if (target instanceof HTMLElement && target.className === "auth-modal is-open") {
           handleAuthModalCall();
         }
       }}>
@@ -31,14 +28,7 @@ const AuthModal: FC<AuthModalProps> = ({ isOpen }) => {
           <ReactSVG src={close} />
         </button>
         <img className="auth-modal__logo" src={logo} alt="Cinema Guide" width={180} />
-        {
-          authMode === "register"
-            ? <Suspense fallback={<MainLoader />}>
-              <RegistrationForm />
-            </Suspense>
-            : <LoginForm
-            />
-        }
+        {authMode === "register" ? <RegistrationForm /> : <LoginForm />}
         <button className="auth-modal__button" onClick={() => handleClick()}>
           {authMode === "register" ? "У меня есть пароль" : "Регистрация"}
         </button>

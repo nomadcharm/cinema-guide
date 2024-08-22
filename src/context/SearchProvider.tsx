@@ -1,18 +1,8 @@
 import { createContext, ReactNode, useEffect, useRef, useState } from "react";
+import { SearchContextProps } from "../models/ComponentProps";
 import { fetchFilmsByTitle } from "../api/FilmsApi";
 import { useDebounce } from "../hooks";
 import { FilmList } from "../models/FilmSchemas";
-
-interface SearchContextProps {
-  searchBarRef: React.RefObject<HTMLDivElement> | null,
-  handleMobileSearch: () => void,
-  modalIsOpen: boolean,
-  setModalIsOpen: React.Dispatch<React.SetStateAction<boolean>>,
-  inputValue: string,
-  setInputValue: React.Dispatch<React.SetStateAction<string>>,
-  handleInput: (value: string) => void,
-  searchResults: FilmList,
-}
 
 export const SearchContext = createContext<SearchContextProps>({
   searchBarRef: null,
@@ -27,15 +17,14 @@ export const SearchContext = createContext<SearchContextProps>({
 
 const SearchProvider = ({ children }: { children: ReactNode }) => {
   const searchBarRef = useRef<HTMLDivElement>(null);
-
-  const handleMobileSearch = () => {
-    searchBarRef.current?.classList.toggle("open");
-  };
-
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(true);
   const [inputValue, setInputValue] = useState<string>("");
   const [searchResults, setSearchResults] = useState<FilmList>([]);
   const debouncedSearch = useDebounce(inputValue);
+
+  const handleMobileSearch = () => {
+    searchBarRef.current?.classList.toggle("open");
+  };
 
   const handleInput = (value: string): void => {
     setModalIsOpen(true);
@@ -59,19 +48,16 @@ const SearchProvider = ({ children }: { children: ReactNode }) => {
     handleSearch(debouncedSearch);
   }, [debouncedSearch]);
 
-  const modal: HTMLElement | null = document.querySelector("#modal");
 
   window.addEventListener("click", (e) => {
-    if (modal && !modal.contains(e.target as Node)) {
-      setModalIsOpen(false);
-    }
-  });
+    const modal: HTMLElement | null = document.querySelector("#modal");
+    const target = e.target;
 
-  useEffect(() => {
-    if (inputValue && modal) {
-      modal.classList.add("active");
+    if (modal && target instanceof HTMLElement && !modal.contains(target)) {
+      setModalIsOpen(false);
+      setInputValue("");
     }
-  }, [inputValue, modal]);
+});
 
   const contextValue = {
     searchBarRef,

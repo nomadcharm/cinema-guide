@@ -1,4 +1,4 @@
-import { FC, ReactElement, useContext, useEffect, useRef } from "react";
+import { FC, memo, ReactElement, useContext, useEffect, useRef } from "react";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { ReactSVG } from "react-svg";
 import AuthContext from "../../context/AuthProvider";
@@ -82,4 +82,5 @@ const Header: FC = (): ReactElement => {
   );
 };
 
-export default Header;
+// export default Header;
+export const MemoHeader = memo(Header);

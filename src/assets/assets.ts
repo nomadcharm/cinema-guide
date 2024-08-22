@@ -3,8 +3,8 @@ import vk from './img/socials-vk.svg';
 import ok from './img/socials-ok.svg';
 import telegram from './img/socials-telegram.svg';
 import youtube from './img/socials-youtube.svg';
-import cardStub from './img/film-preview-stub.avif';
-import backdropStub from './img/stub-banner.avif'
+import cardStub from './img/film-preview-stub.webp';
+import backdropStub from './img/stub-banner.webp'
 import back from './img/icon-back.svg';
 import toRefresh from './img/icon-refresh.svg';
 import toFavor from './img/icon-heart.svg';

@@ -1,9 +1,9 @@
-import { FC, ReactElement } from "react";
+import { FC, memo, ReactNode } from "react";
 import { useTopFilms } from "../../hooks";
 import FilmPreviewCard from "../FilmPreviewCard/FilmPreviewCard";
 import "./TopFilms.scss";
 
-const TopFilms: FC = (): ReactElement => {
+const TopFilms: FC = (): ReactNode => {
   const topFilms = useTopFilms();
 
   return (
@@ -11,7 +11,7 @@ const TopFilms: FC = (): ReactElement => {
       <div className="container top-films__container">
         <h2 className="top-films__title section-title">Топ 10 фильмов</h2>
         {
-          topFilms ? (
+          topFilms && (
             <div className="list-wrapper">
               <ul className="top-films__list">
                 {
@@ -24,11 +24,11 @@ const TopFilms: FC = (): ReactElement => {
                 }
               </ul>
             </div>
-          ) : null
+          )
         }
       </div>
     </section>
   );
 };
 
-export default TopFilms;
+export const MemoTopFilms = memo(TopFilms);

@@ -1,13 +1,13 @@
-import { useNavigate } from "react-router";
-import "./UserSettings.scss";
+import { FC, ReactNode, useContext, useEffect } from "react";
 import { useMutation } from "@tanstack/react-query";
-import { useContext, useEffect } from "react";
+import { NavigateFunction, useNavigate } from "react-router";
 import { queryClient } from "../../api/queryClient";
 import { logoutUser } from "../../api/UserApi";
 import AuthContext from "../../context/AuthProvider";
+import "./UserSettings.scss";
 
-const UserSettings = () => {
-  const navigate = useNavigate();
+const UserSettings: FC = (): ReactNode => {
+  const navigate: NavigateFunction = useNavigate();
   const { currentUser, getCurrentUser, clearCurrentUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const UserSettings = () => {
   return (
     <div className="user">
       {
-        currentUser ?
+        currentUser &&
           <>
             <div className="user__data">
               <div className="user__info">
@@ -53,11 +53,10 @@ const UserSettings = () => {
               className="button button-primary"
               onClick={() => handleLogout()}
             >Выйти из аккаунта</button>
-          </> :
-          <img src="https://media.tenor.com/_BiwWBWhYucAAAAe/what-huh.png" alt="" />
+          </>
       }
     </div>
-  )
-}
+  );
+};
 
-export default UserSettings
+export default UserSettings;

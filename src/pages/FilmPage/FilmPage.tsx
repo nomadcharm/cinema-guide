@@ -1,12 +1,12 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactNode} from "react";
 import { PathMatch, useMatch } from "react-router"
-import Layout from "../../components/Layout/Layout";
+import { Layout } from "../../components/Layout/Layout";
 import { formatCurrency, formatLanguageTag } from "../../utils";
 import FilmBanner from "../../components/FilmBanner/FilmBanner";
 import { useFilmInfo, useSetPageTitle } from "../../hooks";
 import "./FilmPage.scss";
 
-const FilmPage: FC = (): ReactElement => {
+const FilmPage: FC = (): ReactNode=> {
   const matchId: PathMatch<"id"> | null = useMatch("/movie/:id");
   const id = Number(matchId?.params?.id);
   const film = useFilmInfo(id);
@@ -20,7 +20,7 @@ const FilmPage: FC = (): ReactElement => {
         <div className="container film__container">
           <h2 className="section-title film__title">О фильме</h2>
           {
-            film ? (
+            film && (
               <>
                 <dl className="film-details">
                   <dt className="film-details__category">
@@ -83,9 +83,8 @@ const FilmPage: FC = (): ReactElement => {
                   </dd>
                 </dl>
               </>
-            ) : null
+            )
           }
-
         </div>
       </section>
     </Layout>

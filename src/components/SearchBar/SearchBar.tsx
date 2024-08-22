@@ -1,12 +1,14 @@
+import { FC, lazy, ReactNode, Suspense, useContext } from "react";
 import { ReactSVG } from "react-svg";
-import { useContext } from "react";
 import { searchClose } from "../../assets/assets";
 import { useWindowWidth } from './../../hooks/useWindowWidth';
 import { SearchContext } from "../../context/SearchProvider";
-import SearchResultsCard from "../SearchResultsCard/SearchResultsCard";
+import Preloader from "../Loaders/Preloader/Preloader";
 import "./SearchBar.scss";
 
-const SearchBar = () => {
+const SearchResultsCard = lazy(() => import("../SearchResultsCard/SearchResultsCard"))
+
+const SearchBar: FC = (): ReactNode => {
   const windowWidth = useWindowWidth();
   const {
     searchBarRef,
@@ -42,9 +44,15 @@ const SearchBar = () => {
         <ul className="search-bar__results-list">
           {searchResults && searchResults.length > 0 && (searchResults.map(result => {
             return <li className="search-bar__results-item" key={result.id} onClick={() => { setModalIsOpen(false), setInputValue("") }}>
-              <SearchResultsCard result={result} />
+              <Suspense fallback={<Preloader />}>
+                <SearchResultsCard result={result} />
+              </Suspense>
             </li>
           }))
+          }
+          {
+            searchResults.length === 0 && inputValue.length > 5 &&
+            <li className="search-bar__results-item">Фильм с таким названием не найден</li>
           }
         </ul>
       </div>

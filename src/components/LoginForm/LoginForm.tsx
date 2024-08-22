@@ -1,9 +1,9 @@
+import { FC, ReactNode, useContext } from "react";
 import { ReactSVG } from "react-svg";
 import { useMutation } from "@tanstack/react-query";
-import { useNavigate } from "react-router";
+import { NavigateFunction, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext } from "react";
 import { queryClient } from "../../api/queryClient";
 import { UserOnLogin, UserOnLoginSchema } from "../../models/UserSchemas";
 import { email, key } from "../../assets/assets";
@@ -12,9 +12,9 @@ import FormField from "../FormField/FormField";
 import AuthContext from "../../context/AuthProvider";
 import "./LoginForm.scss";
 
-const LoginForm = () => {
+const LoginForm: FC = (): ReactNode => {
   const { handleAuthModalCall } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const navigate: NavigateFunction = useNavigate();
 
   const {
     register,
@@ -59,6 +59,7 @@ const LoginForm = () => {
           <input
             {...register("email")}
             type="text"
+            autoFocus={true}
             placeholder="Электронная почта"
             onChange={() => clearErrors("email")}
           />

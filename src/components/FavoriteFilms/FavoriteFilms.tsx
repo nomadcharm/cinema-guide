@@ -1,9 +1,9 @@
-import { FC, useEffect } from "react";
+import { FC, ReactNode, useEffect } from "react";
 import { useFavorites } from "../../hooks";
 import FilmPreviewCard from "../FilmPreviewCard/FilmPreviewCard";
 import "./FavoriteFilms.scss";
 
-const FavoriteFilms: FC = () => {
+const FavoriteFilms: FC = (): ReactNode => {
   const [favorites, getFavorites, removeFromUserFavorites] = useFavorites();
 
   useEffect(() => {

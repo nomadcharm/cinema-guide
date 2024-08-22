@@ -1,17 +1,11 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactNode } from "react";
 import ReactPlayer from "react-player";
-import { Film } from "../../models/FilmSchemas";
+import { TrailerModalProps } from "../../models/ComponentProps";
 import Preloader from "../Loaders/Preloader/Preloader";
 import { useTrailerPlayer } from "../../hooks";
 import "./TrailerModal.scss";
 
-interface TrailerModalProps {
-  film: Film,
-  active: boolean;
-  handleModalCall: () => void;
-}
-
-const TrailerModal: FC<TrailerModalProps> = ({ film, active, handleModalCall }): ReactElement => {
+const TrailerModal: FC<TrailerModalProps> = ({ film, active, handleModalCall }): ReactNode => {
   const {
     isPlaying,
     loading,
@@ -29,7 +23,8 @@ const TrailerModal: FC<TrailerModalProps> = ({ film, active, handleModalCall }):
     <div 
       className={active ? "trailer-modal is-active" : "trailer-modal"} 
       onClick={(e) => {
-        if ((e.target as HTMLElement).className === "trailer-modal is-active") {
+        const target: EventTarget = e.target;
+        if (target instanceof HTMLElement && target.className === "trailer-modal is-active") {
           handleModalCall();
         }
       }}

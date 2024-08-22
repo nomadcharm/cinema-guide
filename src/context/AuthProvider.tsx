@@ -1,17 +1,8 @@
-import { createContext, ReactNode, useCallback, useEffect, useState } from "react";
+import { createContext, FC, lazy, ReactNode, Suspense, useCallback, useEffect, useState } from "react";
+import { AuthContextProps, AuthProviderProps } from "../models/ComponentProps";
 import { fetchCurrentUser } from "../api/UserApi";
 import { UserOnAuth } from "../models/UserSchemas";
-import AuthModal from "../components/AuthModal/AuthModal";
-
-interface AuthContextProps {
-  authMode: string,
-  setAuthMode: React.Dispatch<React.SetStateAction<string>>,
-  currentUser: UserOnAuth | null;
-  getCurrentUser: () => void;
-  clearCurrentUser: () => void;
-  handleAuthModalCall: () => void;
-  handleClick: () => void;
-}
+import MainLoader from "../components/Loaders/MainLoader/MainLoader";
 
 export const AuthContext = createContext<AuthContextProps>({
   authMode: "login",
@@ -23,7 +14,9 @@ export const AuthContext = createContext<AuthContextProps>({
   handleClick: () => { },
 });
 
-export const AuthProvider = ({ children }: { children: ReactNode }) => {
+const AuthModal = lazy(() => import("../components/AuthModal/AuthModal"));
+
+export const AuthProvider: FC<AuthProviderProps> = ({ children }): ReactNode => {
   const [currentUser, setCurrentUser] = useState<UserOnAuth | null>(null);
   const [authMode, setAuthMode] = useState<string>("login");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
@@ -65,7 +58,10 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
 
   return (
     <AuthContext.Provider value={contextValue}>
-      <AuthModal isOpen={isModalOpen} />
+      {isModalOpen &&
+        <Suspense fallback={<MainLoader />}>
+          <AuthModal isOpen={isModalOpen} />
+        </Suspense>}
       {children}
     </AuthContext.Provider>
   );

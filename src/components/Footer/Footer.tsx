@@ -1,8 +1,8 @@
-import { FC, ReactElement } from "react";
+import { FC, memo, ReactNode } from "react";
 import { ok, telegram, vk, youtube } from "../../assets/assets";
 import "./Footer.scss";
 
-const Footer: FC = (): ReactElement => {
+const Footer: FC = (): ReactNode => {
 
   return (
     <footer className="footer">
@@ -38,4 +38,4 @@ const Footer: FC = (): ReactElement => {
   );
 };
 
-export default Footer;
+export const MemoFooter = memo(Footer);

@@ -1,14 +1,14 @@
-import { FC, ReactElement } from "react";
+import { FC, ReactNode } from "react";
 import { NavigateFunction, useNavigate } from "react-router";
 import { ReactSVG } from "react-svg";
-import Layout from "../../components/Layout/Layout";
+import { Layout } from "../../components/Layout/Layout";
 import { useFilmsByGenre, useSetPageTitle } from "../../hooks";
 import FilmPreviewCard from "../../components/FilmPreviewCard/FilmPreviewCard";
 import { capitalizeString } from "../../utils";
 import { back } from "../../assets/assets";
 import "./GenrePage.scss";
 
-const GenrePage: FC = (): ReactElement => {
+const GenrePage: FC = (): ReactNode => {
   const searchParams: URLSearchParams = new URLSearchParams(window.location.search);
   const genre: string = searchParams.get("genre") ?? "";
 
@@ -28,7 +28,7 @@ const GenrePage: FC = (): ReactElement => {
             <h1 className="page-title films-by-genre__title">{capitalizeString(genre)}</h1>
           </div>
           {
-            filmsByGenre ? (
+            filmsByGenre && (
               <ul className="films-by-genre__list">
                 {
                   filmsByGenre.map((film) => {
@@ -38,7 +38,7 @@ const GenrePage: FC = (): ReactElement => {
                   })
                 }
               </ul>
-            ) : null
+            )
           }
 
           {

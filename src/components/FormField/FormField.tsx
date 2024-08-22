@@ -1,18 +1,13 @@
 import { ReactNode, FC } from "react";
+import { FormFieldProps } from "../../models/ComponentProps";
 import "./FormField.scss";
 
-interface FormFieldProps {
-  children: ReactNode;
-  errorMessage?: string;
-}
+export const FormField: FC<FormFieldProps> = ({ children, errorMessage }): ReactNode => {
 
-export const FormField: FC<FormFieldProps> = ({ children, errorMessage }) => {
   return (
     <label className="form-field">
       {children}
-      {errorMessage && (
-        <span className="form-field__error">{errorMessage}</span>
-      )}
+      {errorMessage && <span className="form-field__error">{errorMessage}</span>}
     </label>
   );
 };

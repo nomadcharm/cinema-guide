@@ -1,8 +1,8 @@
 import { FC, ReactElement } from "react";
 import { useRandomFilm, useSetPageTitle } from "../../hooks";
-import Layout from "../../components/Layout/Layout";
+import { Layout } from "../../components/Layout/Layout";
+import { MemoTopFilms } from "../../components/TopFilms/TopFilms";
 import FilmBanner from "../../components/FilmBanner/FilmBanner";
-import TopFilms from "../../components/TopFilms/TopFilms";
 
 const MainPage: FC = (): ReactElement => {
   useSetPageTitle(`Cinema Guide`);
@@ -12,7 +12,7 @@ const MainPage: FC = (): ReactElement => {
     <Layout>
       <h1 className="visually-hidden">Cinema Guide</h1>
       <FilmBanner film={randomFilm} filmPage={false} handleRefresh={getRandomFilm} />
-      <TopFilms />
+      <MemoTopFilms />
     </Layout>
   );
 };

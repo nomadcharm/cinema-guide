@@ -1,14 +1,15 @@
-import { FC, useState } from "react";
-import Layout from "../../components/Layout/Layout";
-import UserSettings from "../../components/UserSettings/UserSettings";
-import FavoriteFilms from "../../components/FavoriteFilms/FavoriteFilms";
+import { FC, lazy, ReactNode, useState } from "react";
+import { Layout } from "../../components/Layout/Layout";
 import { useSetPageTitle, useWindowWidth } from "../../hooks";
+import FavoriteFilms from "../../components/FavoriteFilms/FavoriteFilms";
 import "./UserAccountPage.scss"
 
-const UserAccountPage: FC = () => {
+const UserSettings = lazy(() => import("../../components/UserSettings/UserSettings"));
+
+const UserAccountPage: FC = (): ReactNode => {
   useSetPageTitle(`Мой аккаунт | Cinema Guide`);
   const windowWidth = useWindowWidth();
-  
+
   const [currentTabIndex, setCurrentTabIndex] = useState<number>(0);
 
   const handleTabClick = (index: number) => {
@@ -43,7 +44,7 @@ const UserAccountPage: FC = () => {
           </div>
 
           <div className={currentTabIndex === 1 ? "user-account__tab-content tab-2 active" : "user-account__tab-content tab-2"}>
-            <UserSettings />
+            {currentTabIndex === 1 && <UserSettings />}
           </div>
         </div>
       </section>

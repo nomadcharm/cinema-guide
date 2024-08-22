@@ -1,21 +1,18 @@
-import { FC, ReactNode } from "react";
-import Header from "../Header/Header";
-import Footer from "../Footer/Footer";
+import { FC, memo, ReactNode } from "react";
+import { LayoutProps } from "../../models/ComponentProps";
+import { MemoHeader } from "../Header/Header";
+import { MemoFooter } from "../Footer/Footer";
 
-interface LayoutProps {
-  children: ReactNode
-}
-
-const Layout: FC<LayoutProps> = ({ children }): ReactNode => {
+const MainLayout: FC<LayoutProps> = ({ children }): ReactNode => {
   return (
     <>
-      <Header />
+      <MemoHeader />
       <main>
         {children}
       </main>
-      <Footer />
+      <MemoFooter />
     </>
   );
 };
 
-export default Layout;
+export const Layout = memo(MainLayout);

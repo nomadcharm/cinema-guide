@@ -1,7 +1,7 @@
+import { FC, ReactNode, useContext, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useContext, useState } from "react";
 import { useMutation } from "@tanstack/react-query";
 import { UserOnRegister, UserOnRegisterSchema } from "../../models/UserSchemas";
 import { email, key, person } from "../../assets/assets";
@@ -11,7 +11,7 @@ import FormField from "../FormField/FormField";
 import AuthContext from "../../context/AuthProvider";
 import "./RegistrationForm.scss";
 
-const RegistrationForm = () => {
+const RegistrationForm: FC = (): ReactNode => {
   const [registrationComplete, setRegistrationComplete] = useState<boolean>(false);
   const { setAuthMode } = useContext(AuthContext);
 
@@ -79,6 +79,7 @@ const RegistrationForm = () => {
                 <input
                   {...register("email")}
                   type="text"
+                  autoFocus={true}
                   placeholder="Электронная почта"
                   onChange={() => clearErrors("email")}
                 />

@@ -1,10 +1,12 @@
+import { FC, ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { popcorn } from "../../assets/assets";
+import { SearchResultsCardProps } from "../../models/ComponentProps";
 import { setRatingColor, formatTime } from "../../utils";
-import { Film } from "../../models/FilmSchemas";
+import { popcorn } from "../../assets/assets";
 import "./SearchResultsCard.scss";
 
-const SearchResultsCard = ({ result }: { result: Film }) => {
+const SearchResultsCard: FC<SearchResultsCardProps> = ({ result }): ReactNode => {
+
   return (
     <Link to={`/movie/${result.id}`}>
       <article className="search-card">

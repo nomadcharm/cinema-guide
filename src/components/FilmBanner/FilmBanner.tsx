@@ -1,22 +1,17 @@
-import { FC, lazy, ReactElement, useContext, useEffect } from "react";
+import { FC, lazy, ReactNode, Suspense, useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { ReactSVG } from "react-svg";
-import { Film } from "../../models/FilmSchemas";
 import { backdropStub, toRefresh, toFavor, favored } from "../../assets/assets";
 import { useFavorites, useMarkFavorite, useTrailerModal } from "../../hooks";
 import { formatTime, setRatingColor } from "../../utils";
+import { FilmBannerProps } from "../../models/ComponentProps";
+import MainLoader from "../Loaders/MainLoader/MainLoader";
 import AuthContext from "../../context/AuthProvider";
 import "./FilmBanner.scss";
 
-const LazyTrailerModal = lazy(() => import("../../components/TrailerModal/TrailerModal"));
+const TrailerModal = lazy(() => import("../../components/TrailerModal/TrailerModal"));
 
-interface FilmBannerProps {
-  film: Film | null,
-  filmPage: boolean,
-  handleRefresh?: () => Promise<void>,
-}
-
-const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): ReactElement => {
+const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): ReactNode => {
   const [active, handleModalCall] = useTrailerModal();
   const [favorites, getFavorites] = useFavorites();
   const [isFavored, toggleFavorite] = useMarkFavorite(film, favorites);
@@ -28,14 +23,16 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
 
   return (
     <>
-      {
-        film && <LazyTrailerModal film={film} active={active} handleModalCall={handleModalCall} />
-      }
+      {film && active && (
+        <Suspense fallback={<MainLoader />}>
+          <TrailerModal film={film} active={active} handleModalCall={handleModalCall} />
+        </Suspense>
+      )}
 
       <section className="film-banner">
         <div className="container film-banner__container">
           {
-            film ? (
+            film && (
               <>
                 <div className="film-banner__content">
                   <div className="film-banner__block">
@@ -91,7 +88,7 @@ const FilmBanner: FC<FilmBannerProps> = ({ film, filmPage, handleRefresh }): Rea
                   <div className="overlay" />
                 </div>
               </>
-            ) : null
+            )
           }
         </div>
       </section>
