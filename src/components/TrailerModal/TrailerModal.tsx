@@ -2,8 +2,8 @@ import { FC, ReactElement } from "react";
 import ReactPlayer from "react-player";
 import { Film } from "../../models/FilmSchemas";
 import Preloader from "../Loaders/Preloader/Preloader";
-import "./TrailerModal.scss";
 import { useTrailerPlayer } from "../../hooks";
+import "./TrailerModal.scss";
 
 interface TrailerModalProps {
   film: Film,
@@ -73,7 +73,11 @@ const TrailerModal: FC<TrailerModalProps> = ({ film, active, handleModalCall }):
           onDisablePIP={() => handleModalCall()}
           config={{
             youtube: {
-              playerVars: { showinfo: 0 }
+              playerVars: { 
+                showinfo: 0,
+                rel: 0,
+                modestBranding: 1, 
+              },
             }
           }}
         />
