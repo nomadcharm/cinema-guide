@@ -1,11 +1,11 @@
 import { z } from "zod";
 
 const UserSchema = z.object({
-  name: z.string().min(2, { message: "Имя должно содержать не менее 2х символов" }),
-  surname: z.string().min(2, { message: "Фамилия должна содержать не менее 2х символов" }),
-  email: z.string().email({ message: "Невалидный формат email" }),
-  password: z.string().min(8, { message: "Пароль должен состоять из не менее 8 символов" }),
-  confirmPassword: z.string().min(8, { message: "Пароль должен состоять из не менее 8 символов" }).optional(),
+  name: z.string().min(2, { message: "Имя должно содержать не менее 2х символов" }).trim(),
+  surname: z.string().min(2, { message: "Фамилия должна содержать не менее 2х символов" }).trim(),
+  email: z.string().trim().email({ message: "Невалидный формат email" }),
+  password: z.string().min(8, { message: "Пароль должен состоять из не менее 8 символов" }).trim(),
+  confirmPassword: z.string().min(8, { message: "Пароль должен состоять из не менее 8 символов" }).trim().optional(),
   favorites: z.array(z.string()),
 })
 
