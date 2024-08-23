@@ -21,6 +21,14 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }): ReactNode => 
   const [authMode, setAuthMode] = useState<string>("login");
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
+  useEffect(() => {
+    document.body.style.overflow = isModalOpen ? "hidden" : "auto";
+
+    return () => {
+      document.body.style.overflow = "auto";
+    };
+  }, [isModalOpen]);
+
   const getCurrentUser = useCallback(async (): Promise<void> => {
     const user: UserOnAuth = await fetchCurrentUser();
     setCurrentUser(user);
