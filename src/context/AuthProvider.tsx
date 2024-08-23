@@ -22,10 +22,10 @@ export const AuthProvider: FC<AuthProviderProps> = ({ children }): ReactNode => 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
   useEffect(() => {
-    document.body.style.overflow = isModalOpen ? "hidden" : "auto";
+    document.body.style.overflowY = isModalOpen ? "hidden" : "auto";
 
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflowY = "auto";
     };
   }, [isModalOpen]);
 

@@ -8,10 +8,10 @@ export const useTrailerModal = (): [boolean, () => void] => {
   };
 
   useEffect(() => {
-    document.body.style.overflow = active ? "hidden" : "auto";
+    document.body.style.overflowY = active ? "hidden" : "auto";
 
     return () => {
-      document.body.style.overflow = "auto";
+      document.body.style.overflowY = "auto";
     };
   }, [active]);
 

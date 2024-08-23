@@ -101,8 +101,6 @@
         gap: 10px 8px;
       }
     }
-
-
   }
 
   &__backdrop {
@@ -195,6 +193,11 @@
 
 .button-about {
   padding: 16px 48px;
+
+  @include mobile-576 {
+    flex: 1;
+    padding: 16px;
+  }
 }
 
 .button-trailer {
