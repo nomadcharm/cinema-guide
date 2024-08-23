@@ -33,7 +33,7 @@ const SearchBar: FC = (): ReactNode => {
         />
         {
           windowWidth <= 1024 ? (
-            <button className="search-bar__close-btn" onClick={handleMobileSearch}>
+            <button className="search-bar__close-btn" onClick={handleMobileSearch} aria-label="Закрыть поиск">
               <ReactSVG src={searchClose} />
             </button>
           ) : null

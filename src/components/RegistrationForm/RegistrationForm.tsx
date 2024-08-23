@@ -10,6 +10,7 @@ import { registerUser } from "../../api/UserApi";
 import FormField from "../FormField/FormField";
 import AuthContext from "../../context/AuthProvider";
 import "./RegistrationForm.scss";
+import Button from "../Button/Button";
 
 const RegistrationForm: FC = (): ReactNode => {
   const [registrationComplete, setRegistrationComplete] = useState<boolean>(false);
@@ -68,7 +69,11 @@ const RegistrationForm: FC = (): ReactNode => {
           <div className="registration-complete">
             <h3 className="registration__title">Регистрация завершена</h3>
             <p className="registration__text">Используйте вашу электронную почту для входа</p>
-            <button className="button button-primary login__submit" onClick={() => setAuthMode("login")}>Войти</button>
+            <button 
+              className="button button-primary login__submit"
+              type="button"
+              onClick={() => setAuthMode("login")}
+            >Войти</button>
           </div>
         ) : (
           <>
@@ -125,7 +130,12 @@ const RegistrationForm: FC = (): ReactNode => {
                 errors.root && <p className="error-message">{errors.root.message}</p>
               }
 
-              <button className="button button-primary registration__submit" type="submit">Создать аккаунт</button>
+              <Button
+                className="button button-primary registration__submit"
+                isLoading={registrationMutation.isPending}
+              >
+                Создать аккаунт
+              </Button>
             </form>
           </>
         )

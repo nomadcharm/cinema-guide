@@ -11,6 +11,7 @@ import { loginUser } from "../../api/UserApi";
 import FormField from "../FormField/FormField";
 import AuthContext from "../../context/AuthProvider";
 import "./LoginForm.scss";
+import Button from "../Button/Button";
 
 const LoginForm: FC = (): ReactNode => {
   const { handleAuthModalCall } = useContext(AuthContext);
@@ -78,7 +79,12 @@ const LoginForm: FC = (): ReactNode => {
           errors.root && <p className="error-message">{errors.root?.message}</p>
         }
 
-        <button className="button button-primary login__submit" type="submit">Войти</button>
+        <Button 
+          className="button button-primary login__submit"
+          isLoading={loginMutation.isPending}
+        >
+          Войти
+        </Button>
       </form>
     </div>
   );

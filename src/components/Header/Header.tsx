@@ -58,16 +58,16 @@ const Header: FC = (): ReactElement => {
         </button>
 
         {windowWidth < 768 ? (
-          <button 
-            className="login-btn login-btn__mobile" 
-            onClick={currentUser ? () => navigate("/profile") : () => handleAuthModalCall()} 
+          <button
+            className="login-btn login-btn__mobile"
+            onClick={currentUser ? () => navigate("/profile") : () => handleAuthModalCall()}
             aria-label="Вход и регистрация"
           >
             <ReactSVG src={person} />
           </button>
         ) : (
           currentUser ? (
-            <button className="login-btn__profile" onClick={() => navigate("/profile")}>
+            <button className="login-btn__profile" onClick={() => navigate("/profile")} aria-label="Перейти в аккаунт">
               {currentUser.surname}
             </button>
           ) : (
@@ -76,11 +76,9 @@ const Header: FC = (): ReactElement => {
             </button>
           )
         )}
-
       </div>
     </header >
   );
 };
 
-// export default Header;
 export const MemoHeader = memo(Header);

@@ -4,6 +4,7 @@ import { NavigateFunction, useNavigate } from "react-router";
 import { queryClient } from "../../api/queryClient";
 import { logoutUser } from "../../api/UserApi";
 import AuthContext from "../../context/AuthProvider";
+import Button from "../Button/Button";
 import "./UserSettings.scss";
 
 const UserSettings: FC = (): ReactNode => {
@@ -49,10 +50,11 @@ const UserSettings: FC = (): ReactNode => {
               </div>
             </div>
 
-            <button
+            <Button
               className="button button-primary"
               onClick={() => handleLogout()}
-            >Выйти из аккаунта</button>
+              isLoading={logoutMutation.isPending}
+            >Выйти из аккаунта</Button>
           </>
       }
     </div>

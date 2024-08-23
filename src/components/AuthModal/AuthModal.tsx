@@ -2,8 +2,8 @@ import { FC, ReactNode, lazy, useContext } from "react";
 import { ReactSVG } from "react-svg";
 import { AuthModalProps } from "../../models/ComponentProps";
 import { close, logo } from "../../assets/assets";
-import LoginForm from "../LoginForm/LoginForm";
 import AuthContext from "../../context/AuthProvider";
+import LoginForm from "../LoginForm/LoginForm";
 import "./AuthModal.scss";
 
 const RegistrationForm = lazy(() => import("../RegistrationForm/RegistrationForm"));

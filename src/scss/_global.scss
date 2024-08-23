@@ -49,8 +49,51 @@
   clip: rect(0 0 0 0);
 }
 
+.rating {
+  padding: 4px 12px 4px 32px;
+  border-radius: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  color: var(--clr-white);
+  background-image: url("./assets/img/star.svg");
+  background-position: left 12px center;
+  background-repeat: no-repeat;
+  background-size: 15px 15px;
+
+  &.excellent {
+    background-color: var(--clr-pirate-gold);
+  }
+
+  &.high {
+    background-color: var(--clr-forest-green);
+  }
+
+  &.medium {
+    background-color: var(--clr-boulder);
+  }
+
+  &.low {
+    background-color: var(--clr-thunderbird);
+  }
+}
+
+.input-icon {
+  position: absolute;
+  left: 16px;
+  top: 16px;
+
+  & svg {
+    fill: var(--clr-black-40);
+    transition: fill 0.3s ease-in-out;
+  }
+}
+
 .button {
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 16px 48px;
   height: 56px;
   border-radius: 28px;
@@ -98,46 +141,6 @@
 
   &-icon {
     padding: 16px 22px;
-  }
-}
-
-.rating {
-  padding: 4px 12px 4px 32px;
-  border-radius: 16px;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 24px;
-  color: var(--clr-white);
-  background-image: url("./assets/img/star.svg");
-  background-position: left 12px center;
-  background-repeat: no-repeat;
-  background-size: 15px 15px;
-
-  &.excellent {
-    background-color: var(--clr-pirate-gold);
-  }
-
-  &.high {
-    background-color: var(--clr-forest-green);
-  }
-
-  &.medium {
-    background-color: var(--clr-boulder);
-  }
-
-  &.low {
-    background-color: var(--clr-thunderbird);
-  }
-}
-
-.input-icon {
-  position: absolute;
-  left: 16px;
-  top: 16px;
-  
-  & svg {
-    fill: var(--clr-black-40);
-    transition: fill 0.3s ease-in-out;
   }
 }
 

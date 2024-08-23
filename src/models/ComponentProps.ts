@@ -1,6 +1,11 @@
-import { ReactNode } from "react";
+import { HTMLAttributes, ReactElement, ReactNode } from "react";
 import { Film, FilmList } from "./FilmSchemas";
 import { UserOnAuth } from "./UserSchemas";
+
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {
+  isLoading?: boolean;
+  children?: string | ReactElement,
+}
 
 interface AuthContextProps {
   authMode: string,
@@ -60,6 +65,7 @@ export {
   type AuthContextProps,
   type AuthModalProps,
   type AuthProviderProps,
+  type ButtonProps,
   type FilmBannerProps,
   type FormFieldProps,
   type LayoutProps,

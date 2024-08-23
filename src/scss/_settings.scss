@@ -40,8 +40,13 @@ button {
   padding: 0;
   outline: none;
   border: none;
+  font-size: 0;
   background: transparent;
   cursor: pointer;
+
+  & > div {
+    font-size: 0;
+  }
 }
 
 input {
