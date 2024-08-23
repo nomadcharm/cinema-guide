@@ -43,7 +43,7 @@ const GenrePage: FC = (): ReactNode => {
 
           {
             hasMoreFilms ? (
-              <button className="films-by-genre__load-btn" onClick={() => setPage(page + 1)}>Показать ещё</button>
+              <button className="button button-primary films-by-genre__load-btn" onClick={() => setPage(page + 1)}>Показать ещё</button>
             ) : null
           }
 
