@@ -67,7 +67,7 @@ const Header: FC = (): ReactElement => {
           </button>
         ) : (
           currentUser ? (
-            <button className="login-btn__profile" onClick={() => navigate("/profile")} aria-label="Перейти в аккаунт">
+            <button className="login-btn login-btn__profile" onClick={() => navigate("/profile")} aria-label="Перейти в аккаунт">
               {currentUser.surname}
             </button>
           ) : (

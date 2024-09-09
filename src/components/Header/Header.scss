@@ -1,4 +1,5 @@
 @import "../../scss/mixins/breakpoints";
+@import "../../scss/mixins/hover";
 
 .header {
   position: absolute;
@@ -111,6 +112,14 @@
       }
     }
 
+    &__link {
+      transition: color 0.3s ease-in-out;
+
+      @include hover {
+        color: var(--clr-melrose);
+      }
+    }
+
     &__link--active {
       position: relative;
 
@@ -128,10 +137,10 @@
         background-color: var(--clr-heliotrope);
 
         @include tablet-768 {
-            display: none;
+          display: none;
         }
       }
-    }    
+    }
   }
 }
 
@@ -140,6 +149,12 @@
   font-size: 24px;
   line-height: 32px;
   color: var(--clr-white);
+
+  transition: color 0.3s ease-in-out;
+
+  @include hover {
+    color: var(--clr-melrose);
+  }
 
   @include tablet-1024 {
     margin-left: 0;
