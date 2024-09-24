@@ -18,6 +18,16 @@
   }
 }
 
+@keyframes dropDown {
+  from {
+    transform: translateY(-200%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
 // refresh button
 @keyframes rotate {
   0% {

@@ -116,7 +116,12 @@
       transition: color 0.3s ease-in-out;
 
       @include hover {
+        color: var(--clr-heliotrope);
+      }
+
+      &:active {
         color: var(--clr-melrose);
+
       }
     }
 
@@ -149,11 +154,10 @@
   font-size: 24px;
   line-height: 32px;
   color: var(--clr-white);
-
   transition: color 0.3s ease-in-out;
 
   @include hover {
-    color: var(--clr-melrose);
+    color: var(--clr-heliotrope);
   }
 
   @include tablet-1024 {
