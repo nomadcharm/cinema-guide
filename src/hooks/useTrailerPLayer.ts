@@ -1,7 +1,9 @@
 import { useEffect, useRef, useState } from "react";
 import ReactPlayer from "react-player";
+import { useWindowWidth } from "./useWindowWidth";
 
 export const useTrailerPlayer = (active: boolean) => {
+  const windowWidth = useWindowWidth();
   const [isPlaying, setIsPlaying] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
 
@@ -16,7 +18,7 @@ export const useTrailerPlayer = (active: boolean) => {
 
   const handleOnReady = (): void => {
     setLoading(false);
-    closeButtonRef.current?.classList.add("visually-hidden", "paused");
+    closeButtonRef.current?.classList.add("visually-hidden", "active");
   };
 
   const handleOnPlay = (): void => {
@@ -24,6 +26,12 @@ export const useTrailerPlayer = (active: boolean) => {
     titleBlockRef.current?.classList.remove("visually-hidden");
     playButtonRef.current?.classList.remove("visually-hidden");
     playButtonRef.current?.classList.add("on-play");
+
+    if (windowWidth < 1024) {
+      closeButtonRef.current?.classList.add("active");
+      playButtonRef.current?.classList.remove("paused");
+      titleBlockRef.current?.classList.add("active");
+    }
   };
 
   const handleOnPause = (): void => {
@@ -31,6 +39,12 @@ export const useTrailerPlayer = (active: boolean) => {
     closeButtonRef.current?.classList.remove("visually-hidden");
     playButtonRef.current?.classList.remove("on-play");
     titleBlockRef.current?.classList.remove("visually-hidden");
+
+    if (windowWidth < 1024) {
+      closeButtonRef.current?.classList.remove("active");
+      playButtonRef.current?.classList.add("paused");
+      titleBlockRef.current?.classList.remove("active");
+    }
   };
 
   useEffect((): void => {

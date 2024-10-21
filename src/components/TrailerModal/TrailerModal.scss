@@ -1,4 +1,5 @@
 @import "../../scss/mixins/breakpoints";
+@import "../../scss/mixins/hover";
 
 .trailer-modal {
   position: fixed;
@@ -17,12 +18,6 @@
   &.is-active {
     pointer-events: all;
     opacity: 1;
-
-    &__inner:hover {
-      &:hover .trailer-modal__close {
-        background-color: red;
-      }
-    }
   }
 
   &__inner {
@@ -59,9 +54,17 @@
       }
     }
 
-    &:hover .trailer-modal__title,
-    &:hover .trailer-modal__close,
-    &:hover .trailer-modal__play {
+    @include hover {
+      & > .trailer-modal__title,
+      & > .trailer-modal__close,
+      & > .trailer-modal__play {
+        display: block;
+      }
+    }
+
+    &:active .trailer-modal__title,
+    &:active .trailer-modal__close,
+    &:active .trailer-modal__play {
       display: block;
     }
   }
@@ -115,7 +118,7 @@
       background-size: 32px 32px;
     }
 
-    &.paused {
+    &.active {
       display: none;
     }
   }
