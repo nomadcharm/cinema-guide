@@ -1,0 +1,41 @@
+.error {
+  padding-top: 140px;
+  padding-bottom: 140px;
+
+  &__container {
+    display: flex;
+    justify-content: end;
+    padding: 0 200px;
+  }
+
+  &__content {
+    position: relative;
+    flex-basis: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 20px;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -400px;
+      width: 750px;
+      height: 500px;
+      background-image: url("../../assets/img/ep-camera.png");
+      background-size: 750px 500px;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &__title {
+    font-size: 193px;
+    font-weight: 700;
+    color: var(--clr-melrose);
+  }
+
+  &__subtitle {
+    font-size: 30px;
+  }
+}

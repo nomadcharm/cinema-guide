@@ -1,17 +1,22 @@
-import { FC, ReactNode} from "react";
+import { FC, ReactNode } from "react";
 import { PathMatch, useMatch } from "react-router"
 import { Layout } from "../../components/Layout/Layout";
 import { formatCurrency, formatLanguageTag } from "../../utils";
-import FilmBanner from "../../components/FilmBanner/FilmBanner";
 import { useFilmInfo, useSetPageTitle } from "../../hooks";
+import FilmBanner from "../../components/FilmBanner/FilmBanner";
+import ErrorPage from "../ErrorPage/ErrorPage";
 import "./FilmPage.scss";
 
-const FilmPage: FC = (): ReactNode=> {
+const FilmPage: FC = (): ReactNode => {
   const matchId: PathMatch<"id"> | null = useMatch("/movie/:id");
   const id = Number(matchId?.params?.id);
-  const film = useFilmInfo(id);
+  const { film, error } = useFilmInfo(id);
 
-  useSetPageTitle(`${film?.title} | Cinema Guide`, film?.title)
+  useSetPageTitle(film?.title ? `${film.title} | Cinema Guide` : "404 | Cinema Guide");
+
+  if (error || !film) {
+    return <ErrorPage />;
+  }
 
   return (
     <Layout>
