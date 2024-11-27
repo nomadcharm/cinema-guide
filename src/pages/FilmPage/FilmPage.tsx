@@ -14,7 +14,7 @@ const FilmPage: FC = (): ReactNode => {
 
   useSetPageTitle(film?.title ? `${film.title} | Cinema Guide` : "404 | Cinema Guide");
 
-  if (error || !film) {
+  if (error) {
     return <ErrorPage />;
   }
 
