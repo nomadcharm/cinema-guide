@@ -9,9 +9,9 @@ export const useWindowWidth = (): number => {
   }
 
   useEffect(() => {
-    window.addEventListener('resize', updateWidth);
+    window.addEventListener("resize", updateWidth);
     return () => {
-      window.removeEventListener('resize', updateWidth)
+      window.removeEventListener("resize", updateWidth)
     };
   }, []);
 
