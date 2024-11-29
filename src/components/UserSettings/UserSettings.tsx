@@ -51,7 +51,7 @@ const UserSettings: FC = (): ReactNode => {
             </div>
 
             <Button
-              className="button button-primary"
+              className="button button-primary user__button"
               onClick={() => handleLogout()}
               isLoading={logoutMutation.isPending}
             >Выйти из аккаунта</Button>

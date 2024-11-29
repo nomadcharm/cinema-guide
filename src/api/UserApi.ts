@@ -4,28 +4,28 @@ import validateResponse from "./responseValidation";
 const BASE_URL = `https://cinemaguide.skillbox.cc`;
 const BASE_AUTH_URL = `https://cinemaguide.skillbox.cc/auth`;
 
-const registerUser = (email: string, name: string, surname: string, password: string) => {
-  return fetch(`${BASE_URL}/user`, {
+const registerUser = async (email: string, name: string, surname: string, password: string) => {
+  const response = await fetch(`${BASE_URL}/user`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     credentials: "include",
     body: JSON.stringify({ email, name, surname, password })
-  })
-  .then((response) => validateResponse(response))
+  });
+  return await validateResponse(response);
 }
 
-const loginUser = (email: string, password: string): Promise<Response> => {
-  return fetch(`${BASE_AUTH_URL}/login`, {
+const loginUser = async (email: string, password: string): Promise<Response> => {
+  const response = await fetch(`${BASE_AUTH_URL}/login`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
     },
     credentials: "include",
     body: JSON.stringify({ email, password })
-  })
-    .then((response) => validateResponse(response))
+  });
+  return await validateResponse(response);
 }
 
 const logoutUser = (): Promise<Response> => {
@@ -38,12 +38,12 @@ const logoutUser = (): Promise<Response> => {
   })
 }
 
-const fetchCurrentUser = (): Promise<UserOnAuth> => {
-  return fetch(`${BASE_URL}/profile`, {
+const fetchCurrentUser = async (): Promise<UserOnAuth> => {
+  const res = await fetch(`${BASE_URL}/profile`, {
     credentials: "include",
-  })
-    .then((res) => res.json())
-    .then((data) => UserOnAuthSchema.parse(data))
+  });
+  const data = await res.json();
+  return UserOnAuthSchema.parse(data);
 }
 
 export {
