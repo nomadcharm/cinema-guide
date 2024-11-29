@@ -36,6 +36,10 @@ interface FormFieldProps {
   errorMessage?: string;
 }
 
+interface GenrePreviewCardProps {
+  genre: string;
+}
+
 interface LayoutProps {
   children: ReactNode
 }
@@ -68,6 +72,7 @@ export {
   type ButtonProps,
   type FilmBannerProps,
   type FormFieldProps,
+  type GenrePreviewCardProps,
   type LayoutProps,
   type SearchResultsCardProps,
   type SearchContextProps,

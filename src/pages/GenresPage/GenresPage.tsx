@@ -1,8 +1,7 @@
 import { FC, ReactNode } from "react";
-import { Link } from "react-router-dom";
 import { Layout } from "../../components/Layout/Layout";
 import { useSetPageTitle, useGenres } from "../../hooks";
-import { pickGenrePoster } from "../../utils";
+import GenrePreviewCard from "../../components/GenrePreviewCard/GenrePreviewCard";
 import "./GenresPage.scss";
 
 const GenresPage: FC = (): ReactNode => {
@@ -20,14 +19,7 @@ const GenresPage: FC = (): ReactNode => {
                 {
                   genres.map((genre, index) => {
                     return <li className="genres__item" key={index}>
-                      <article className="genre-card">
-                        <Link className="genre-card__link" to={`/movie?genre=${genre}`} >
-                          <img className="genre-card__img" src={pickGenrePoster(genre)} alt="" />
-                          <div className="genre-card__name">
-                            <p>{genre}</p>
-                          </div>
-                        </Link>
-                      </article>
+                      <GenrePreviewCard genre={genre} />
                     </li>
                   })
                 }
