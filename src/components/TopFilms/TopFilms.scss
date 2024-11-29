@@ -1,7 +1,7 @@
 @import "../../scss/mixins/breakpoints";
 
 .top-films {
-  padding-top: 48px;
+  padding-top: 38px;
   padding-bottom: 120px;
 
   @include tablet-768 {
@@ -63,7 +63,7 @@
     z-index: 11;
     top: -12px;
     left: -12px;
-    padding: 8px 24px;
+    padding: 10px 24px;
     border-radius: 50px;
     font-size: 24px;
     font-weight: 700;
