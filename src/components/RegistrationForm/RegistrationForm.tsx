@@ -9,8 +9,8 @@ import { queryClient } from "../../api/queryClient";
 import { registerUser } from "../../api/UserApi";
 import FormField from "../FormField/FormField";
 import AuthContext from "../../context/AuthProvider";
-import "./RegistrationForm.scss";
 import Button from "../Button/Button";
+import "./RegistrationForm.scss";
 
 const RegistrationForm: FC = (): ReactNode => {
   const [registrationComplete, setRegistrationComplete] = useState<boolean>(false);
@@ -44,7 +44,11 @@ const RegistrationForm: FC = (): ReactNode => {
       setError("root", { type: "server", message: error.message });
 
       if (error.name !== "AuthError") {
-        setError("email" || "name" || "surname" || "password" || "confirmPassword", { type: "manual", message: error.message });
+        setError("email", { type: "manual", message: error.message });
+        setError("name", { type: "manual", message: error.message });
+        setError("surname", { type: "manual", message: error.message });
+        setError("password", { type: "manual", message: error.message });
+        setError("confirmPassword", { type: "manual", message: error.message });
       }
 
       setRegistrationComplete(false);

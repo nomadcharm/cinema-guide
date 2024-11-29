@@ -43,7 +43,8 @@ const LoginForm: FC = (): ReactNode => {
       setError("root", { type: "server", message: error.message });
 
       if (error.name !== "AuthError") {
-        setError("email" || "password", { type: "manual", message: error.message });
+        setError("email", { type: "manual", message: error.message });
+        setError("password", { type: "manual", message: error.message });
       }
     }
   }, queryClient);
