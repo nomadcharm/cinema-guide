@@ -5,6 +5,7 @@ import { useWindowWidth } from './../../hooks/useWindowWidth';
 import { SearchContext } from "../../context/SearchProvider";
 import Preloader from "../Loaders/Preloader/Preloader";
 import "./SearchBar.scss";
+import { useDebounce } from "../../hooks";
 
 const SearchResultsCard = lazy(() => import("../SearchResultsCard/SearchResultsCard"))
 
@@ -23,17 +24,15 @@ const SearchBar: FC = (): ReactNode => {
     searchResults,
   } = useContext(SearchContext);
 
-  useEffect(() => {
-    if (searchResults.length === 0 && inputValue.length > 5) {
-      const timer = setTimeout(() => {
-        setShowNotFoundMessage(true);
-      }, 1000); 
+  const debouncedInputValue = useDebounce(inputValue, 1000);
 
-      return () => clearTimeout(timer);
+  useEffect(() => {
+    if (searchResults.length === 0 && debouncedInputValue.length > 5) {
+      setShowNotFoundMessage(true);
     } else {
       setShowNotFoundMessage(false);
     }
-  }, [searchResults, inputValue]);
+  }, [searchResults, debouncedInputValue]);
 
   return (
     <div className="search-bar" ref={searchBarRef}>
