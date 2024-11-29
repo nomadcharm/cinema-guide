@@ -1,4 +1,4 @@
-import { FC, lazy, ReactNode, Suspense, useContext } from "react";
+import { FC, lazy, ReactNode, Suspense, useContext, useEffect, useState } from "react";
 import { ReactSVG } from "react-svg";
 import { searchClose } from "../../assets/assets";
 import { useWindowWidth } from './../../hooks/useWindowWidth';
@@ -9,6 +9,8 @@ import "./SearchBar.scss";
 const SearchResultsCard = lazy(() => import("../SearchResultsCard/SearchResultsCard"))
 
 const SearchBar: FC = (): ReactNode => {
+  const [showNotFoundMessage, setShowNotFoundMessage] = useState(false);
+  
   const windowWidth = useWindowWidth();
   const {
     searchBarRef,
@@ -20,6 +22,18 @@ const SearchBar: FC = (): ReactNode => {
     handleInput,
     searchResults,
   } = useContext(SearchContext);
+
+  useEffect(() => {
+    if (searchResults.length === 0 && inputValue.length > 5) {
+      const timer = setTimeout(() => {
+        setShowNotFoundMessage(true);
+      }, 1000); 
+
+      return () => clearTimeout(timer);
+    } else {
+      setShowNotFoundMessage(false);
+    }
+  }, [searchResults, inputValue]);
 
   return (
     <div className="search-bar" ref={searchBarRef}>
@@ -51,8 +65,7 @@ const SearchBar: FC = (): ReactNode => {
           }))
           }
           {
-            searchResults.length === 0 && inputValue.length > 5 &&
-            <li className="search-bar__results-item">Фильм с таким названием не найден</li>
+            showNotFoundMessage && <li className="search-bar__results-item">Фильм с таким названием не найден</li>
           }
         </ul>
       </div>

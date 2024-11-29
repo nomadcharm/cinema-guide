@@ -2,6 +2,7 @@ import { FC, ReactNode, useEffect } from "react";
 import { useFavorites } from "../../hooks";
 import FilmPreviewCard from "../FilmPreviewCard/FilmPreviewCard";
 import "./FavoriteFilms.scss";
+import Button from "../Button/Button";
 
 const FavoriteFilms: FC = (): ReactNode => {
   const [favorites, getFavorites, removeFromUserFavorites] = useFavorites();
@@ -18,7 +19,7 @@ const FavoriteFilms: FC = (): ReactNode => {
             {
               favorites.map((film) => {
                 return <li className="favorites__item" key={film.id}>
-                  <button
+                  <Button
                     className="favorites__remove-btn"
                     onClick={() => removeFromUserFavorites(film.id)}
                     aria-label="Удалить фильм из избранного"

@@ -7,6 +7,7 @@ import FilmPreviewCard from "../../components/FilmPreviewCard/FilmPreviewCard";
 import { capitalizeString } from "../../utils";
 import { back } from "../../assets/assets";
 import "./GenrePage.scss";
+import Button from "../../components/Button/Button";
 
 const GenrePage: FC = (): ReactNode => {
   const searchParams: URLSearchParams = new URLSearchParams(window.location.search);
@@ -43,7 +44,12 @@ const GenrePage: FC = (): ReactNode => {
 
           {
             hasMoreFilms ? (
-              <button className="button button-primary films-by-genre__load-btn" onClick={() => setPage(page + 1)}>Показать ещё</button>
+              <Button
+                className="button button-primary films-by-genre__load-btn"
+                onClick={() => setPage(page + 1)}
+              >
+                Показать ещё
+              </Button>
             ) : null
           }
 
