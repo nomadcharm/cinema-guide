@@ -1,3 +1,5 @@
+@import "../../scss/mixins/breakpoints";
+
 .error {
   padding-top: 140px;
   padding-bottom: 140px;
@@ -6,6 +8,18 @@
     display: flex;
     justify-content: end;
     padding: 0 200px;
+
+    @include tablet-1024 {
+      padding: 0 100px;
+    }
+
+    @include tablet-768 {
+      margin-inline: auto;
+    }
+
+    @include mobile-576 {
+      padding: 0 40px;
+    }
   }
 
   &__content {
@@ -16,16 +30,25 @@
     align-items: end;
     gap: 20px;
 
+    @include mobile-576 {
+      text-align: right;
+    }
+
     &::before {
       content: "";
       position: absolute;
+      z-index: -1;
       top: 0;
-      left: -400px;
+      left: -75%;
       width: 750px;
       height: 500px;
       background-image: url("../../assets/img/ep-camera.png");
       background-size: 750px 500px;
       background-repeat: no-repeat;
+
+      @include tablet-768 {
+        display: none;
+      }
     }
   }
 
@@ -33,6 +56,11 @@
     font-size: 193px;
     font-weight: 700;
     color: var(--clr-melrose);
+
+    @include mobile-576 {
+      font-size: 143px;
+      text-align: right;
+    }
   }
 
   &__subtitle {
